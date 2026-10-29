@@ -535,6 +535,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#versions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Versions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#c1-install-separate-environments" class="md-nav__link">
     <span class="md-ellipsis">
       C1. Install: separate environments
@@ -1662,6 +1671,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#versions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Versions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#c1-install-separate-environments" class="md-nav__link">
     <span class="md-ellipsis">
       C1. Install: separate environments
@@ -2193,6 +2211,34 @@ a clone: <code>python -m marathonts.bench.run &lt;stage&gt;</code>, <code>python
 analysis of a published run, download its tables from Hugging Face
 (<a href="../BENCHMARK/#published-runs">BENCHMARK.md</a>) into <code>artifacts/run_h200/tables/</code> and run
 <code>python -m marathonts.hypotheses.run --artifacts-dir artifacts/run_h200</code>.</p>
+<h3 id="versions">Versions<a class="headerlink" href="#versions" title="Permanent link">&para;</a></h3>
+<p><code>envs/*.txt</code> give flexible versions — a lower bound (the oldest the published runs used) and an upper bound where
+a newer version is known to change the results (pandas 3 changes the prepared data) — so that they install on
+top of Colab's and the Docker images' own torch and TensorFlow. Two sets of exact versions are kept as well:</p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>What it fixes</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>envs/lock/main-run-core.txt</code>, <code>envs/lock/main-run-tsgm.txt</code></td>
+<td>the environments of the main run (Linux x86_64, Python 3.12.13, torch 2.9.1 with CUDA 12.8, TensorFlow 2.20.0), from its <code>pip freeze</code></td>
+<td>to repeat the benchmark stages as they were run; the tsgm file is installed in two steps (its header)</td>
+</tr>
+<tr>
+<td><code>tests/requirements.txt</code></td>
+<td>the analysis environment</td>
+<td><code>hypotheses.run</code> rebuilds the published rankings, questions and reports from the published tables bit for bit (checked by CI)</td>
+</tr>
+</tbody>
+</table>
+<p>Results depend on versions in a few places: newer scipy changes some p-values of RQ4 with tied values, GPU
+generations and library builds change the trained generators (the two published runs differ mainly for this
+reason, <a href="../BENCHMARK/#published-runs">BENCHMARK.md</a>).</p>
 <h3 id="c1-install-separate-environments">C1. Install: separate environments<a class="headerlink" href="#c1-install-separate-environments" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/zypl-ai/MarathonTS.git
 <span class="nb">cd</span><span class="w"> </span>MarathonTS
