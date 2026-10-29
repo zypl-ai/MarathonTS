@@ -1,0 +1,1857 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A benchmark of long synthetic time series from window assembly and long-series generators">
+      
+      
+      
+        <link rel="canonical" href="https://zypl-ai.github.io/MarathonTS/dev/MODELS/">
+      
+      
+        <link rel="prev" href="../METRICS/">
+      
+      
+        <link rel="next" href="../HYPOTHESES/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.39">
+    
+    
+      
+        <title>Models - MarathonTS</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.8c3ca2c6.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#utility-ml-models" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="MarathonTS" class="md-header__button md-logo" aria-label="MarathonTS" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            MarathonTS
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Models
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/zypl-ai/MarathonTS" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    zypl-ai/MarathonTS
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="MarathonTS" class="md-nav__button md-logo" aria-label="MarathonTS" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    MarathonTS
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/zypl-ai/MarathonTS" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    zypl-ai/MarathonTS
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GETTING_STARTED/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Getting started
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CONFIGURATION/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Configuration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../EXTENDING/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Extending
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Benchmark
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Benchmark
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../BENCHMARK/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Pipeline and protocol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../BASELINES/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Methods
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DATASETS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Datasets
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../METRICS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Metrics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Models
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Models
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#configurations-exogenous-tuning-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configurations: exogenous, tuning optional
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tasks-and-what-the-model-predicts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tasks and what the model predicts
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#linear-linear-models-in-pytorch" class="md-nav__link">
+    <span class="md-ellipsis">
+      linear — linear models in PyTorch
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mlp-neural-network-in-pytorch" class="md-nav__link">
+    <span class="md-ellipsis">
+      mlp — neural network in PyTorch
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gbdt-gradient-boosting" class="md-nav__link">
+    <span class="md-ellipsis">
+      gbdt — gradient boosting
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scikit-learn-models-sk_" class="md-nav__link">
+    <span class="md-ellipsis">
+      scikit-learn models (sk_*)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#grids-hyperparameter-tuning-and-rq5-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      Grids (hyperparameter tuning and RQ5 (c))
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#saving-and-loading" class="md-nav__link">
+    <span class="md-ellipsis">
+      Saving and loading
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#library-versions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Library versions
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../HYPOTHESES/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Statistics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Figures
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Figures
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig01_architecture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 01
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig02_stage_pipeline/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 02
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig03_environments/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 03
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig04_data_preprocessing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 04
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig05_temporal_split/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 05
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig06_pool_generator_vae/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 06
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig08_method_family/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 08
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig09_long_generators/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 09
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig10_utility_pipeline/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 10
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig11_tasks_models/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 11
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig12_fidelity_evaluation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 12
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig13_statistical_pipeline/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 13
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig14_hypotheses_map/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 14
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig15_incremental_recompute/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 15
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig16_artifact_layout/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 16
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig17_profiles/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 17
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig18_extensibility/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 18
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    API reference
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            API reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/config/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Configuration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/registry/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Registries
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/components/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Components
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/load/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Loading artifacts
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LITERATURE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Literature
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DATASET_LICENSES/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Licences
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#configurations-exogenous-tuning-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configurations: exogenous, tuning optional
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tasks-and-what-the-model-predicts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tasks and what the model predicts
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#linear-linear-models-in-pytorch" class="md-nav__link">
+    <span class="md-ellipsis">
+      linear — linear models in PyTorch
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mlp-neural-network-in-pytorch" class="md-nav__link">
+    <span class="md-ellipsis">
+      mlp — neural network in PyTorch
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gbdt-gradient-boosting" class="md-nav__link">
+    <span class="md-ellipsis">
+      gbdt — gradient boosting
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scikit-learn-models-sk_" class="md-nav__link">
+    <span class="md-ellipsis">
+      scikit-learn models (sk_*)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#grids-hyperparameter-tuning-and-rq5-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      Grids (hyperparameter tuning and RQ5 (c))
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#saving-and-loading" class="md-nav__link">
+    <span class="md-ellipsis">
+      Saving and loading
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#library-versions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Library versions
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="utility-ml-models">Utility ML models<a class="headerlink" href="#utility-ml-models" title="Permanent link">&para;</a></h1>
+<p>Models that are trained either on real data or only on synthetic data
+and evaluated on real data (the <code>utility</code> stage, section U3 of <a href="../METRICS/">METRICS.md</a>). Code:
+<code>marathonts/bench/models.py</code>; models are selected by name: <code>Config(models=[...])</code> or <code>--models</code>. You can add your own
+model through the registry (<a href="../EXTENDING/">EXTENDING.md</a>).</p>
+<p>By default three models are used: <code>linear</code>, <code>gbdt</code>, <code>mlp</code> (<code>Config.models</code>). In the <code>min</code> and <code>mid</code> profiles <code>mlp</code>
+runs on the task U2.1 (<code>clf_up_h24_q90</code>) only (<code>Config.model_tasks</code>); in <code>max</code> every model runs on every task it supports.</p>
+<h2 id="configurations-exogenous-tuning-optional">Configurations: exogenous, tuning optional<a class="headerlink" href="#configurations-exogenous-tuning-optional" title="Permanent link">&para;</a></h2>
+<p>All hyperparameters are fixed in advance in <code>marathonts/bench/model_configs.json</code> — the code only reads them, nothing is
+tuned on the data. The same file holds the grids (<code>grids</code>) for two optional features:</p>
+<ul>
+<li><strong>hyperparameter tuning</strong> (<code>Config.hpo</code>, profile <code>max</code>): for each training run the model's grid is
+  searched; each configuration is trained on the regime's own training data without its last 20% (<code>hpo_val_frac</code>;
+  R: the real train, S: the synthetic series) and evaluated on that tail by the task's primary metric (AUC, log-loss, MASE, pinball); the best one is
+  retrained on all the data. Val and OOT do not take part in the tuning. The selected configuration
+  is written to the <code>params</code> column of the utility table. Between the training part and the tail there is a gap of
+  h + 168 rows, so that the labels and lags of the training part do not reach into the tail;</li>
+<li><strong>grid for RQ5 (c)</strong> (<code>Config.decision_transfer</code>, profile <code>max</code>): all configurations of the grids of the
+  classification models are trained on real data and on synthetic data for the task <code>Config.model_grid_task</code> (U2.1)
+  and scored by AUC on val — the check is whether their rankings agree (METRICS.md, U6.1).</li>
+</ul>
+<p>In the <code>min</code> (the Colab run) and <code>mid</code> profiles both are off: each model has a single fixed configuration.
+An explicit override for a run: <code>Config(extra={"&lt;model&gt;": {...}})</code>.</p>
+<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Family</th>
+<th>Library</th>
+<th>Tasks</th>
+<th>Where it runs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>linear</code></td>
+<td>logistic / softmax regression, ridge, linear quantile regression</td>
+<td>PyTorch (in-house implementation)</td>
+<td>all</td>
+<td>GPU (CUDA), otherwise CPU</td>
+</tr>
+<tr>
+<td><code>mlp</code></td>
+<td>fully connected network 64 → 32</td>
+<td>PyTorch (in-house implementation)</td>
+<td>all (<code>min</code>, <code>mid</code>: U2.1 only)</td>
+<td>GPU (CUDA), otherwise CPU</td>
+</tr>
+<tr>
+<td><code>gbdt</code></td>
+<td>gradient-boosted trees</td>
+<td>XGBoost; fallback — scikit-learn</td>
+<td>all (with XGBoost)</td>
+<td>XGBoost — GPU or all CPU cores</td>
+</tr>
+<tr>
+<td><code>sk_linear</code></td>
+<td>same as <code>linear</code></td>
+<td>scikit-learn</td>
+<td>all (quantiles via <code>linear</code>)</td>
+<td>CPU</td>
+</tr>
+<tr>
+<td><code>sk_hgb</code></td>
+<td>HistGradientBoosting</td>
+<td>scikit-learn</td>
+<td>all except multi-step</td>
+<td>CPU</td>
+</tr>
+<tr>
+<td><code>sk_mlp</code></td>
+<td>MLP 64 → 32</td>
+<td>scikit-learn</td>
+<td>all except quantile</td>
+<td>CPU</td>
+</tr>
+</tbody>
+</table>
+<p>The <code>sk_*</code> models are scikit-learn implementations of the same model families, for running without a GPU; they are
+not used by default.</p>
+<h2 id="tasks-and-what-the-model-predicts">Tasks and what the model predicts<a class="headerlink" href="#tasks-and-what-the-model-predicts" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Task type (<code>kind</code>)</th>
+<th>Tasks (METRICS U2)</th>
+<th>Model output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>clf</code> — binary classification</td>
+<td>U2.1–U2.4: upper and lower tails, different horizons and quantiles</td>
+<td>P(y = 1), <code>(n,)</code></td>
+</tr>
+<tr>
+<td><code>mc</code> — multiclass</td>
+<td>U2.5: down / neutral / up</td>
+<td>class probabilities, <code>(n, 3)</code></td>
+</tr>
+<tr>
+<td><code>reg</code> — regression</td>
+<td>U2.6: value h = 1, 24, 168 hours ahead</td>
+<td><code>(n,)</code></td>
+</tr>
+<tr>
+<td><code>qreg</code> — quantile regression</td>
+<td>U2.7: quantiles 0.1 / 0.5 / 0.9</td>
+<td><code>(n, 3)</code></td>
+</tr>
+<tr>
+<td><code>ms</code> — multi-step forecast</td>
+<td>U2.8: vector of values 24 hours ahead</td>
+<td><code>(n, 24)</code></td>
+</tr>
+<tr>
+<td><code>vol</code> — volatility</td>
+<td>U2.9: std of changes over the next 24 hours</td>
+<td><code>(n,)</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Class weights and calibration.</strong> Classifiers (all except <code>sk_mlp</code>) are trained with balanced
+class weights, so their probabilities correspond to equal class shares. In the <code>utility</code> stage
+the probabilities are mapped back to the class shares of the training sample of their regime (real train for
+TRTR, synthetic series for TSTR):
+P(c | x) ∝ P_bal(c | x) · share(c) (<code>bench.models.prior_correct</code>). AUC, PR AUC, lift and F1 at the
+quantile threshold are unaffected by this, whereas Brier, log-loss and ECE then measure calibration rather
+than reweighting. The saved predictions are already corrected; a model loaded via
+<code>load.load_model</code> returns raw probabilities — to obtain the same values, apply <code>prior_correct</code>
+with the training labels.</p>
+<p><strong>Training regimes.</strong> Each model is trained in two regimes: R — TRTR, on the real train
+(pseudo-method <code>real</code>), and S — TSTR, only on the method's synthetic series; the test for both is the same
+real val / OOT. Early stopping of the MLP (profile <code>max</code>) holds out 10% of <em>distinct</em> rows of its
+training sample.</p>
+<p>All models use the same features: the series value, differences at lags 1, 2, 3, 6, 12, 24, 48, 168 and
+sin / cos of the hour of week (BENCHMARK.md, Protocol: utility). All models standardise the features on the training sample; for
+regression tasks <code>linear</code> and <code>mlp</code> also standardise the target and return the forecast in the original
+units.</p>
+<h2 id="linear-linear-models-in-pytorch"><code>linear</code> — linear models in PyTorch<a class="headerlink" href="#linear-linear-models-in-pytorch" title="Permanent link">&para;</a></h2>
+<p>Source: in-house implementation in <code>marathonts/bench/models.py</code> on top of <strong>PyTorch</strong> (<code>torch</code>, <code>torch.optim.LBFGS</code>,
+<code>torch.linalg.solve</code>). Trained on the whole sample at once (full batch), on the GPU if one is available.</p>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Model</th>
+<th>Loss function and regularisation</th>
+<th>Optimisation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>clf</code></td>
+<td>logistic regression</td>
+<td>weighted binary cross-entropy (class weights <code>balanced</code>) + L2 <code>‖W‖² / (2C)</code>, C = 1</td>
+<td>L-BFGS with strong Wolfe, up to 300 iterations</td>
+</tr>
+<tr>
+<td><code>mc</code></td>
+<td>softmax regression</td>
+<td>weighted cross-entropy (<code>balanced</code>) + L2, C = 1</td>
+<td>L-BFGS</td>
+</tr>
+<tr>
+<td><code>reg</code>, <code>vol</code>, <code>ms</code></td>
+<td>ridge</td>
+<td>MSE + L2, α = 1</td>
+<td>exact solution <code>(XᵀX + αI) W = XᵀY</code></td>
+</tr>
+<tr>
+<td><code>qreg</code></td>
+<td>linear quantile regression</td>
+<td>smoothed pinball loss <code>q·u + ε·softplus(−u/ε)</code>, ε = 10⁻³, all three quantiles at once</td>
+<td>L-BFGS</td>
+</tr>
+</tbody>
+</table>
+<p>The objective function for <code>clf</code> and <code>mc</code> coincides with <code>LogisticRegression(class_weight="balanced", C=1)</code>
+from scikit-learn.</p>
+<p>Saved weights: <code>W</code>, <code>b</code>, the mean and std of the features, the mean and std of the target.</p>
+<h2 id="mlp-neural-network-in-pytorch"><code>mlp</code> — neural network in PyTorch<a class="headerlink" href="#mlp-neural-network-in-pytorch" title="Permanent link">&para;</a></h2>
+<p>Source: in-house implementation in <code>marathonts/bench/models.py</code> in <strong>PyTorch</strong> (<code>torch.nn</code>, <code>torch.optim.Adam</code>).</p>
+<ul>
+<li>Architecture: <code>Linear(d, 64) → ReLU → Linear(64, 32) → ReLU → Linear(32, k)</code>; k is the number of outputs
+  of the task (1, 3, 24).</li>
+<li>Optimisation: Adam, learning rate 10⁻³, L2 via <code>weight_decay</code> = 10⁻⁴, batch 512.</li>
+<li>Number of epochs: fixed, 30 (<code>epochs</code>), without early stopping — profile <code>min</code>. In profile <code>max</code>
+  — up to 200 epochs with early stopping (<code>early_stopping_patience</code> = 10): 10% of the distinct rows (random, with a
+  seed) are used for validation, and the weights of the epoch with the lowest validation loss are returned.</li>
+<li>The architecture (<code>hidden</code>) is also set in the configuration: (64, 32) by default.</li>
+<li>Losses: <code>clf</code> — binary cross-entropy with <code>pos_weight = (1 − p) / p</code> (class balance);
+  <code>mc</code> — cross-entropy with class weights <code>balanced</code>; <code>reg</code>, <code>vol</code>, <code>ms</code> — MSE; <code>qreg</code> —
+  smoothed pinball loss over the three quantiles.</li>
+</ul>
+<p>Saved weights: the network's <code>state_dict</code>, the mean and std of the features and of the target.</p>
+<h2 id="gbdt-gradient-boosting"><code>gbdt</code> — gradient boosting<a class="headerlink" href="#gbdt-gradient-boosting" title="Permanent link">&para;</a></h2>
+<p>Source: the <strong>XGBoost</strong> library (<code>xgboost.XGBClassifier</code>, <code>xgboost.XGBRegressor</code>).</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th><code>min</code>, <code>mid</code> (light, <code>model_configs.json</code>)</th>
+<th><code>max</code> (full)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>trees (<code>n_estimators</code>)</td>
+<td>100</td>
+<td>200</td>
+</tr>
+<tr>
+<td>depth (<code>max_depth</code>)</td>
+<td>4</td>
+<td>6 (in the tuning grid: 2, 4, 6, 8)</td>
+</tr>
+<tr>
+<td>learning rate</td>
+<td>0.2</td>
+<td>0.1</td>
+</tr>
+<tr>
+<td>histogram bins (<code>max_bin</code>)</td>
+<td>64</td>
+<td>256</td>
+</tr>
+<tr>
+<td>where it runs (<code>device</code>)</td>
+<td>CPU: on ~10,000 rows faster than GPU</td>
+<td>CUDA if available</td>
+</tr>
+<tr>
+<td>multi-step task (<code>multi_strategy_ms</code>)</td>
+<td><code>multi_output_tree</code>: a single ensemble with vector leaves for 24 outputs</td>
+<td><code>one_output_per_tree</code>: a separate ensemble for each step</td>
+</tr>
+</tbody>
+</table>
+<p>Timing on data of <code>min</code> size (2 CPU threads): binary task 0.08 s versus 0.37 s for the full configuration,
+multi-step 0.95 s versus 10.3 s.</p>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>XGBoost objective</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>clf</code></td>
+<td><code>binary:logistic</code>, <code>scale_pos_weight = (1 − p) / p</code></td>
+</tr>
+<tr>
+<td><code>mc</code></td>
+<td><code>multi:softprob</code>, sample weights <code>balanced</code> (a class absent from training — a row with weight ~0)</td>
+</tr>
+<tr>
+<td><code>reg</code>, <code>vol</code></td>
+<td><code>reg:squarederror</code></td>
+</tr>
+<tr>
+<td><code>qreg</code></td>
+<td><code>reg:quantileerror</code>, <code>quantile_alpha = [0.1, 0.5, 0.9]</code> — one model for all three quantiles</td>
+</tr>
+<tr>
+<td><code>ms</code></td>
+<td><code>reg:squarederror</code>, strategy from <code>multi_strategy_ms</code></td>
+</tr>
+</tbody>
+</table>
+<p>Saved weights: the XGBoost booster in the binary UBJSON format.</p>
+<p><strong>Fallback.</strong> If XGBoost is not installed, or on macOS (there torch and xgboost load two
+different OpenMP libraries, and xgboost crashes in the same process as torch), <code>gbdt</code> uses
+<code>HistGradientBoosting</code> from <strong>scikit-learn</strong> (the <code>sk_hgb</code> implementation) with the <code>gbdt</code> parameters <code>n_estimators</code>
+(as <code>max_iter</code>), <code>max_depth</code> and <code>learning_rate</code>; the multi-step task is then skipped. The choice is set by the environment variable <code>BENCH_GBDT_BACKEND=xgboost|sklearn</code>. In Docker
+and in Colab (Linux) XGBoost is used. The two are different models under one name: a run on the fallback
+warns at the start of the utility stage, marks its rows (<code>"_backend": "sklearn"</code> in <code>params</code>) and <code>collect</code>
+warns when such rows are in the tables. The expected cells of <code>gbdt</code> follow XGBoost (<code>GBDT.all_kinds</code>), so
+results made with XGBoost stay valid in an environment without it and its multi-step cells are left to an
+environment that has it — run every stage in one environment.</p>
+<h2 id="scikit-learn-models-sk_">scikit-learn models (<code>sk_*</code>)<a class="headerlink" href="#scikit-learn-models-sk_" title="Permanent link">&para;</a></h2>
+<p>Source: <strong>scikit-learn</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>sklearn classes</th>
+<th>Parameters</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sk_linear</code></td>
+<td><code>StandardScaler</code> + <code>LogisticRegression</code> (<code>clf</code>, <code>mc</code>), <code>Ridge</code> (<code>reg</code>, <code>vol</code>, <code>ms</code>)</td>
+<td><code>class_weight="balanced"</code>, C = 1, <code>max_iter=2000</code>; α = 1. Quantiles via <code>linear</code></td>
+</tr>
+<tr>
+<td><code>sk_hgb</code></td>
+<td><code>HistGradientBoostingClassifier</code> / <code>HistGradientBoostingRegressor</code></td>
+<td><code>max_iter=200</code>, unlimited depth, learning rate 0.1, without early stopping, <code>class_weight="balanced"</code>; quantiles — three models with <code>loss="quantile"</code></td>
+</tr>
+<tr>
+<td><code>sk_mlp</code></td>
+<td><code>StandardScaler</code> + <code>MLPClassifier</code> / <code>MLPRegressor</code></td>
+<td><code>hidden_layer_sizes=(64, 32)</code>, without early stopping, 30 epochs, α = 10⁻⁴</td>
+</tr>
+</tbody>
+</table>
+<p>Saved weights: the fitted scikit-learn object (pickle, zstd-compressed inside Parquet).</p>
+<h2 id="grids-hyperparameter-tuning-and-rq5-c">Grids (hyperparameter tuning and RQ5 (c))<a class="headerlink" href="#grids-hyperparameter-tuning-and-rq5-c" title="Permanent link">&para;</a></h2>
+<p><code>marathonts/bench/model_configs.json</code> → <code>grids</code>; each grid point is applied on top of the fixed
+configuration of the model:</p>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Grid</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>linear</code></td>
+<td>(C, α ridge) = (0.01, 10), (0.1, 3), (1, 1), (10, 0.1)</td>
+</tr>
+<tr>
+<td><code>gbdt</code></td>
+<td>depth 2, 4, 6, 8</td>
+</tr>
+<tr>
+<td><code>mlp</code></td>
+<td>weight decay 10⁻⁴, 10⁻²; hidden layers (128, 64)</td>
+</tr>
+<tr>
+<td><code>sk_hgb</code></td>
+<td>depth 2, 4, unlimited</td>
+</tr>
+</tbody>
+</table>
+<h2 id="saving-and-loading">Saving and loading<a class="headerlink" href="#saving-and-loading" title="Permanent link">&para;</a></h2>
+<p>The weights of each trained model are written to <code>artifacts/&lt;profile&gt;/utility/&lt;dataset&gt;/&lt;method&gt;/seed&lt;k&gt;/models.parquet</code>
+under the key <code>&lt;task&gt;|&lt;model&gt;|&lt;regime&gt;|&lt;parameter&gt;</code>. A model is loaded back and predicts without
+retraining:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">marathonts.bench</span><span class="w"> </span><span class="kn">import</span> <span class="n">load</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">load</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="n">cfg</span><span class="p">,</span> <span class="s2">"ett"</span><span class="p">,</span> <span class="s2">"vae_zseries"</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">task</span><span class="o">=</span><span class="s2">"clf_up_h24_q90"</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">"gbdt"</span><span class="p">,</span> <span class="n">regime</span><span class="o">=</span><span class="s2">"S"</span><span class="p">)</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">load</span><span class="o">.</span><span class="n">task_xy</span><span class="p">(</span><span class="n">cfg</span><span class="p">,</span> <span class="s2">"ett"</span><span class="p">,</span> <span class="s2">"clf_up_h24_q90"</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="s2">"oot"</span><span class="p">)</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</code></pre></div>
+<p>The weights of the tuning candidates and of the RQ5 (c) grid are not saved: they contribute metrics to the table, and for the final
+model the selected configuration (<code>params</code>).</p>
+<h2 id="library-versions">Library versions<a class="headerlink" href="#library-versions" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Library</th>
+<th>Used for</th>
+<th>Installation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PyTorch</td>
+<td><code>linear</code>, <code>mlp</code></td>
+<td><code>pip install torch</code> (already present in Colab and in the Docker image)</td>
+</tr>
+<tr>
+<td>XGBoost</td>
+<td><code>gbdt</code></td>
+<td><code>pip install xgboost</code> (version ≥ 2.0: quantiles and multi-output; <code>envs/core.txt</code>)</td>
+</tr>
+<tr>
+<td>scikit-learn</td>
+<td><code>sk_*</code>, fallback <code>gbdt</code>, quality metrics</td>
+<td><code>pip install scikit-learn</code></td>
+</tr>
+</tbody>
+</table>
+<p>The requirements are in <code>envs/core.txt</code>. The installed versions (<code>bench.timing.library_versions</code>) are written to
+<code>artifacts/&lt;profile&gt;/tables/hardware.parquet</code> by <code>collect</code>, for the environment in which <code>collect</code> runs; the
+configuration of the run is in <code>artifacts/&lt;profile&gt;/tables/config.json</code>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../METRICS/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Metrics">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Metrics
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../HYPOTHESES/" class="md-footer__link md-footer__link--next" aria-label="Next: Statistics">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Statistics
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright 2026 zypl Holding Ltd. Code under the Apache License 2.0.
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.sections", "navigation.top", "navigation.footer", "toc.follow", "search.highlight", "content.code.copy"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.525ec568.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

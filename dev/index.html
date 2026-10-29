@@ -1,0 +1,2098 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A benchmark of long synthetic time series from window assembly and long-series generators">
+      
+      
+      
+        <link rel="canonical" href="https://zypl-ai.github.io/MarathonTS/dev/">
+      
+      
+      
+        <link rel="next" href="GETTING_STARTED/">
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.39">
+    
+    
+      
+        <title>MarathonTS</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.8c3ca2c6.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#marathonts" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="." title="MarathonTS" class="md-header__button md-logo" aria-label="MarathonTS" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            MarathonTS
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Home
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/zypl-ai/MarathonTS" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    zypl-ai/MarathonTS
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="MarathonTS" class="md-nav__button md-logo" aria-label="MarathonTS" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    MarathonTS
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/zypl-ai/MarathonTS" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    zypl-ai/MarathonTS
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#quick-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quick start
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ways-to-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ways to run
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#results-and-how-to-read-them" class="md-nav__link">
+    <span class="md-ellipsis">
+      Results and how to read them
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Results and how to read them">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#published-runs-and-the-main-leaderboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      Published runs and the main leaderboard
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#change-the-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Change the configuration
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#add-your-own-component" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add your own component
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Documentation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#project-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Project structure
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proprietary-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Proprietary methods
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#citation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Citation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#authors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Authors
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#licence" class="md-nav__link">
+    <span class="md-ellipsis">
+      Licence
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="GETTING_STARTED/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Getting started
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="CONFIGURATION/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Configuration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="EXTENDING/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Extending
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Benchmark
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Benchmark
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="BENCHMARK/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Pipeline and protocol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="BASELINES/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Methods
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="DATASETS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Datasets
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="METRICS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Metrics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="MODELS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Models
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="HYPOTHESES/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Statistics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Figures
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Figures
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="figures/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="figures/fig01_architecture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 01
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="figures/fig02_stage_pipeline/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 02
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="figures/fig03_environments/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 03
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="figures/fig04_data_preprocessing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 04
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="figures/fig05_temporal_split/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 05
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="figures/fig06_pool_generator_vae/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 06
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="figures/fig08_method_family/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 08
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="figures/fig09_long_generators/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 09
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="figures/fig10_utility_pipeline/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 10
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="figures/fig11_tasks_models/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 11
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="figures/fig12_fidelity_evaluation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 12
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="figures/fig13_statistical_pipeline/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 13
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="figures/fig14_hypotheses_map/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 14
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="figures/fig15_incremental_recompute/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 15
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="figures/fig16_artifact_layout/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 16
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="figures/fig17_profiles/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 17
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="figures/fig18_extensibility/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 18
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    API reference
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            API reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/config/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Configuration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/registry/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Registries
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/components/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Components
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/load/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Loading artifacts
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="LITERATURE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Literature
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="DATASET_LICENSES/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Licences
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#quick-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quick start
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ways-to-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ways to run
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#results-and-how-to-read-them" class="md-nav__link">
+    <span class="md-ellipsis">
+      Results and how to read them
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Results and how to read them">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#published-runs-and-the-main-leaderboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      Published runs and the main leaderboard
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#change-the-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Change the configuration
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#add-your-own-component" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add your own component
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Documentation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#project-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Project structure
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proprietary-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Proprietary methods
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#citation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Citation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#authors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Authors
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#licence" class="md-nav__link">
+    <span class="md-ellipsis">
+      Licence
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="marathonts">MarathonTS<a class="headerlink" href="#marathonts" title="Permanent link">&para;</a></h1>
+<p><a href="https://github.com/zypl-ai/MarathonTS/blob/main/LICENSE"><img alt="License: Apache 2.0" src="https://img.shields.io/badge/license-Apache%202.0-blue.svg" /></a>
+<a href="GETTING_STARTED/"><img alt="Python 3.11 | 3.12" src="https://img.shields.io/badge/python-3.11%20%7C%203.12-blue.svg" /></a>
+<a href="https://zypl-ai.github.io/MarathonTS/"><img alt="Docs" src="https://img.shields.io/badge/docs-zypl--ai.github.io-informational.svg" /></a>
+<a href="https://huggingface.co/datasets/zyplai/MarathonTS"><img alt="Data on Hugging Face" src="https://img.shields.io/badge/%F0%9F%A4%97%20data-zyplai%2FMarathonTS-yellow.svg" /></a>
+<a href="https://huggingface.co/spaces/zyplai/MarathonTS"><img alt="Leaderboard" src="https://img.shields.io/badge/%F0%9F%A4%97%20leaderboard-Space-yellow.svg" /></a></p>
+<!-- After the arXiv announcement: [![arXiv](https://img.shields.io/badge/arXiv-XXXX.XXXXX-b31b1b.svg)](https://arxiv.org/abs/XXXX.XXXXX) -->
+<!-- After the PyPI release: [![PyPI](https://img.shields.io/pypi/v/marathonts.svg)](https://pypi.org/project/marathonts/) -->
+
+<p><strong>A benchmark of long synthetic time series from window assembly and long-series generators.</strong></p>
+<p>Many uses of synthetic time series need a series much longer than the windows a generative model is
+trained on. MarathonTS compares the two ways to obtain one under a single protocol: <strong>assembly</strong> from a pool
+of short generated windows (which windows, in what order, how the seams are processed) and
+<strong>long-series generators</strong> (Diffusion-TS, Chronos, TimesFM, Timestral). Every method yields a series of the
+same length; the benchmark measures its fidelity to the real data, its utility for models trained on it,
+its memorisation of the training data and its cost. The statistics (rankings, research questions with
+tests and uncertainty, a pre-specified confirmatory family) are a separate stage that reads the benchmark
+tables.</p>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Paper</td>
+<td>arXiv: to be announced</td>
+</tr>
+<tr>
+<td>Code</td>
+<td>https://github.com/zypl-ai/MarathonTS</td>
+</tr>
+<tr>
+<td>Package</td>
+<td>https://pypi.org/project/marathonts/ (<code>pip install marathonts</code>)</td>
+</tr>
+<tr>
+<td>Data</td>
+<td>https://huggingface.co/datasets/zyplai/MarathonTS (full benchmark artifacts)</td>
+</tr>
+<tr>
+<td>Leaderboard</td>
+<td>https://huggingface.co/spaces/zyplai/MarathonTS (interactive view of the published rankings)</td>
+</tr>
+<tr>
+<td>Documentation</td>
+<td>https://zypl-ai.github.io/MarathonTS/</td>
+</tr>
+</tbody>
+</table>
+<p align="center">
+  <img src="figures/fig08_method_family.png" width="760"
+       alt="The compared methods: assemblers and seam joiners on a shared pool of generated windows, and long-series generators">
+</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Methods in the result tables</td>
+<td>16 in profile <code>min</code> (12 run by the pipeline + 4 published results), 17 in <code>mid</code>, 35 in <code>max</code></td>
+</tr>
+<tr>
+<td>Fidelity</td>
+<td>83 metrics in 12 groups F1–F12, each against three real references (train, val, OOT)</td>
+</tr>
+<tr>
+<td>Utility</td>
+<td>14 tasks; models trained on the synthetic series only and tested on real data (TSTR against TRTR)</td>
+</tr>
+<tr>
+<td>Data</td>
+<td>9 open hourly datasets, 10 seeds</td>
+</tr>
+<tr>
+<td>Statistics</td>
+<td>overall leaderboard, rankings by slice, research questions RQ0–RQ9, confirmatory family C1–C4</td>
+</tr>
+</tbody>
+</table>
+<h2 id="quick-start">Quick start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h2>
+<p>A smoke test runs the whole pipeline on 2 datasets (<code>ett</code>, <code>bike</code>), 2 seeds and small models
+(<code>Config.quick()</code>); both datasets are downloaded without credentials. Local run in one environment
+(Linux or macOS, Python 3.11 or 3.12, <code>git</code> on the path):</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/zypl-ai/MarathonTS.git
+<span class="nb">cd</span><span class="w"> </span>MarathonTS
+python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">source</span><span class="w"> </span>.venv/bin/activate
+pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Y-debug-sys/Diffusion-TS.git<span class="w"> </span>external/Diffusion-TS
+git<span class="w"> </span>-C<span class="w"> </span>external/Diffusion-TS<span class="w"> </span>checkout<span class="w"> </span>566307e6cf2d8095e58de4c6e3a6ae965b69b5b5
+
+python<span class="w"> </span>-m<span class="w"> </span>marathonts.bench.run<span class="w"> </span>all<span class="w"> </span>--quick<span class="w">                            </span><span class="c1"># data → pools → series → fidelity → utility → tables</span>
+python<span class="w"> </span>-m<span class="w"> </span>marathonts.hypotheses.run<span class="w"> </span>--artifacts-dir<span class="w"> </span>artifacts/quick<span class="w">   </span><span class="c1"># reports → artifacts/quick/reports/</span>
+</code></pre></div>
+<p>The benchmark is also installable as a package, <code>pip install marathonts</code> (the same commands; see
+<a href="GETTING_STARTED/#c0-install-the-package-from-pypi">Guide C, C0</a>). The pretrained generators (Chronos,
+TimesFM, Timestral) download their weights from Hugging Face on first use. The same test with Docker: <a href="GETTING_STARTED/#a2-smoke-test">Guide A, A2</a>; in Colab:
+<a href="GETTING_STARTED/#b4-smoke-test">Guide B, B4</a>.</p>
+<h2 id="ways-to-run">Ways to run<a class="headerlink" href="#ways-to-run" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Way</th>
+<th>When to use</th>
+<th>Guide</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Docker</td>
+<td>a Linux machine with Docker (NVIDIA GPU optional); two images (<code>tsgm</code> with TensorFlow, <code>bench</code> with PyTorch) share <code>data/</code> and <code>artifacts/</code></td>
+<td><a href="GETTING_STARTED/#guide-a-docker">Guide A</a></td>
+</tr>
+<tr>
+<td>Colab notebooks</td>
+<td>Google Colab with the project on Google Drive; one notebook per stage, each on its own runtime</td>
+<td><a href="GETTING_STARTED/#guide-b-google-colab">Guide B</a></td>
+</tr>
+<tr>
+<td>Local environments</td>
+<td>your own machine; one virtual environment per dependency set (<code>envs/*.txt</code>) or one environment for everything (<code>requirements.txt</code>)</td>
+<td><a href="GETTING_STARTED/#guide-c-local-environments">Guide C</a></td>
+</tr>
+</tbody>
+</table>
+<p>Each guide covers the smoke test, the full run of profile <code>min</code> and re-running only the analysis on existing
+tables.</p>
+<h2 id="results-and-how-to-read-them">Results and how to read them<a class="headerlink" href="#results-and-how-to-read-them" title="Permanent link">&para;</a></h2>
+<p>Stage 7 (<code>python -m marathonts.hypotheses.run</code>) writes four Markdown reports to <code>artifacts/&lt;profile&gt;/reports/</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Report</th>
+<th>Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>OVERALL.md</code></td>
+<td>the overall leaderboard: fidelity on the core metrics and utility with equal weights, noise-aware ranks, robustness checks</td>
+</tr>
+<tr>
+<td><code>LEADERBOARD.md</code></td>
+<td>the ranking of every method in every slice: the four rankings, core-metric rankings, privacy, cost</td>
+</tr>
+<tr>
+<td><code>METRIC_VALUES.md</code></td>
+<td>values of the core fidelity metrics and the primary utility metrics by reference, dataset, task, model and split</td>
+</tr>
+<tr>
+<td><code>REPORT.md</code></td>
+<td>research questions RQ0–RQ9, the confirmatory family C1–C4, the case study CS1–CS15</td>
+</tr>
+</tbody>
+</table>
+<p>Their Parquet tables are in <code>artifacts/&lt;profile&gt;/overall/</code>, <code>leaderboard/</code>, <code>metric_values/</code> and
+<code>hypotheses/</code>; the benchmark tables they are computed from are in <code>artifacts/&lt;profile&gt;/tables/</code>.
+<code>artifacts/run_h200/</code> holds the tables and reports of the main run and <code>artifacts/run_l4/</code> those of the replication
+run; your own runs are written to <code>artifacts/&lt;profile&gt;/</code>. The full artifacts of both runs (pools, series, fidelity and utility records,
+labels) are on <a href="https://huggingface.co/datasets/zyplai/MarathonTS">Hugging Face</a>, and the rankings of both runs
+can be explored in the <a href="https://huggingface.co/spaces/zyplai/MarathonTS">interactive leaderboard</a>, which opens
+on the main run. The metrics are defined in
+<a href="METRICS/">METRICS.md</a>, the statistical procedure and the reading of the verdicts in
+<a href="HYPOTHESES/">HYPOTHESES.md</a>.</p>
+<h3 id="published-runs-and-the-main-leaderboard">Published runs and the main leaderboard<a class="headerlink" href="#published-runs-and-the-main-leaderboard" title="Permanent link">&para;</a></h3>
+<p>Two runs of profile <code>min</code> are published: the <strong>main run</strong> on one NVIDIA H200 (computing infrastructure of
+<a href="https://www.greendarya.ai/">darya.ai</a>; 34 methods, 24 ranked: the VAE
+and zEDGE pools, the open long-series generators and zEDGE_TS) and a <strong>replication run</strong> on one NVIDIA L4 (the
+VAE pool and the open long-series generators, 13 ranked). Every result of the paper and the leaderboard below
+come from the main run; the replication run shows how the results reproduce on other hardware. Ranks and
+times are compared only within a run. Their setup, the comparison and the sources of the differences
+(retrained generators, sampling, downstream models, a slightly different ETT series in the main run) are in
+<a href="BENCHMARK/#published-runs">BENCHMARK.md</a>.</p>
+<p>Overall leaderboard of the main run, in full (24 ranked methods; * proprietary, evaluated as a black box).
+Read it by tier, not by place: the tests do not separate the places within the top tier, and these places
+change between runs on different hardware (<a href="HYPOTHESES/">HYPOTHESES.md</a>).</p>
+<table>
+<thead>
+<tr>
+<th>place</th>
+<th>method</th>
+<th>family</th>
+<th>mean rank</th>
+<th>95 % interval</th>
+<th>P(first)</th>
+<th>top tier</th>
+<th>datasets</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>zedge_quilting</code> *</td>
+<td>assembly</td>
+<td>8.27</td>
+<td>7.35–9.20</td>
+<td>0.85</td>
+<td>yes</td>
+<td>9</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>zedge_zseries</code> *</td>
+<td>assembly</td>
+<td>8.79</td>
+<td>8.28–9.47</td>
+<td>0.08</td>
+<td>yes</td>
+<td>9</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>zedge_greedy</code> *</td>
+<td>assembly</td>
+<td>8.95</td>
+<td>7.97–10.00</td>
+<td>0.01</td>
+<td>yes</td>
+<td>9</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>zedge_pctsp</code> *</td>
+<td>assembly</td>
+<td>9.18</td>
+<td>8.13–10.25</td>
+<td>0.00</td>
+<td>yes</td>
+<td>9</td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>zedge_knn</code> *</td>
+<td>assembly</td>
+<td>9.33</td>
+<td>8.32–10.48</td>
+<td>0.00</td>
+<td>yes</td>
+<td>9</td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>zedge_atsp</code> *</td>
+<td>assembly</td>
+<td>9.39</td>
+<td>7.83–11.10</td>
+<td>0.03</td>
+<td>yes</td>
+<td>9</td>
+</tr>
+<tr>
+<td>7</td>
+<td><code>zedge_ts_ar</code> *</td>
+<td>long-series</td>
+<td>9.40</td>
+<td>7.99–10.91</td>
+<td>0.02</td>
+<td>yes</td>
+<td>9</td>
+</tr>
+<tr>
+<td>8</td>
+<td><code>zedge_ts_long</code> *</td>
+<td>long-series</td>
+<td>9.50</td>
+<td>8.25–10.89</td>
+<td>0.00</td>
+<td>yes</td>
+<td>9</td>
+</tr>
+<tr>
+<td>9</td>
+<td><code>zedge_herding</code> *</td>
+<td>assembly</td>
+<td>10.48</td>
+<td>9.15–11.88</td>
+<td>0.00</td>
+<td>yes</td>
+<td>9</td>
+</tr>
+<tr>
+<td>10</td>
+<td><code>zedge_mbb</code> *</td>
+<td>assembly</td>
+<td>10.58</td>
+<td>9.10–12.25</td>
+<td>0.00</td>
+<td>yes</td>
+<td>9</td>
+</tr>
+<tr>
+<td>11</td>
+<td><code>zedge_rand</code> *</td>
+<td>assembly (random)</td>
+<td>10.75</td>
+<td>9.12–12.49</td>
+<td>0.00</td>
+<td>yes</td>
+<td>9</td>
+</tr>
+<tr>
+<td>12</td>
+<td><code>vae_herding</code></td>
+<td>assembly</td>
+<td>13.53</td>
+<td>12.79–14.30</td>
+<td>0.00</td>
+<td>no</td>
+<td>9</td>
+</tr>
+<tr>
+<td>13</td>
+<td><code>vae_zseries</code> *</td>
+<td>assembly</td>
+<td>13.68</td>
+<td>12.15–15.24</td>
+<td>0.00</td>
+<td>yes</td>
+<td>9</td>
+</tr>
+<tr>
+<td>14</td>
+<td><code>diffusion_ts</code></td>
+<td>long-series</td>
+<td>13.78</td>
+<td>11.98–15.39</td>
+<td>0.00</td>
+<td>no</td>
+<td>9</td>
+</tr>
+<tr>
+<td>15</td>
+<td><code>timesfm</code></td>
+<td>long-series</td>
+<td>14.43</td>
+<td>12.56–16.23</td>
+<td>0.00</td>
+<td>yes</td>
+<td>6</td>
+</tr>
+<tr>
+<td>16</td>
+<td><code>vae_quilting</code></td>
+<td>assembly</td>
+<td>14.44</td>
+<td>12.64–16.20</td>
+<td>0.00</td>
+<td>yes</td>
+<td>9</td>
+</tr>
+<tr>
+<td>17</td>
+<td><code>vae_pctsp</code></td>
+<td>assembly</td>
+<td>15.27</td>
+<td>13.80–16.67</td>
+<td>0.00</td>
+<td>no</td>
+<td>9</td>
+</tr>
+<tr>
+<td>18</td>
+<td><code>vae_atsp</code></td>
+<td>assembly</td>
+<td>15.28</td>
+<td>13.26–17.10</td>
+<td>0.00</td>
+<td>no</td>
+<td>9</td>
+</tr>
+<tr>
+<td>19</td>
+<td><code>vae_greedy</code></td>
+<td>assembly</td>
+<td>15.57</td>
+<td>13.90–17.19</td>
+<td>0.00</td>
+<td>no</td>
+<td>9</td>
+</tr>
+<tr>
+<td>20</td>
+<td><code>chronos</code></td>
+<td>long-series</td>
+<td>15.78</td>
+<td>14.04–17.45</td>
+<td>0.00</td>
+<td>yes</td>
+<td>7</td>
+</tr>
+<tr>
+<td>21</td>
+<td><code>vae_knn</code></td>
+<td>assembly</td>
+<td>16.01</td>
+<td>14.16–17.70</td>
+<td>0.00</td>
+<td>no</td>
+<td>9</td>
+</tr>
+<tr>
+<td>22</td>
+<td><code>vae_mbb</code></td>
+<td>assembly</td>
+<td>16.30</td>
+<td>14.24–18.20</td>
+<td>0.00</td>
+<td>no</td>
+<td>9</td>
+</tr>
+<tr>
+<td>23</td>
+<td><code>vae_rand</code></td>
+<td>assembly (random)</td>
+<td>16.47</td>
+<td>14.43–18.39</td>
+<td>0.00</td>
+<td>no</td>
+<td>9</td>
+</tr>
+<tr>
+<td>24</td>
+<td><code>timestral</code></td>
+<td>long-series</td>
+<td>16.77</td>
+<td>15.53–18.08</td>
+<td>0.00</td>
+<td>no</td>
+<td>9</td>
+</tr>
+</tbody>
+</table>
+<h2 id="change-the-configuration">Change the configuration<a class="headerlink" href="#change-the-configuration" title="Permanent link">&para;</a></h2>
+<p>Every setting is a field of <code>Config</code> (<code>marathonts/bench/config.py</code>); three profiles (<code>min</code>, <code>mid</code>, <code>max</code>) are
+ready-made sets of values. Settings are changed by command-line flags, in the <code>cfg</code> cell of the notebooks, in
+Python, or by a JSON file — <a href="CONFIGURATION/">CONFIGURATION.md</a>, which also lists every field with its
+default and which stages a change recomputes.</p>
+<h2 id="add-your-own-component">Add your own component<a class="headerlink" href="#add-your-own-component" title="Permanent link">&para;</a></h2>
+<p>Datasets, tasks, pool generators, long-series generators, assemblers, seam processing, ML models, fidelity
+and utility metrics, statistical tests and hypotheses are registered by name in a plugin file and switched on
+by one line of configuration — <a href="EXTENDING/">EXTENDING.md</a>.</p>
+<h2 id="documentation">Documentation<a class="headerlink" href="#documentation" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="GETTING_STARTED/">docs/GETTING_STARTED.md</a></td>
+<td>requirements, the three ways to run step by step, resuming, troubleshooting</td>
+</tr>
+<tr>
+<td><a href="CONFIGURATION/">docs/CONFIGURATION.md</a></td>
+<td><code>Config</code>, profiles, every setting, CLI flags, what a change recomputes</td>
+</tr>
+<tr>
+<td><a href="EXTENDING/">docs/EXTENDING.md</a></td>
+<td>plugins: your own dataset, task, generator, assembler, seam processing, model, metric, test, hypothesis</td>
+</tr>
+<tr>
+<td><a href="BENCHMARK/">docs/BENCHMARK.md</a></td>
+<td>pipeline, protocol, environments, stages, artifacts, compute volume</td>
+</tr>
+<tr>
+<td><a href="HYPOTHESES/">docs/HYPOTHESES.md</a></td>
+<td>research questions RQ0–RQ9, ranking, case study CS1–CS15, tests, analysis pipeline</td>
+</tr>
+<tr>
+<td><a href="METRICS/">docs/METRICS.md</a></td>
+<td>fidelity metrics F1–F12 and utility metrics</td>
+</tr>
+<tr>
+<td><a href="MODELS/">docs/MODELS.md</a></td>
+<td>the utility ML models and their libraries</td>
+</tr>
+<tr>
+<td><a href="BASELINES/">docs/BASELINES.md</a></td>
+<td>the compared methods and the alternatives from the literature</td>
+</tr>
+<tr>
+<td><a href="DATASETS/">docs/DATASETS.md</a></td>
+<td>the nine datasets, preprocessing, leakage into pretrained models</td>
+</tr>
+<tr>
+<td><a href="DATASET_LICENSES/">docs/DATASET_LICENSES.md</a></td>
+<td>dataset licences and what is published for each dataset</td>
+</tr>
+<tr>
+<td><a href="LITERATURE/">docs/LITERATURE.md</a></td>
+<td>references</td>
+</tr>
+<tr>
+<td><a href="figures/">docs/figures/README.md</a></td>
+<td>vector figures of the benchmark design</td>
+</tr>
+</tbody>
+</table>
+<p>The same documentation, with an API reference built from the docstrings (<code>docs/api/</code>), is a site
+(<code>mkdocs.yml</code>, published from the repository by <code>.github/workflows/docs.yml</code>); locally:</p>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>docs/requirements.txt
+mkdocs<span class="w"> </span>serve<span class="w">                        </span><span class="c1"># http://127.0.0.1:8000</span>
+</code></pre></div>
+<h2 id="project-structure">Project structure<a class="headerlink" href="#project-structure" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>MarathonTS/
+├── marathonts/               # the Python package (pip install marathonts)
+│   ├── bench/                #   benchmark: data, generators, assemblers, models, metrics → artifacts/&lt;profile&gt;/
+│   │   ├── config.py         #     Config: every setting; the profiles min / mid / max
+│   │   ├── run.py            #     the stages: python -m marathonts.bench.run &lt;stage&gt;
+│   │   ├── registry.py       #     registries of the pluggable components
+│   │   ├── model_configs.json  #   hyperparameters and search grids of the ML models
+│   │   └── target_params*.json #   exogenous task thresholds per dataset
+│   └── hypotheses/           #   leaderboard, rankings, metric values, research questions → artifacts/&lt;profile&gt;/reports/
+├── pyproject.toml            # package metadata and dependencies
+├── colab/                    # Colab notebooks 01–07 (one per stage) + colab_setup.py
+├── envs/                     # dependencies per environment: base, core, tsgm, diffusion_ts, chronos, timesfm, timestral, sdv
+├── docs/                     # documentation; design figures in docs/figures/ (source: docs/figures/src/);
+│                             #   API reference pages docs/api/, site build docs/requirements.txt
+├── artifacts/run_h200/       # main run (NVIDIA H200): tables and reports
+├── artifacts/run_l4/         # replication run (NVIDIA L4): tables and reports
+├── Dockerfile                # two images: tsgm (TensorFlow) and bench (PyTorch, CUDA or CPU)
+├── docker-compose.yml        # the stages in the two images with shared data/ and artifacts/
+├── mkdocs.yml                # the documentation site
+├── requirements.txt          # every environment in one (Python ≤ 3.12)
+├── CITATION.cff, CHANGELOG.md, CONTRIBUTING.md
+└── LICENSE, NOTICE           # Apache 2.0 for the code
+</code></pre></div>
+<p>Data (<code>data/</code>) and the Diffusion-TS code (<code>external/</code>) are not in the repository: the data are downloaded by
+the <code>raw</code> stage, Diffusion-TS is cloned at install time.</p>
+<h2 id="proprietary-methods">Proprietary methods<a class="headerlink" href="#proprietary-methods" title="Permanent link">&para;</a></h2>
+<p>Three components are proprietary methods of <a href="https://zypl.ai/">zypl.ai</a> under development: the assembler zseries
+(<code>vae_zseries</code> and its seam-processing variants) and, in the main run of the paper, two generators of the
+zEDGE family:</p>
+<ul>
+<li><strong>zEDGE</strong> — a pool generator: it generates the window pool that the assemblers turn into a long series
+  (pool prefix <code>zedge</code>, methods <code>zedge_zseries</code>, <code>zedge_greedy</code>, …);</li>
+<li><strong>zEDGE_TS</strong> — a long-series generator: it generates the long series directly, without a pool. One
+  sequence model over the latent vectors of zEDGE is trained per dataset and shared by the seeds; it is
+  sampled in two modes:</li>
+<li><code>zedge_ts_long</code> — block inpainting: the latent sequence is built in blocks of 12 latent vectors, each
+    next block conditioned on the last three latent vectors of the previous one;</li>
+<li><code>zedge_ts_ar</code> — autoregressive: one latent vector at a time, conditioned on the preceding 11; slower,
+    but every step agrees with a longer context.</li>
+</ul>
+<p>In both modes every latent vector is decoded into a window, and neighbouring windows (overlap T/2) are
+  joined by a cosine crossfade.</p>
+<p>They are evaluated as black boxes under the same protocol as every other method: their results
+are published in the tables (<code>Config.frozen_methods</code>) and enter the rankings and the analysis, their code
+is not part of the repository, and their results cannot be reproduced from it. No open method uses any of
+their components. Every ranking can be recomputed with any set of methods excluded (<code>--rank-exclude</code>).
+The paper states the competing interests of the authors.</p>
+<h2 id="citation">Citation<a class="headerlink" href="#citation" title="Permanent link">&para;</a></h2>
+<p>If you use MarathonTS, please cite the paper (the arXiv identifier will be added after the announcement)
+and the original source of every dataset you use (<a href="DATASETS/">DATASETS.md</a>):</p>
+<div class="highlight"><pre><span></span><code><span class="nc">@misc</span><span class="p">{</span><span class="nl">varshavskiy2026marathonts</span><span class="p">,</span>
+<span class="w">  </span><span class="na">title</span><span class="w">         </span><span class="p">=</span><span class="w"> </span><span class="s">{{MarathonTS}: A Benchmark of Long Synthetic Time Series from Window Assembly and</span>
+<span class="s">                   Long-Series Generators}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">author</span><span class="w">        </span><span class="p">=</span><span class="w"> </span><span class="s">{Varshavskiy, Ilyas and Shulgin, Sergey and Khalilbekov, Shuhrat and Boboeva, Bonu and</span>
+<span class="s">                   Azimi, Azizjon}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">year</span><span class="w">          </span><span class="p">=</span><span class="w"> </span><span class="s">{2026}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">eprint</span><span class="w">        </span><span class="p">=</span><span class="w"> </span><span class="s">{XXXX.XXXXX}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">archivePrefix</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{arXiv}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Machine-readable citation metadata: <a href="https://github.com/zypl-ai/MarathonTS/blob/main/CITATION.cff">CITATION.cff</a>.</p>
+<h2 id="authors">Authors<a class="headerlink" href="#authors" title="Permanent link">&para;</a></h2>
+<p>Ilyas Varshavskiy (<a href="https://orcid.org/0000-0003-4924-2097">ORCID 0000-0003-4924-2097</a>),
+Sergey Shulgin, Shuhrat Khalilbekov, Bonu Boboeva, Azizjon Azimi — zypl.ai.
+Contact: Ilyas Varshavskiy, <a href="https://github.com/zypl-ai/MarathonTS/blob/main/mailto:ilyas.varshavskiy@zypl.ai">ilyas.varshavskiy@zypl.ai</a>. Questions and
+bug reports: <a href="https://github.com/zypl-ai/MarathonTS/issues">GitHub issues</a>; contributions:
+<a href="https://github.com/zypl-ai/MarathonTS/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a>; changes between versions: <a href="https://github.com/zypl-ai/MarathonTS/blob/main/CHANGELOG.md">CHANGELOG.md</a>.</p>
+<h2 id="licence">Licence<a class="headerlink" href="#licence" title="Permanent link">&para;</a></h2>
+<p>The code (<code>marathonts/</code>, <code>colab/</code>, <code>docs/figures/src/</code>) is licensed under the
+<a href="https://github.com/zypl-ai/MarathonTS/blob/main/LICENSE">Apache License 2.0</a>, copyright 2026 zypl Holding Ltd (<a href="https://github.com/zypl-ai/MarathonTS/blob/main/NOTICE">NOTICE</a>).</p>
+<p>Datasets and benchmark artifacts (synthetic series, pools, model weights, labels) are not covered by
+it: each dataset keeps its own licence, and what is published for each one is listed in
+<a href="DATASET_LICENSES/">DATASET_LICENSES.md</a>.</p>
+<p>Third-party components keep their own licences. Diffusion-TS is cloned at install time and is not
+part of this repository. The <code>vae_atsp</code> assembler uses <code>elkai</code>, which bundles the LKH solver: LKH is
+free for academic and non-commercial use only, so commercial use of <code>vae_atsp</code> requires a licence
+for LKH. The weights of TimesFM 3.0 are under the TimesFM Non-Commercial License v1.0, those of
+Timestral under a Modified MIT licence; both are downloaded from Hugging Face, not distributed here. The optional pool
+generator <code>sdv_par</code> uses SDV, licensed under the Business Source License 1.1: it may not be used for a
+Synthetic Data Service (as defined by that licence); each SDV version converts to the MIT licence four
+years after its release.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+        
+          
+          <a href="GETTING_STARTED/" class="md-footer__link md-footer__link--next" aria-label="Next: Getting started">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Getting started
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright 2026 zypl Holding Ltd. Code under the Apache License 2.0.
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.sections", "navigation.top", "navigation.footer", "toc.follow", "search.highlight", "content.code.copy"], "search": "assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="assets/javascripts/bundle.525ec568.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

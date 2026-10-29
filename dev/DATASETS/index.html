@@ -1,0 +1,2056 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A benchmark of long synthetic time series from window assembly and long-series generators">
+      
+      
+      
+        <link rel="canonical" href="https://zypl-ai.github.io/MarathonTS/dev/DATASETS/">
+      
+      
+        <link rel="prev" href="../BASELINES/">
+      
+      
+        <link rel="next" href="../METRICS/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.39">
+    
+    
+      
+        <title>Datasets - MarathonTS</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.8c3ca2c6.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#datasets-for-the-experiments" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="MarathonTS" class="md-header__button md-logo" aria-label="MarathonTS" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            MarathonTS
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Datasets
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/zypl-ai/MarathonTS" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    zypl-ai/MarathonTS
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="MarathonTS" class="md-nav__button md-logo" aria-label="MarathonTS" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    MarathonTS
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/zypl-ai/MarathonTS" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    zypl-ai/MarathonTS
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GETTING_STARTED/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Getting started
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CONFIGURATION/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Configuration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../EXTENDING/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Extending
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Benchmark
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Benchmark
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../BENCHMARK/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Pipeline and protocol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../BASELINES/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Methods
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Datasets
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Datasets
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#principle-the-same-datasets-for-all-tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Principle: the same datasets for all tasks
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tasks-from-metricsmd-u2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tasks (from METRICS.md, U2)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary table
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#descriptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Descriptions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Descriptions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-etth1-electricity-transformer-temperature" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. ETTh1 — Electricity Transformer Temperature
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-electricity-load-diagrams-20112014" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Electricity Load Diagrams 2011–2014
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-individual-household-electric-power-consumption" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Individual Household Electric Power Consumption
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-pjm-hourly-energy-consumption-pjme" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. PJM Hourly Energy Consumption (PJME)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-beijing-pm25" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Beijing PM2.5
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-jena-climate-20092016" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Jena Climate 2009–2016
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-metro-interstate-traffic-volume" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Metro Interstate Traffic Volume
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-bike-sharing-hourly" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Bike Sharing (hourly)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-bitcoin-historical-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. Bitcoin Historical Data
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#leakage-into-pretrained-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      Leakage into pretrained models
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-the-datasets-differ-why-there-are-nine" class="md-nav__link">
+    <span class="md-ellipsis">
+      How the datasets differ (why there are nine)
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../METRICS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Metrics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MODELS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Models
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../HYPOTHESES/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Statistics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Figures
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Figures
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig01_architecture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 01
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig02_stage_pipeline/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 02
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig03_environments/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 03
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig04_data_preprocessing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 04
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig05_temporal_split/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 05
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig06_pool_generator_vae/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 06
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig08_method_family/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 08
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig09_long_generators/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 09
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig10_utility_pipeline/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 10
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig11_tasks_models/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 11
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig12_fidelity_evaluation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 12
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig13_statistical_pipeline/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 13
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig14_hypotheses_map/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 14
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig15_incremental_recompute/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 15
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig16_artifact_layout/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 16
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig17_profiles/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 17
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig18_extensibility/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 18
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    API reference
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            API reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/config/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Configuration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/registry/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Registries
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/components/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Components
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/load/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Loading artifacts
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LITERATURE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Literature
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DATASET_LICENSES/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Licences
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#principle-the-same-datasets-for-all-tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Principle: the same datasets for all tasks
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tasks-from-metricsmd-u2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tasks (from METRICS.md, U2)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary table
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#descriptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Descriptions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Descriptions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-etth1-electricity-transformer-temperature" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. ETTh1 — Electricity Transformer Temperature
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-electricity-load-diagrams-20112014" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Electricity Load Diagrams 2011–2014
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-individual-household-electric-power-consumption" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Individual Household Electric Power Consumption
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-pjm-hourly-energy-consumption-pjme" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. PJM Hourly Energy Consumption (PJME)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-beijing-pm25" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Beijing PM2.5
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-jena-climate-20092016" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Jena Climate 2009–2016
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-metro-interstate-traffic-volume" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Metro Interstate Traffic Volume
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-bike-sharing-hourly" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Bike Sharing (hourly)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-bitcoin-historical-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. Bitcoin Historical Data
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#leakage-into-pretrained-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      Leakage into pretrained models
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-the-datasets-differ-why-there-are-nine" class="md-nav__link">
+    <span class="md-ellipsis">
+      How the datasets differ (why there are nine)
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="datasets-for-the-experiments">Datasets for the experiments<a class="headerlink" href="#datasets-for-the-experiments" title="Permanent link">&para;</a></h1>
+<p>Open datasets on which the methods from <a href="../BASELINES/">BASELINES.md</a> are compared by the
+metrics from <a href="../METRICS/">METRICS.md</a>. Licences are listed in <a href="../DATASET_LICENSES/">DATASET_LICENSES.md</a>.</p>
+<h2 id="principle-the-same-datasets-for-all-tasks">Principle: the same datasets for all tasks<a class="headerlink" href="#principle-the-same-datasets-for-all-tasks" title="Permanent link">&para;</a></h2>
+<p>All utility tasks (U2.1–U2.9) are built from <strong>a single target series</strong> of a dataset, so every
+dataset below is used in all 14 tasks (nine task groups U2.1–U2.9) — there is one set of datasets for the whole experiment.
+To this end, for all datasets:</p>
+<ul>
+<li>a single target column is chosen (channel 0 of the pipeline);</li>
+<li>the step is brought to one hour (aggregation by mean or sum), the calendar is the hour of week (BENCHMARK.md, Protocol: data);</li>
+<li>the length after aggregation is ≥ 17,000 hours: with a 60 / 20 / 20 split (train / val / OOT, profile
+  <code>max</code>, the full series) and <code>T = 168</code> this gives <code>K ≥ 60</code> windows, enough for h = 168 and for events with
+  q = 0.99. Profiles <code>min</code> and <code>mid</code> take the last 10,000 hourly points of every dataset with a 50 / 25 / 25
+  split: 9,664 points after the embargoes, train 5,000, val = OOT = 2,332, <code>K = 30</code> (<code>artifacts/run_h200/tables/datasets.parquet</code>).</li>
+</ul>
+<h2 id="tasks-from-metricsmd-u2">Tasks (from METRICS.md, U2)<a class="headerlink" href="#tasks-from-metricsmd-u2" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Task</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>U2.1</td>
+<td>Upper tail: change over h = 24 above the 0.90 quantile</td>
+<td>binary classification</td>
+</tr>
+<tr>
+<td>U2.2</td>
+<td 168="168" 1_="1," 6_="6,">The same at horizons h ∈</td>
+<td>binary classification</td>
+</tr>
+<tr>
+<td>U2.3</td>
+<td 0.95_="0.95," 0.99="0.99">Rare events: q ∈</td>
+<td>binary classification (strong imbalance)</td>
+</tr>
+<tr>
+<td>U2.4</td>
+<td>Lower tail: change below the 0.10 quantile</td>
+<td>binary classification</td>
+</tr>
+<tr>
+<td>U2.5</td>
+<td>Down / neutral / up</td>
+<td>multiclass classification (3 classes)</td>
+</tr>
+<tr>
+<td>U2.6</td>
+<td 168="168" 1_="1," 24_="24,">Value <code>x[t+h]</code>, h ∈</td>
+<td>regression</td>
+</tr>
+<tr>
+<td>U2.7</td>
+<td>Quantiles 0.1 / 0.5 / 0.9 at horizon h = 24</td>
+<td>quantile regression</td>
+</tr>
+<tr>
+<td>U2.8</td>
+<td>Vector <code>x[t+1 : t+24]</code></td>
+<td>multi-step regression</td>
+</tr>
+<tr>
+<td>U2.9</td>
+<td>std over the next 24 hours</td>
+<td>regression (volatility)</td>
+</tr>
+</tbody>
+</table>
+<p>Every dataset below is used in <strong>all</strong> tasks U2.1–U2.9.</p>
+<h2 id="summary-table">Summary table<a class="headerlink" href="#summary-table" title="Permanent link">&para;</a></h2>
+<p><code>Columns</code> — in the source file. <code>Hours</code> — length of the target series after conversion to an hourly step.
+<code>K</code> — approximate number of assembled windows with train = 60% and T = 168 (profile <code>max</code>; <code>min</code> and <code>mid</code>: K = 30 for every dataset).</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Dataset</th>
+<th>File</th>
+<th>Columns</th>
+<th>Rows in file</th>
+<th>Source step</th>
+<th>Hours</th>
+<th>K</th>
+<th>Target column</th>
+<th>Tasks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>ETTh1</td>
+<td><code>ETTh1.csv</code></td>
+<td>8</td>
+<td>17,420</td>
+<td>1 h</td>
+<td>17,420</td>
+<td>≈ 62</td>
+<td><code>OT</code></td>
+<td>U2.1–U2.9</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Electricity Load Diagrams</td>
+<td><code>LD2011_2014.txt</code></td>
+<td>371</td>
+<td>140,256</td>
+<td>15 min</td>
+<td>35,065</td>
+<td>≈ 125</td>
+<td>sum over 370 clients</td>
+<td>U2.1–U2.9</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Household Electric Power Consumption</td>
+<td><code>household_power_consumption.txt</code></td>
+<td>9</td>
+<td>2,075,259</td>
+<td>1 min</td>
+<td>≈ 34,590</td>
+<td>≈ 124</td>
+<td><code>Global_active_power</code></td>
+<td>U2.1–U2.9</td>
+</tr>
+<tr>
+<td>4</td>
+<td>PJM Hourly Energy Consumption (PJME)</td>
+<td><code>PJME_hourly.csv</code></td>
+<td>2</td>
+<td>145,366</td>
+<td>1 h</td>
+<td>145,392</td>
+<td>≈ 519</td>
+<td><code>PJME_MW</code></td>
+<td>U2.1–U2.9</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Beijing PM2.5</td>
+<td><code>PRSA_data_2010.1.1-2014.12.31.csv</code></td>
+<td>13</td>
+<td>43,824</td>
+<td>1 h</td>
+<td>43,800</td>
+<td>≈ 156</td>
+<td><code>pm2.5</code></td>
+<td>U2.1–U2.9</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Jena Climate 2009–2016</td>
+<td><code>jena_climate_2009_2016.csv</code></td>
+<td>15</td>
+<td>420,551</td>
+<td>10 min</td>
+<td>≈ 70,000</td>
+<td>≈ 250</td>
+<td><code>T (degC)</code></td>
+<td>U2.1–U2.9</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Metro Interstate Traffic Volume</td>
+<td><code>Metro_Interstate_Traffic_Volume.csv</code></td>
+<td>9</td>
+<td>48,204</td>
+<td>1 h (with gaps)</td>
+<td>≈ 29,000 (after skipping 2014–2015)</td>
+<td>≈ 103</td>
+<td><code>traffic_volume</code></td>
+<td>U2.1–U2.9</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Bike Sharing (hourly)</td>
+<td><code>hour.csv</code></td>
+<td>17</td>
+<td>17,379</td>
+<td>1 h</td>
+<td>17,544 by calendar</td>
+<td>≈ 63</td>
+<td><code>cnt</code></td>
+<td>U2.1–U2.9</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Bitcoin Historical Data</td>
+<td><code>btcusd_1-min_data.csv</code></td>
+<td>6</td>
+<td>7,767,566</td>
+<td>1 min</td>
+<td>≈ 85,000 (2017-01 – 2026-10)</td>
+<td>≈ 305</td>
+<td><code>Close</code> (log price)</td>
+<td>U2.1–U2.9</td>
+</tr>
+</tbody>
+</table>
+<p>Columns and rows in the files have been checked against the downloaded data (<code>data/raw/</code>, October 2026; Bitcoin
+is updated daily, so the number of rows grows). <code>Hours</code> runs from the first to the last valid hourly value, gaps included. Values marked ≈ are rounded.</p>
+<p>The files are stored in <code>data/raw/&lt;dataset&gt;/</code> as Parquet (zstd, lossless: all source columns, float64):
+<code>ett/</code>, <code>electricity/</code>, <code>household/</code>, <code>pjm/</code> (together with the other PJM regions), <code>beijing_pm25/</code>,
+<code>jena/</code>, <code>metro/</code>, <code>bike/</code> (together with <code>day.parquet</code> and <code>Readme.txt</code>), <code>bitcoin/</code>. In total ≈ 200 MB
+versus 1.3 GB of source CSV. The data are not included in the repository: the stage <code>python -m marathonts.bench.run raw</code>
+downloads the source files (Kaggle — with <code>~/.kaggle/kaggle.json</code>) and converts them to Parquet.
+Column names in the table above are the original ones; the number of rows matches the source files.</p>
+<h2 id="descriptions">Descriptions<a class="headerlink" href="#descriptions" title="Permanent link">&para;</a></h2>
+<h3 id="1-etth1-electricity-transformer-temperature">1. ETTh1 — Electricity Transformer Temperature<a class="headerlink" href="#1-etth1-electricity-transformer-temperature" title="Permanent link">&para;</a></h3>
+<p>Loads and oil temperature of a power transformer in China, July 2016 – June 2018, 1-hour step.
+Columns: <code>date</code>, six loads (<code>HUFL</code>, <code>HULL</code>, <code>MUFL</code>, <code>MULL</code>, <code>LUFL</code>, <code>LULL</code>) and the oil
+temperature <code>OT</code>. A standard long-horizon forecasting benchmark (Informer, Autoformer, etc.), with no missing values.
+The shortest in the set — the lower bound on length.</p>
+<ul>
+<li>Source: <a href="https://github.com/zhouhaoyi/ETDataset">github.com/zhouhaoyi/ETDataset</a>, file <code>ETT-small/ETTh1.csv</code></li>
+<li>Paper: Zhou H. et al. <em>Informer: Beyond efficient transformer for long sequence time-series forecasting</em>. AAAI 2021</li>
+</ul>
+<h3 id="2-electricity-load-diagrams-20112014">2. Electricity Load Diagrams 2011–2014<a class="headerlink" href="#2-electricity-load-diagrams-20112014" title="Permanent link">&para;</a></h3>
+<p>Electricity consumption of 370 clients in Portugal, 2011–2014, kW per 15 minutes. The first column is
+the time, the rest are clients; separator <code>;</code>, decimal comma. Clients connected later
+have zeros at the start. The target series is the total load aggregated to hours: strong daily and
+weekly seasonality.</p>
+<ul>
+<li>Source: <a href="https://archive.ics.uci.edu/dataset/321/electricityloaddiagrams20112014">UCI #321</a></li>
+<li>
+<p>Author: Trindade A., 2015</p>
+</li>
+<li>
+<p><strong>Leakage for Chronos:</strong> the Chronos training corpus contains this dataset (Electricity 15 min, hourly
+  and weekly, all 370 clients, without only the last 24 points; Ansari et al., <em>Chronos: Learning the
+  Language of Time Series</em>, TMLR 2024, Table 3). The benchmark's target is the sum of the clients, so
+  Chronos has seen the val and OOT periods of this series in aggregated form; its results on
+  <code>electricity</code> are not out-of-sample.</p>
+</li>
+</ul>
+<h3 id="3-individual-household-electric-power-consumption">3. Individual Household Electric Power Consumption<a class="headerlink" href="#3-individual-household-electric-power-consumption" title="Permanent link">&para;</a></h3>
+<p>Consumption of a single household in France, December 2006 – November 2010, 1-minute step. Columns:
+<code>Date</code>, <code>Time</code>, active and reactive power, voltage, current, three sub-meters. About 1.25% of the rows
+are missing (marked <code>?</code>). The target series is the hourly mean of <code>Global_active_power</code>. A noisy series with
+sharp peaks — a test on irregular dynamics.</p>
+<ul>
+<li>Source: <a href="https://archive.ics.uci.edu/dataset/235/individual+household+electric+power+consumption">UCI #235</a></li>
+<li>Authors: Hébrail G., Bérard A., 2012</li>
+<li><strong>Leakage for TimesFM:</strong> the TimesFM 3.0 training data (GiftEvalPretrain) include this dataset as
+  <code>sceaux</code> (from BuildingsBench): one hourly series, 2007-01-01 – 2010-11-26, equal to the hourly mean of
+  <code>Global_active_power</code> on every common hour after a 1-hour label shift. TimesFM is left out on
+  <code>household</code> (<code>Config.leaked</code>).</li>
+</ul>
+<h3 id="4-pjm-hourly-energy-consumption-pjme">4. PJM Hourly Energy Consumption (PJME)<a class="headerlink" href="#4-pjm-hourly-energy-consumption-pjme" title="Permanent link">&para;</a></h3>
+<p>Hourly consumption of the PJM East region (USA), 2002–2018, megawatts. The set also contains ~12 files for
+other PJM regions in the same format (<code>Datetime</code>, <code>&lt;REGION&gt;_MW</code>). The longest series in the set
+(largest K). There are isolated duplicates and gaps at the transitions to daylight saving
+time.</p>
+<ul>
+<li>Source: <a href="https://www.kaggle.com/datasets/robikscube/hourly-energy-consumption">kaggle.com/datasets/robikscube/hourly-energy-consumption</a></li>
+<li>Primary data: PJM Interconnection LLC</li>
+</ul>
+<h3 id="5-beijing-pm25">5. Beijing PM2.5<a class="headerlink" href="#5-beijing-pm25" title="Permanent link">&para;</a></h3>
+<p>PM2.5 concentration at the US Embassy in Beijing and airport weather, 2010–2014, 1-hour step. Columns:
+<code>No</code>, <code>year</code>, <code>month</code>, <code>day</code>, <code>hour</code>, <code>pm2.5</code>, <code>DEWP</code>, <code>TEMP</code>, <code>PRES</code>, <code>cbwd</code>, <code>Iws</code>, <code>Is</code>, <code>Ir</code>.
+<code>pm2.5</code> has about 2000 missing values. A heavy right tail and smog episodes (tail tasks U2.1–U2.4).</p>
+<ul>
+<li>Source: <a href="https://archive.ics.uci.edu/dataset/381/beijing+pm2+5+data">UCI #381</a></li>
+<li>Paper: Liang X. et al. <em>Assessing Beijing's PM2.5 pollution: severity, weather impact, APEC and winter heating</em>. Proc. Royal Society A 471, 2015</li>
+<li><strong>Leakage for TimesFM:</strong> the TimesFM 3.0 training data (GiftEvalPretrain, built on LOTSA) include
+  "Beijing Air Quality" (UCI #501: PM2.5 and weather of 12 Beijing stations, March 2013 – February 2017).
+  It is another file, but the same city, pollutant and hours as this series over 2013–2014 — the period
+  of the <code>min</code> window. TimesFM is left out on <code>beijing_pm25</code> (<code>Config.leaked</code>).</li>
+<li><strong>Leakage for Chronos:</strong> the Chronos training corpus includes KDD Cup 2018 (air quality of Beijing and
+  London stations, January 2017 – March 2018; Benchmark I of Ansari et al., 2024). Same city and
+  pollutant, other stations and years: a related pair, so Chronos is left out on <code>beijing_pm25</code> too.</li>
+</ul>
+<h3 id="6-jena-climate-20092016">6. Jena Climate 2009–2016<a class="headerlink" href="#6-jena-climate-20092016" title="Permanent link">&para;</a></h3>
+<p>Weather station of the Max Planck Institute for Biogeochemistry (Jena), 2009–2016, 10-minute step, 14 variables:
+pressure, temperature, humidity, wind, etc. The target series is temperature averaged to hours.
+Strong daily and yearly seasonality with weak weekly seasonality — a check that the "hour of week" calendar
+does not impose spurious structure.</p>
+<ul>
+<li>Source: <a href="https://www.bgc-jena.mpg.de/wetter/">Max Planck BGC Jena</a>; ready-made file —
+  <a href="https://storage.googleapis.com/tensorflow/tf-keras-datasets/jena_climate_2009_2016.csv.zip">jena_climate_2009_2016.csv.zip</a> (Keras / TensorFlow)</li>
+</ul>
+<h3 id="7-metro-interstate-traffic-volume">7. Metro Interstate Traffic Volume<a class="headerlink" href="#7-metro-interstate-traffic-volume" title="Permanent link">&para;</a></h3>
+<p>Hourly westbound traffic on I-94 (Minneapolis – St Paul), October 2012 – September
+2018, plus weather and holidays. Columns: <code>holiday</code>, <code>temp</code>, <code>rain_1h</code>, <code>snow_1h</code>, <code>clouds_all</code>,
+<code>weather_main</code>, <code>weather_description</code>, <code>date_time</code>, <code>traffic_volume</code>. There are duplicate hours (several
+weather descriptions) and a large gap in 2014–2015. The duplicate hours are averaged, and the series
+starts after the last gap longer than 30 days (June 2015). Very strong weekly structure.</p>
+<ul>
+<li>Source: <a href="https://archive.ics.uci.edu/dataset/492/metro+interstate+traffic+volume">UCI #492</a></li>
+<li>Author: Hogue J., 2019</li>
+</ul>
+<h3 id="8-bike-sharing-hourly">8. Bike Sharing (hourly)<a class="headerlink" href="#8-bike-sharing-hourly" title="Permanent link">&para;</a></h3>
+<p>Hourly number of Capital Bikeshare bicycle rentals (Washington, D.C.), 2011–2012, with weather and
+calendar. Columns of <code>hour.csv</code>: <code>instant</code>, <code>dteday</code>, <code>season</code>, <code>yr</code>, <code>mnth</code>, <code>hr</code>, <code>holiday</code>,
+<code>weekday</code>, <code>workingday</code>, <code>weathersit</code>, <code>temp</code>, <code>atemp</code>, <code>hum</code>, <code>windspeed</code>, <code>casual</code>,
+<code>registered</code>, <code>cnt</code>. Several hours are missing (zero demand) and are set to 0. Count
+data with a trend between years.</p>
+<ul>
+<li>Source: <a href="https://archive.ics.uci.edu/dataset/275/bike+sharing+dataset">UCI #275</a></li>
+<li>Paper: Fanaee-T H., Gama J. <em>Event labeling combining ensemble detectors and background knowledge</em>. Progress in Artificial Intelligence 2, 2014</li>
+</ul>
+<h3 id="9-bitcoin-historical-data">9. Bitcoin Historical Data<a class="headerlink" href="#9-bitcoin-historical-data" title="Permanent link">&para;</a></h3>
+<p>Minute-level OHLCV data for BTC/USD (Bitstamp), from 2012 to the present. Columns: <code>Timestamp</code>,
+<code>Open</code>, <code>High</code>, <code>Low</code>, <code>Close</code>, <code>Volume</code>. Before 2017 many minutes have no trades; the series is taken
+from <code>bitcoin_start</code> = 2017-01-01 to <code>bitcoin_end</code> = 2026-10-01 (exclusive). The target series is the log of the hourly close price. A financial series: weak seasonality,
+volatility clustering, heavy-tailed increments.</p>
+<ul>
+<li>Source: <a href="https://www.kaggle.com/datasets/mczielinski/bitcoin-historical-data">kaggle.com/datasets/mczielinski/bitcoin-historical-data</a></li>
+<li><strong>Leakage for TimesFM:</strong> GiftEvalPretrain includes the Monash "Bitcoin" set (18 daily series, among
+  them the Bitcoin price, 2009 – mid-2021). The same asset at a daily resolution: a related pair, so
+  TimesFM is left out on <code>bitcoin</code> in every profile — also in <code>min</code>, whose window (2025–2026) lies after
+  it (<code>Config.leaked</code>).</li>
+</ul>
+<h2 id="leakage-into-pretrained-models">Leakage into pretrained models<a class="headerlink" href="#leakage-into-pretrained-models" title="Permanent link">&para;</a></h2>
+<p>A dataset whose object is in a pretrained model's training data is not out-of-sample for it: the method
+is left out on that dataset in every ranking, question and case-study test (<code>Config.leaked</code>,
+<code>bench.config.LEAKED</code>); the other methods keep every dataset. The analysis always applies the list of the
+current code (not the copy saved with the tables), so a pair added later takes effect on the next run of
+notebook 7 without recomputing anything; <code>--leaked</code> replaces it from the command line.</p>
+<p><strong>Rule.</strong> Left out are both
+- <strong>exact</strong> pairs: the same data, the same source series, in the training corpus;
+- <strong>related</strong> pairs: the same object — the same dataset, the same city and pollutant, the same asset —
+  at other stations, years or resolution, whether or not the periods overlap with the benchmark window.</p>
+<p>Kept are pairs that share only the phenomenon (bike rentals in another city, gridded weather reanalysis)
+and datasets that a model uses only for evaluation.</p>
+<p>The audit (October 2026) checked every model × dataset pair against the primary sources: Chronos — the
+paper's Appendix B, Table 3 (pretraining = pretraining-only sets + Benchmark I; Benchmark II is
+zero-shot evaluation only); TimesFM 3.0 — the model card and the full list of GiftEvalPretrain
+sub-datasets (Hugging Face <code>Salesforce/GiftEvalPretrain</code>, LOTSA builders of <code>uni2ts</code>), with the candidate
+sub-datasets downloaded and compared with the benchmark's raw files; Timestral — the model card and
+the release note.</p>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Training data (source)</th>
+<th>Left out on</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Chronos T5 (small; base in <code>max</code>, same training corpus)</td>
+<td>Ansari et al., TMLR 2024, Appendix B, Table 3</td>
+<td><code>electricity</code> (exact), <code>beijing_pm25</code> (related: KDD Cup 2018)</td>
+</tr>
+<tr>
+<td>TimesFM 3.0</td>
+<td>model card: GiftEvalPretrain (without GIFT-Eval test sets and fev-bench overlaps), Wikipedia Pageviews, Google Trends, synthetic</td>
+<td><code>household</code> (exact: <code>sceaux</code>), <code>beijing_pm25</code> (related: Beijing Air Quality), <code>bitcoin</code> (related: Monash Bitcoin)</td>
+</tr>
+<tr>
+<td>Timestral 209M</td>
+<td>not disclosed (mostly synthetic; real post-training sets unnamed)</td>
+<td>— cannot be checked</td>
+</tr>
+<tr>
+<td>Diffusion-TS, VAE</td>
+<td>trained by the benchmark on train only</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>Every pair of the audit (exact / related / weak / none / unknown):</p>
+<table>
+<thead>
+<tr>
+<th>Dataset</th>
+<th>Chronos T5</th>
+<th>TimesFM 3.0</th>
+<th>Timestral 209M</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ETTh1</td>
+<td>none: zero-shot evaluation only (Benchmark II)</td>
+<td>none: GIFT-Eval test set, not in GiftEvalPretrain</td>
+<td>unknown</td>
+</tr>
+<tr>
+<td>electricity</td>
+<td><strong>exact</strong>: Electricity 15 min / hourly / weekly in Benchmark I</td>
+<td>none: GIFT-Eval test set</td>
+<td>unknown</td>
+</tr>
+<tr>
+<td>household</td>
+<td>none (London Smart Meters only: other households)</td>
+<td><strong>exact</strong>: <code>sceaux</code> = UCI #235, hourly 2007-01 – 2010-11, equal to the hourly mean of <code>Global_active_power</code> on every common hour (after a 1-hour label shift)</td>
+<td>unknown</td>
+</tr>
+<tr>
+<td>pjm</td>
+<td>none</td>
+<td>none found: no GiftEvalPretrain series equals any of the 11 PJM regions; <code>pdb</code> (public Kaggle set of undocumented origin, 2013–2014) correlates with PJME (r = 0.945) — origin unresolved</td>
+<td>unknown</td>
+</tr>
+<tr>
+<td>beijing_pm25</td>
+<td><strong>related</strong>: KDD Cup 2018 (Beijing and London stations, 2017-01 – 2018-03)</td>
+<td><strong>related</strong>: Beijing Air Quality (UCI #501, 12 stations, 2013-03 – 2017-02; station correlations with our series 0.81–0.96)</td>
+<td>unknown</td>
+</tr>
+<tr>
+<td>jena</td>
+<td>weak: WeatherBench gridded reanalysis only</td>
+<td>weak: gridded ERA5 / CMIP6 only (jena_weather is a GIFT-Eval test set)</td>
+<td>unknown</td>
+</tr>
+<tr>
+<td>metro</td>
+<td>none (traffic sets are PeMS, evaluation only)</td>
+<td>none (California and China traffic sets)</td>
+<td>unknown</td>
+</tr>
+<tr>
+<td>bike</td>
+<td>weak: Mexico City Bikes (another city)</td>
+<td>none</td>
+<td>unknown</td>
+</tr>
+<tr>
+<td>bitcoin</td>
+<td>none</td>
+<td><strong>related</strong>: Monash Bitcoin, daily <code>price</code>, 2009 – mid-2021</td>
+<td>unknown</td>
+</tr>
+</tbody>
+</table>
+<p>Timestral declares no GIFT-Eval test-data leakage on the GIFT-Eval leaderboard (zero-shot), which weakly
+covers ETTh1, electricity and Jena; the other pairs cannot be checked. Earlier TimesFM versions differ
+(1.0 / 2.0 also trained on Electricity and the Jena weather data): the benchmark uses 3.0 only.</p>
+<h2 id="how-the-datasets-differ-why-there-are-nine">How the datasets differ (why there are nine)<a class="headerlink" href="#how-the-datasets-differ-why-there-are-nine" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Datasets</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Strong weekly seasonality</td>
+<td>Electricity, PJME, Metro, Bike</td>
+</tr>
+<tr>
+<td>Strong daily, weak weekly</td>
+<td>Jena, ETTh1</td>
+</tr>
+<tr>
+<td>Heavy tails, spikes</td>
+<td>PM2.5, Household, Bitcoin</td>
+</tr>
+<tr>
+<td>Volatility clustering, weak seasonality</td>
+<td>Bitcoin</td>
+</tr>
+<tr>
+<td>Trend / level drift</td>
+<td>Bike, ETTh1, Bitcoin</td>
+</tr>
+<tr>
+<td>Gaps and duplicates requiring preprocessing</td>
+<td>Household, PM2.5, Metro, Bike, PJME</td>
+</tr>
+<tr>
+<td>Short (K ≈ 60)</td>
+<td>ETTh1, Bike</td>
+</tr>
+<tr>
+<td>Long (K ≥ 250)</td>
+<td>PJME, Jena, Bitcoin</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../BASELINES/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Methods">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Methods
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../METRICS/" class="md-footer__link md-footer__link--next" aria-label="Next: Metrics">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Metrics
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright 2026 zypl Holding Ltd. Code under the Apache License 2.0.
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.sections", "navigation.top", "navigation.footer", "toc.follow", "search.highlight", "content.code.copy"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.525ec568.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

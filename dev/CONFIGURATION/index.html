@@ -1,0 +1,3025 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A benchmark of long synthetic time series from window assembly and long-series generators">
+      
+      
+      
+        <link rel="canonical" href="https://zypl-ai.github.io/MarathonTS/dev/CONFIGURATION/">
+      
+      
+        <link rel="prev" href="../GETTING_STARTED/">
+      
+      
+        <link rel="next" href="../EXTENDING/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.39">
+    
+    
+      
+        <title>Configuration - MarathonTS</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.8c3ca2c6.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#configuration" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="MarathonTS" class="md-header__button md-logo" aria-label="MarathonTS" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            MarathonTS
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Configuration
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/zypl-ai/MarathonTS" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    zypl-ai/MarathonTS
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="MarathonTS" class="md-nav__button md-logo" aria-label="MarathonTS" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    MarathonTS
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/zypl-ai/MarathonTS" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    zypl-ai/MarathonTS
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GETTING_STARTED/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Getting started
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Configuration
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Configuration
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#how-the-configuration-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      How the configuration works
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How the configuration works">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#profiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Profiles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configquick" class="md-nav__link">
+    <span class="md-ellipsis">
+      Config.quick()
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#four-ways-to-set-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      Four ways to set it
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Four ways to set it">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-command-line-flags" class="md-nav__link">
+    <span class="md-ellipsis">
+      (a) Command-line flags
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-the-cfg-cell-of-the-notebooks" class="md-nav__link">
+    <span class="md-ellipsis">
+      (b) The cfg cell of the notebooks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      (c) Python
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d-a-json-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      (d) A JSON file
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference-of-the-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reference of the settings
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Reference of the settings">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#paths" class="md-nav__link">
+    <span class="md-ellipsis">
+      Paths
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scope
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#switching-methods-on-and-off" class="md-nav__link">
+    <span class="md-ellipsis">
+      Switching methods on and off
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-and-split" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data and split
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#windows-and-pool" class="md-nav__link">
+    <span class="md-ellipsis">
+      Windows and pool
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pool-generator-vae-tsgm_vae" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pool generator (VAE, tsgm_vae)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#assemblers-baselinesmd-a" class="md-nav__link">
+    <span class="md-ellipsis">
+      Assemblers (BASELINES.md A)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seam-processing-baselinesmd-b" class="md-nav__link">
+    <span class="md-ellipsis">
+      Seam processing (BASELINES.md B)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#diffusion-ts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diffusion-TS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chronos-timesfm-timestral" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chronos, TimesFM, Timestral
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fidelity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fidelity
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#utility" class="md-nav__link">
+    <span class="md-ellipsis">
+      Utility
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#artifacts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Artifacts
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#statistics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Statistics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analysis-only-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analysis-only settings
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters-of-components-extra" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parameters of components: extra
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exogenous-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exogenous files
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-a-change-recomputes" class="md-nav__link">
+    <span class="md-ellipsis">
+      What a change recomputes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#command-line-of-the-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Command line of the analysis
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../EXTENDING/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Extending
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Benchmark
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Benchmark
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../BENCHMARK/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Pipeline and protocol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../BASELINES/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Methods
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DATASETS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Datasets
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../METRICS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Metrics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MODELS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Models
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../HYPOTHESES/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Statistics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Figures
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Figures
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig01_architecture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 01
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig02_stage_pipeline/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 02
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig03_environments/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 03
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig04_data_preprocessing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 04
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig05_temporal_split/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 05
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig06_pool_generator_vae/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 06
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig08_method_family/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 08
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig09_long_generators/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 09
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig10_utility_pipeline/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 10
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig11_tasks_models/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 11
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig12_fidelity_evaluation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 12
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig13_statistical_pipeline/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 13
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig14_hypotheses_map/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 14
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig15_incremental_recompute/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 15
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig16_artifact_layout/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 16
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig17_profiles/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 17
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig18_extensibility/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 18
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    API reference
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            API reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/config/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Configuration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/registry/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Registries
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/components/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Components
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/load/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Loading artifacts
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LITERATURE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Literature
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DATASET_LICENSES/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Licences
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#how-the-configuration-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      How the configuration works
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How the configuration works">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#profiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Profiles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configquick" class="md-nav__link">
+    <span class="md-ellipsis">
+      Config.quick()
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#four-ways-to-set-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      Four ways to set it
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Four ways to set it">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-command-line-flags" class="md-nav__link">
+    <span class="md-ellipsis">
+      (a) Command-line flags
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-the-cfg-cell-of-the-notebooks" class="md-nav__link">
+    <span class="md-ellipsis">
+      (b) The cfg cell of the notebooks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      (c) Python
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d-a-json-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      (d) A JSON file
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference-of-the-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reference of the settings
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Reference of the settings">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#paths" class="md-nav__link">
+    <span class="md-ellipsis">
+      Paths
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scope
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#switching-methods-on-and-off" class="md-nav__link">
+    <span class="md-ellipsis">
+      Switching methods on and off
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-and-split" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data and split
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#windows-and-pool" class="md-nav__link">
+    <span class="md-ellipsis">
+      Windows and pool
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pool-generator-vae-tsgm_vae" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pool generator (VAE, tsgm_vae)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#assemblers-baselinesmd-a" class="md-nav__link">
+    <span class="md-ellipsis">
+      Assemblers (BASELINES.md A)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seam-processing-baselinesmd-b" class="md-nav__link">
+    <span class="md-ellipsis">
+      Seam processing (BASELINES.md B)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#diffusion-ts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diffusion-TS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chronos-timesfm-timestral" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chronos, TimesFM, Timestral
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fidelity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fidelity
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#utility" class="md-nav__link">
+    <span class="md-ellipsis">
+      Utility
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#artifacts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Artifacts
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#statistics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Statistics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analysis-only-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analysis-only settings
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters-of-components-extra" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parameters of components: extra
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exogenous-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exogenous files
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-a-change-recomputes" class="md-nav__link">
+    <span class="md-ellipsis">
+      What a change recomputes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#command-line-of-the-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Command line of the analysis
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h1>
+<p>Every setting of the benchmark is a field of one dataclass, <code>Config</code> (<code>marathonts/bench/config.py</code>). A run is defined by a
+<code>Config</code> object: the stages of <code>python -m marathonts.bench.run</code>, the notebooks and the analysis all read it. This file
+describes how the object is built, the four ways to change it, every field with its default, the exogenous
+files, and which stages a change recomputes. How to run the stages is in <a href="../GETTING_STARTED/">GETTING_STARTED.md</a>,
+how to add components in <a href="../EXTENDING/">EXTENDING.md</a>.</p>
+<h2 id="how-the-configuration-works">How the configuration works<a class="headerlink" href="#how-the-configuration-works" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>Config()</code> is profile <code>min</code>. <code>Config.profile("min" | "mid" | "max", **fields)</code> returns a profile with some
+  fields changed; <code>Config.quick(**fields)</code> returns the smoke-test configuration.</li>
+<li>When the object is created (<code>__post_init__</code>), the plugin files of <code>plugins</code> are imported, the assembly suite
+  is registered on every pool generator of <code>pool_suites</code>, the long-series generators of <code>long_methods</code> are
+  registered as methods, and — if <code>methods</code> is <code>None</code> — the method list is built from these fields. Methods that
+  are switched off (<code>disabled</code>), published without code (<code>frozen_methods</code>) or the noise twin without
+  <code>noise_twin=True</code> are removed from <code>methods</code> and <code>baselines</code>.</li>
+<li>Components are named by their registry names (<code>marathonts/bench/registry.py</code>); the parameters of a component go to
+  <code>extra[&lt;component name&gt;]</code> and reach it as <code>ctx.params</code> (generators, assemblers, fidelity groups) or
+  <code>self.params</code> (models).</li>
+<li>Each profile has its own folders, <code>data/processed/&lt;profile&gt;/</code> and <code>artifacts/&lt;profile&gt;/</code>, so results of
+  different profiles do not mix (<code>mid</code> reads the processed data of <code>min</code>, which are identical).</li>
+</ul>
+<h3 id="profiles">Profiles<a class="headerlink" href="#profiles" title="Permanent link">&para;</a></h3>
+<p>The settings that differ between the profiles are compared in <a href="../BENCHMARK/">BENCHMARK.md</a>, "Profiles". The
+fields each profile sets:</p>
+<table>
+<thead>
+<tr>
+<th>Profile</th>
+<th>Fields (everything else as in <code>Config()</code>)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>min</code></td>
+<td>the defaults of the reference below</td>
+</tr>
+<tr>
+<td><code>mid</code></td>
+<td><code>profile_name="mid"</code>, <code>pool_train_replicas=None</code> (VAE trained on every seed), <code>noise_twin=True</code>, <code>artifacts_dir=artifacts/mid</code></td>
+</tr>
+<tr>
+<td><code>max</code></td>
+<td><code>profile_name="max"</code>, <code>processed_dir=data/processed/max</code>, <code>artifacts_dir=artifacts/max</code>, <code>max_points=None</code>, <code>split=(0.6, 0.2, 0.2)</code>, <code>target_params_file=marathonts/bench/target_params_max.json</code>, <code>smooth_paths="all"</code>, <code>noise_twin=True</code>, <code>pool_train_replicas=None</code>, <code>dts_train_per_seed=True</code>, <code>chronos_model="amazon/chronos-t5-base"</code>, <code>hpo=True</code>, <code>decision_transfer=True</code>, <code>grid_methods="all"</code>, <code>model_tasks={}</code>, <code>extra={"mlp": {"epochs": 200, "early_stopping_patience": 10}, "gbdt": {"n_estimators": 200, "max_depth": 6, "learning_rate": 0.1, "max_bin": 256, "device": "auto", "multi_strategy_ms": "one_output_per_tree"}}</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="configquick"><code>Config.quick()</code><a class="headerlink" href="#configquick" title="Permanent link">&para;</a></h3>
+<p>The smoke test (<code>python -m marathonts.bench.run &lt;stage&gt; --quick</code>): <code>datasets=["ett", "bike"]</code>, <code>seeds=[0, 1]</code>,
+<code>vae_epochs=5</code>, <code>vae_patience=3</code>, <code>vae_min_epochs=1</code>, <code>dts_steps=60</code>, <code>dts_eval_every=30</code>, <code>dts_sampling_steps=5</code>,
+<code>dts_timesteps=50</code>, <code>dts_d_model=32</code>, <code>dts_enc_layers=1</code>, <code>dts_dec_layers=1</code>,
+<code>chronos_model="amazon/chronos-t5-tiny"</code>, <code>timestral_model="mistralai/Timestral-5M"</code>, <code>timestral_revision=None</code>,
+<code>n_boot=200</code>, <code>pool_size=80</code>, <code>pctsp_time_s=2.0</code>, <code>disc_epochs=3</code>, <code>max_windows=800</code>,
+<code>extra={"mlp": {"epochs": 3}, "gbdt": {"n_estimators": 30}, "sk_hgb": {"n_estimators": 30}}</code>, folders
+<code>data/processed/quick/</code> and <code>artifacts/quick/</code>, <code>profile_name="quick"</code>. Every other field is the <code>min</code> default.</p>
+<h2 id="four-ways-to-set-it">Four ways to set it<a class="headerlink" href="#four-ways-to-set-it" title="Permanent link">&para;</a></h2>
+<h3 id="a-command-line-flags">(a) Command-line flags<a class="headerlink" href="#a-command-line-flags" title="Permanent link">&para;</a></h3>
+<p><code>python -m marathonts.bench.run &lt;stage&gt; [flags]</code> (<code>marathonts/bench/run.py</code>):</p>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>stage</code></td>
+<td><code>raw</code>, <code>prepare</code>, <code>targets</code>, <code>hashes</code>, <code>pools</code>, <code>generate</code>, <code>fidelity</code>, <code>utility</code>, <code>collect</code> or <code>all</code> (= <code>raw</code> … <code>collect</code>, without <code>targets</code> and <code>hashes</code>)</td>
+</tr>
+<tr>
+<td><code>--profile {min,mid,max}</code></td>
+<td>the profile (default <code>min</code>)</td>
+</tr>
+<tr>
+<td><code>--quick</code></td>
+<td><code>Config.quick()</code> instead of the profile</td>
+</tr>
+<tr>
+<td><code>--config FILE</code></td>
+<td>a JSON file written by <code>Config.to_json()</code>; replaces <code>--profile</code> and <code>--quick</code> (<a href="#d-a-json-file">d</a>)</td>
+</tr>
+<tr>
+<td><code>--datasets NAME …</code></td>
+<td><code>Config.datasets</code></td>
+</tr>
+<tr>
+<td><code>--methods NAME …</code></td>
+<td><code>Config.methods</code>: run exactly these methods (minus <code>disabled</code> and <code>frozen_methods</code>)</td>
+</tr>
+<tr>
+<td><code>--models NAME …</code></td>
+<td><code>Config.models</code> (utility)</td>
+</tr>
+<tr>
+<td><code>--seeds N …</code></td>
+<td><code>Config.seeds</code></td>
+</tr>
+<tr>
+<td><code>--pool-generators NAME …</code></td>
+<td>stage <code>pools</code>: which pool generators to fit (default: those used by <code>methods</code>)</td>
+</tr>
+<tr>
+<td><code>--artifacts-dir DIR</code></td>
+<td><code>Config.artifacts_dir</code></td>
+</tr>
+<tr>
+<td><code>--device DEV</code></td>
+<td><code>Config.device</code> for torch: <code>cpu</code>, <code>cuda</code>, <code>cuda:1</code>, … (default: CUDA if available)</td>
+</tr>
+<tr>
+<td><code>--diffusion-ts-dir DIR</code></td>
+<td><code>Config.diffusion_ts_dir</code>, the clone of the Diffusion-TS repository</td>
+</tr>
+<tr>
+<td><code>--plugins FILE …</code></td>
+<td>plugin files, imported before the configuration is built and added to <code>Config.plugins</code></td>
+</tr>
+</tbody>
+</table>
+<p>The scope flags are applied on top of the profile, <code>--quick</code> or <code>--config</code>; a flag given without values is
+ignored. Every other field is set by (b), (c) or (d). Examples:</p>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>marathonts.bench.run<span class="w"> </span>all<span class="w"> </span>--profile<span class="w"> </span>mid<span class="w"> </span>--datasets<span class="w"> </span>ett<span class="w"> </span>jena<span class="w"> </span>--seeds<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">2</span>
+python<span class="w"> </span>-m<span class="w"> </span>marathonts.bench.run<span class="w"> </span>generate<span class="w"> </span>--methods<span class="w"> </span>vae_greedy<span class="w"> </span>vae_knn<span class="w"> </span>chronos<span class="w"> </span>--device<span class="w"> </span>cuda:1
+python<span class="w"> </span>-m<span class="w"> </span>marathonts.bench.run<span class="w"> </span>utility<span class="w"> </span>--models<span class="w"> </span>linear<span class="w"> </span>gbdt<span class="w"> </span>sk_hgb
+python<span class="w"> </span>-m<span class="w"> </span>marathonts.bench.run<span class="w"> </span>all<span class="w"> </span>--plugins<span class="w"> </span>my_plugins.py<span class="w"> </span>--config<span class="w"> </span>my_cfg.json
+</code></pre></div>
+<p>The flags of the analysis are listed in <a href="#command-line-of-the-analysis">Command line of the analysis</a>.</p>
+<h3 id="b-the-cfg-cell-of-the-notebooks">(b) The <code>cfg</code> cell of the notebooks<a class="headerlink" href="#b-the-cfg-cell-of-the-notebooks" title="Permanent link">&para;</a></h3>
+<p>The setup cell of every notebook creates <code>cfg = Config.profile(PROFILE)</code>; notebooks 01–06 then change it in
+their scope cell. The cell as shipped, with the optional lines commented out:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># ── scope of this run: change freely; finished units are skipped on re-run ──</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">dataclasses</span>
+<span class="n">cfg</span> <span class="o">=</span> <span class="n">dataclasses</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
+    <span class="n">cfg</span><span class="p">,</span>
+    <span class="n">datasets</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">datasets</span><span class="p">),</span>  <span class="c1"># the profile's datasets (marathonts/bench/config.py DATASETS); or a list, e.g. ["ett", "my_ds"]</span>
+    <span class="n">methods</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>                <span class="c1"># None → the suites on every pool + long_methods; or a list to run a subset</span>
+    <span class="n">baselines</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>              <span class="c1"># None → long_methods (case study: CS9, CS10)</span>
+    <span class="c1"># custom components (EXTENDING.md): plugin files + one line each, no code changes:</span>
+    <span class="c1"># plugins=["my_plugins.py"],                          # files registering them (path from the project folder)</span>
+    <span class="c1"># pool_suites={"vae": "tsgm_vae", "gan": "my_gan"},   # the whole suite on another pool generator → gan_zseries, …</span>
+    <span class="c1"># extra_assemblers=["my_stitch"],                     # an assembler on every pool → vae_my_stitch, …</span>
+    <span class="c1"># extra_joiners=["my_smooth"],                        # your own seam processing (run like the built-in ones)</span>
+    <span class="c1"># smooth_paths=["zseries", "greedy"],                 # assemblers that get seam processing ("all": all but the random path and vae_quilting; min: ["zseries"])</span>
+    <span class="c1"># joiners=["crossfade", "wsola"],                     # which seam processings (None: all)</span>
+    <span class="c1"># disabled=["pctsp", "chronos"],                      # switch off methods or components by name</span>
+    <span class="c1"># noise_twin=True,                                    # + the noise twin vae_rand_b (min: off; mid, max: on)</span>
+    <span class="c1"># frozen_methods=[],                                  # published results kept as they are, not run (default: vae_zseries and its</span>
+    <span class="c1">#                                                     #   seam-processing variants, marathonts/bench/config.py FROZEN_METHODS); [] → left out of the tables</span>
+    <span class="c1"># long_methods=[*cfg.long_methods, "my_long"],          # + a long-series generator (method and baseline)</span>
+    <span class="n">seeds</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)),</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Any other field is added to the same call, e.g. <code>knn_k=10</code>, <code>hpo=True</code> or
+<code>extra={**cfg.extra, "my_stitch": {"alpha": 0.5}}</code>. The cell must be the same in every notebook of a run.
+Notebook 02 hands the whole <code>cfg</code> to its stage subprocess (<code>run_in_env(..., config=cfg)</code>). Notebook 07 does not
+use the scope cell: the analysis takes the configuration saved with the tables
+(<a href="#analysis-only-settings">Analysis-only settings</a>).</p>
+<h3 id="c-python">(c) Python<a class="headerlink" href="#c-python" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">dataclasses</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">marathonts.bench.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">Config</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">marathonts.bench.run</span><span class="w"> </span><span class="kn">import</span> <span class="n">STAGES</span>
+
+<span class="n">cfg</span> <span class="o">=</span> <span class="n">Config</span><span class="o">.</span><span class="n">profile</span><span class="p">(</span><span class="s2">"min"</span><span class="p">,</span> <span class="n">hpo</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">datasets</span><span class="o">=</span><span class="p">[</span><span class="s2">"ett"</span><span class="p">,</span> <span class="s2">"jena"</span><span class="p">],</span> <span class="n">seeds</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="n">cfg</span> <span class="o">=</span> <span class="n">dataclasses</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">cfg</span><span class="p">,</span> <span class="n">knn_k</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">extra</span><span class="o">=</span><span class="p">{</span><span class="o">**</span><span class="n">cfg</span><span class="o">.</span><span class="n">extra</span><span class="p">,</span> <span class="s2">"mlp"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"epochs"</span><span class="p">:</span> <span class="mi">50</span><span class="p">}})</span>
+
+<span class="k">for</span> <span class="n">stage</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"raw"</span><span class="p">,</span> <span class="s2">"prepare"</span><span class="p">,</span> <span class="s2">"pools"</span><span class="p">,</span> <span class="s2">"generate"</span><span class="p">,</span> <span class="s2">"fidelity"</span><span class="p">,</span> <span class="s2">"utility"</span><span class="p">,</span> <span class="s2">"collect"</span><span class="p">):</span>
+    <span class="n">STAGES</span><span class="p">[</span><span class="n">stage</span><span class="p">](</span><span class="n">cfg</span><span class="p">)</span>                      <span class="c1"># or: from marathonts.bench.run import stage_generate; stage_generate(cfg)</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">marathonts.hypotheses.run</span><span class="w"> </span><span class="kn">import</span> <span class="n">main</span>
+<span class="n">main</span><span class="p">([</span><span class="s2">"--profile"</span><span class="p">,</span> <span class="s2">"min"</span><span class="p">,</span> <span class="s2">"--artifacts-dir"</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">artifacts_dir</span><span class="p">)])</span>
+</code></pre></div>
+<p>Two rules apply to the method list:</p>
+<ul>
+<li><code>Config.profile(...)</code> and <code>Config.quick(...)</code> rebuild <code>methods</code> when a field that defines it (<code>pool_suites</code>,
+  <code>extra_assemblers</code>, <code>extra_joiners</code>, <code>long_methods</code>, <code>smooth_paths</code>, <code>joiners</code>, <code>disabled</code>, <code>noise_twin</code>,
+  <code>frozen_methods</code>) is passed without <code>methods</code>, and rebuild <code>baselines</code> when <code>long_methods</code> is passed without
+  <code>baselines</code>.</li>
+<li><code>dataclasses.replace(cfg, ...)</code> keeps the list of <code>cfg</code>: pass <code>methods=None</code> (and <code>baselines=None</code>) with such
+  fields, as the notebook cell does. <code>disabled</code> and <code>frozen_methods</code> are applied in either case.</li>
+</ul>
+<p><code>extra</code> replaces the whole dictionary: <code>extra={**cfg.extra, ...}</code> keeps the parameters the profile sets (<code>max</code>
+sets <code>mlp</code> and <code>gbdt</code>).</p>
+<h3 id="d-a-json-file">(d) A JSON file<a class="headerlink" href="#d-a-json-file" title="Permanent link">&para;</a></h3>
+<p><code>Config.to_json()</code> writes every field; <code>Config.from_json(text)</code> reads it back. <code>--config</code> hands such a file to
+<code>python -m marathonts.bench.run</code> and <code>python -m marathonts.hypotheses.run</code> (the notebooks use it for their stage subprocesses):</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">marathonts.bench.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">Config</span>
+<span class="n">cfg</span> <span class="o">=</span> <span class="n">Config</span><span class="o">.</span><span class="n">profile</span><span class="p">(</span><span class="s2">"min"</span><span class="p">,</span> <span class="n">seeds</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">knn_k</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">disabled</span><span class="o">=</span><span class="p">[</span><span class="s2">"pctsp"</span><span class="p">])</span>
+<span class="nb">open</span><span class="p">(</span><span class="s2">"my_cfg.json"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">to_json</span><span class="p">())</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>marathonts.bench.run<span class="w"> </span>all<span class="w"> </span>--config<span class="w"> </span>my_cfg.json
+python<span class="w"> </span>-m<span class="w"> </span>marathonts.hypotheses.run<span class="w"> </span>--config<span class="w"> </span>my_cfg.json
+</code></pre></div>
+<p>The paths in the file (<code>*_dir</code>, <code>*_file</code>) are absolute paths of the machine that wrote it. For another machine
+or a Docker container, write them relative to the project folder; relative paths are resolved against the
+working directory, i.e. the project folder (<code>/app</code> in the containers):</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">marathonts.bench.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">ROOT</span><span class="p">,</span> <span class="n">Config</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">Config</span><span class="o">.</span><span class="n">profile</span><span class="p">(</span><span class="s2">"min"</span><span class="p">,</span> <span class="n">seeds</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span><span class="o">.</span><span class="n">to_json</span><span class="p">())</span>
+<span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="n">relative_to</span><span class="p">(</span><span class="n">ROOT</span><span class="p">)</span><span class="o">.</span><span class="n">as_posix</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span><span class="o">.</span><span class="n">endswith</span><span class="p">((</span><span class="s2">"_dir"</span><span class="p">,</span> <span class="s2">"_file"</span><span class="p">))</span> <span class="ow">and</span> <span class="n">v</span> <span class="k">else</span> <span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+<span class="n">Path</span><span class="p">(</span><span class="s2">"artifacts/my_cfg.json"</span><span class="p">)</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+</code></pre></div>
+<p><code>collect</code> writes the configuration of a run in this form to <code>artifacts/&lt;profile&gt;/tables/config.json</code>.</p>
+<h2 id="reference-of-the-settings">Reference of the settings<a class="headerlink" href="#reference-of-the-settings" title="Permanent link">&para;</a></h2>
+<p>Defaults are those of <code>Config()</code> (profile <code>min</code>); the profile columns of <a href="../BENCHMARK/">BENCHMARK.md</a> and the
+table above give the other values.</p>
+<h3 id="paths">Paths<a class="headerlink" href="#paths" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>raw_dir</code></td>
+<td><code>data/raw</code></td>
+<td>raw data (<code>raw</code> stage)</td>
+</tr>
+<tr>
+<td><code>processed_dir</code></td>
+<td><code>data/processed/min</code></td>
+<td>prepared data of the profile</td>
+</tr>
+<tr>
+<td><code>artifacts_dir</code></td>
+<td><code>artifacts/min</code></td>
+<td>every artifact, tables and reports of the run</td>
+</tr>
+<tr>
+<td><code>profile_name</code></td>
+<td><code>"min"</code></td>
+<td>name of the profile (recorded with the tables)</td>
+</tr>
+<tr>
+<td><code>diffusion_ts_dir</code></td>
+<td><code>external/Diffusion-TS</code></td>
+<td>clone of the Diffusion-TS repository</td>
+</tr>
+<tr>
+<td><code>target_params_file</code></td>
+<td><code>marathonts/bench/target_params.json</code></td>
+<td>exogenous task thresholds (<a href="#exogenous-files">Exogenous files</a>)</td>
+</tr>
+<tr>
+<td><code>model_configs_file</code></td>
+<td><code>marathonts/bench/model_configs.json</code></td>
+<td>hyperparameters of the ML models (<a href="#exogenous-files">Exogenous files</a>)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="scope">Scope<a class="headerlink" href="#scope" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>datasets</code></td>
+<td>the 9 built-in datasets</td>
+<td><code>ett</code>, <code>electricity</code>, <code>household</code>, <code>pjm</code>, <code>beijing_pm25</code>, <code>jena</code>, <code>metro</code>, <code>bike</code>, <code>bitcoin</code>; any registered dataset</td>
+</tr>
+<tr>
+<td><code>seeds</code></td>
+<td><code>[0, …, 9]</code></td>
+<td>a seed sets the pool sampling, the random paths, the generators and the models</td>
+</tr>
+<tr>
+<td><code>methods</code></td>
+<td><code>None</code></td>
+<td><code>None</code> → the assembly suite on every pool of <code>pool_suites</code> + <code>long_methods</code>; a list runs exactly that list</td>
+</tr>
+<tr>
+<td><code>pool_suites</code></td>
+<td><code>{"vae": "tsgm_vae"}</code></td>
+<td>prefix → pool generator; each entry registers the suite <code>&lt;prefix&gt;_rand</code>, <code>&lt;prefix&gt;_greedy</code>, …</td>
+</tr>
+<tr>
+<td><code>pool_generators</code></td>
+<td><code>None</code></td>
+<td>stage <code>pools</code>: which generators to fit; <code>None</code> → those used by <code>methods</code></td>
+</tr>
+<tr>
+<td><code>pool_train_replicas</code></td>
+<td><code>1</code></td>
+<td>trained pool generators per dataset: <code>1</code> — one model shared by all seeds; <code>k</code> — seed s uses model s mod k; <code>None</code> — one per seed (<code>mid</code>, <code>max</code>)</td>
+</tr>
+<tr>
+<td><code>plugins</code></td>
+<td><code>[]</code></td>
+<td>plugin files registering custom components, loaded with the configuration (<a href="../EXTENDING/#plugin-files">EXTENDING.md</a>)</td>
+</tr>
+<tr>
+<td><code>extra_assemblers</code></td>
+<td><code>[]</code></td>
+<td>custom assemblers, each run on every pool as <code>&lt;prefix&gt;_&lt;name&gt;</code></td>
+</tr>
+<tr>
+<td><code>extra_joiners</code></td>
+<td><code>[]</code></td>
+<td>custom seam processing, run like the built-in ones</td>
+</tr>
+<tr>
+<td><code>smooth_paths</code></td>
+<td><code>["zseries"]</code></td>
+<td>assemblers that get seam processing: suite suffixes or assembler names; <code>"all"</code> → every assembler except the random path and <code>vae_quilting</code> (<code>max</code>); <code>[]</code> → none</td>
+</tr>
+<tr>
+<td><code>joiners</code></td>
+<td><code>None</code></td>
+<td>which seam processings run; <code>None</code> → <code>crossfade</code>, <code>wsola</code>, <code>quilt</code> and <code>extra_joiners</code></td>
+</tr>
+<tr>
+<td><code>long_methods</code></td>
+<td><code>["diffusion_ts", "chronos", "timesfm", "timestral"]</code></td>
+<td>long-series generators run as methods under their own names</td>
+</tr>
+<tr>
+<td><code>baselines</code></td>
+<td><code>None</code></td>
+<td>long-series baselines of the case study (CS9, CS10); <code>None</code> → <code>long_methods</code></td>
+</tr>
+<tr>
+<td><code>disabled</code></td>
+<td><code>[]</code></td>
+<td>switched off by name: methods, suite suffixes or components (<a href="#switching-methods-on-and-off">below</a>)</td>
+</tr>
+<tr>
+<td><code>noise_twin</code></td>
+<td><code>False</code></td>
+<td>run the noise twin <code>&lt;prefix&gt;_rand_b</code> (<code>mid</code>, <code>max</code>: <code>True</code>)</td>
+</tr>
+<tr>
+<td><code>frozen_methods</code></td>
+<td><code>["vae_zseries", "vae_zseries_xfade", "vae_zseries_wsola", "vae_zseries_quilt"]</code></td>
+<td>methods whose results are kept as they are and not run (<a href="#switching-methods-on-and-off">below</a>)</td>
+</tr>
+<tr>
+<td><code>case_method</code></td>
+<td><code>"vae_zseries"</code></td>
+<td>the method of the case study CS1–CS15 (analysis)</td>
+</tr>
+<tr>
+<td><code>noise_pair</code></td>
+<td><code>("vae_rand", "vae_rand_b")</code></td>
+<td>two random paths on one pool: the noise reference of the analysis</td>
+</tr>
+<tr>
+<td><code>device</code></td>
+<td><code>None</code></td>
+<td>torch device; <code>None</code> → CUDA if available, else CPU</td>
+</tr>
+</tbody>
+</table>
+<h3 id="switching-methods-on-and-off">Switching methods on and off<a class="headerlink" href="#switching-methods-on-and-off" title="Permanent link">&para;</a></h3>
+<p>Every method is selected by the configuration; nothing in the code has to change.</p>
+<ul>
+<li><strong>Off.</strong> <code>disabled</code> takes method names (<code>"vae_pctsp"</code>), suite suffixes (<code>"greedy"</code> — on every pool) or
+  component names: an assembler (<code>"atsp"</code>), a seam processing (<code>"wsola"</code> — all its variants), a pool generator
+  (<code>"tsgm_vae"</code> — the whole suite on it) or a long-series generator (<code>"chronos"</code>). A switched-off method is not
+  run and does not enter the baselines; its rows already in the tables are dropped by the next <code>collect</code>.</li>
+<li><strong>On.</strong> Built-in methods are on unless <code>disabled</code>. A custom one is switched on by its line: <code>extra_assemblers</code>,
+  <code>extra_joiners</code>, <code>long_methods</code>, <code>pool_suites</code> (<a href="../EXTENDING/">EXTENDING.md</a>).</li>
+<li><strong>Seam processing over any assembler.</strong> <code>smooth_paths=["greedy", "atsp"]</code> adds every seam processing of
+  <code>joiners</code> over these assemblers (<code>vae_greedy_xfade</code>, <code>vae_atsp_wsola</code>, …); <code>"all"</code> — over every assembler except
+  the random path and <code>vae_quilting</code> (it has its own cut).</li>
+<li><strong>Only some methods.</strong> <code>methods=["vae_rand", "vae_greedy", "chronos"]</code> (or <code>--methods</code>) runs exactly this list.</li>
+<li><strong>Results without code.</strong> <code>frozen_methods</code> lists methods that are not run but whose results stay: <code>generate</code>,
+  <code>fidelity</code> and <code>utility</code> skip them, <code>collect</code> carries their rows into the tables (from their unit files or, if
+  there are none, from the tables already in <code>tables/</code>), and they take part in the rankings, the questions and
+  the case study. Their rows enter only where the run has the settings of the published results: the dataset
+  and seed are in the run, and the fingerprints the run gives them — what their series depend on in the open
+  part (pool, data, thresholds) and each utility cell and fidelity group — equal those in <code>tables/frozen.json</code>
+  (<code>python -m marathonts.bench.run freeze</code>, written once with the results). A run with other data, seeds, tasks, models or
+  settings leaves the rest out with a warning, so its tables never mix the published numbers with its own. The default (<code>bench.config.FROZEN_METHODS</code>) is
+  <code>vae_zseries</code> (zseries, the proprietary assembler of zypl.ai (under development)) and its three seam-processing variants, published as results; their code is
+  not part of the repository, so the assembler <code>zseries</code> is never run on any pool. <code>frozen_methods=[]</code> leaves them
+  out of the tables.</li>
+</ul>
+<h3 id="data-and-split">Data and split<a class="headerlink" href="#data-and-split" title="Permanent link">&para;</a></h3>
+<p>These settings define the processed data (<code>Config.DATA_KEYS</code>); changing them redoes <code>prepare</code> and every unit of
+the affected datasets.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>max_points</code></td>
+<td><code>10_000</code></td>
+<td>last N hourly points of every dataset; <code>None</code> → the whole series (<code>max</code>)</td>
+</tr>
+<tr>
+<td><code>split</code></td>
+<td><code>(0.5, 0.25, 0.25)</code></td>
+<td>train / val / OOT shares (<code>max</code>: <code>(0.6, 0.2, 0.2)</code>)</td>
+</tr>
+<tr>
+<td><code>embargo</code></td>
+<td><code>168</code></td>
+<td>rows dropped between the parts</td>
+</tr>
+<tr>
+<td><code>max_gap_interp</code></td>
+<td><code>6</code></td>
+<td>gaps up to this many hours are interpolated, longer ones stay NaN</td>
+</tr>
+<tr>
+<td><code>bitcoin_start</code>, <code>bitcoin_end</code></td>
+<td><code>"2017-01-01"</code>, <code>"2026-10-01"</code></td>
+<td>window of the Bitcoin series (a fixed end: the source file grows daily); enter the keys of <code>bitcoin</code> only</td>
+</tr>
+<tr>
+<td><code>T</code></td>
+<td><code>168</code></td>
+<td>window length (one week of hours), the same for every dataset</td>
+</tr>
+</tbody>
+</table>
+<h3 id="windows-and-pool">Windows and pool<a class="headerlink" href="#windows-and-pool" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>max_windows</code></td>
+<td><code>5000</code></td>
+<td>slicing stride s = max(1, (n_train − T) // max_windows) of the training windows</td>
+</tr>
+<tr>
+<td><code>holdout_frac</code></td>
+<td><code>0.10</code></td>
+<td>last share of train used as holdout for early stopping of the generators</td>
+</tr>
+<tr>
+<td><code>pool_size</code></td>
+<td><code>300</code></td>
+<td>pool size N = max(<code>pool_size</code>, <code>pool_mult</code> · K)</td>
+</tr>
+<tr>
+<td><code>pool_mult</code></td>
+<td><code>2</code></td>
+<td>see <code>pool_size</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="pool-generator-vae-tsgm_vae">Pool generator (VAE, <code>tsgm_vae</code>)<a class="headerlink" href="#pool-generator-vae-tsgm_vae" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>vae_latent</code></td>
+<td><code>16</code></td>
+<td>latent dimension</td>
+</tr>
+<tr>
+<td><code>vae_beta</code></td>
+<td><code>2.0</code></td>
+<td>β of the β-VAE</td>
+</tr>
+<tr>
+<td><code>vae_epochs</code></td>
+<td><code>400</code></td>
+<td>maximum epochs</td>
+</tr>
+<tr>
+<td><code>vae_patience</code></td>
+<td><code>50</code></td>
+<td>early-stopping patience on the holdout loss</td>
+</tr>
+<tr>
+<td><code>vae_min_epochs</code></td>
+<td><code>150</code></td>
+<td>no stopping and no best-weight pick before this epoch</td>
+</tr>
+<tr>
+<td><code>vae_noise</code></td>
+<td><code>0.5</code></td>
+<td>sampling: z ~ N(0, 1) · <code>vae_noise</code></td>
+</tr>
+<tr>
+<td><code>vae_batch</code></td>
+<td><code>64</code></td>
+<td>batch size</td>
+</tr>
+</tbody>
+</table>
+<h3 id="assemblers-baselinesmd-a">Assemblers (BASELINES.md A)<a class="headerlink" href="#assemblers-baselinesmd-a" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>pctsp_solutions</code></td>
+<td><code>2000</code></td>
+<td><code>vae_pctsp</code>: the OR-Tools search stops after this many solutions</td>
+</tr>
+<tr>
+<td><code>pctsp_time_s</code></td>
+<td><code>60.0</code></td>
+<td><code>vae_pctsp</code>: … or after this time per unit</td>
+</tr>
+<tr>
+<td><code>mbb_bandwidth</code></td>
+<td><code>1.0</code></td>
+<td><code>vae_mbb</code>: Gaussian kernel, h = this × median jump</td>
+</tr>
+<tr>
+<td><code>knn_k</code></td>
+<td><code>None</code></td>
+<td><code>vae_knn</code>: neighbours; <code>None</code> → round(√N)</td>
+</tr>
+<tr>
+<td><code>quilt_tol</code></td>
+<td><code>0.1</code></td>
+<td><code>vae_quilting</code>: candidates within (1 + tol) × the best overlap error</td>
+</tr>
+<tr>
+<td><code>herding_stride</code></td>
+<td><code>4</code></td>
+<td><code>vae_herding</code>: every k-th point of a window as features</td>
+</tr>
+</tbody>
+</table>
+<h3 id="seam-processing-baselinesmd-b">Seam processing (BASELINES.md B)<a class="headerlink" href="#seam-processing-baselinesmd-b" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>join_overlap</code></td>
+<td><code>12</code></td>
+<td>points two neighbouring windows overlap (<code>crossfade</code>, <code>wsola</code>, <code>quilt</code>, <code>vae_quilting</code>)</td>
+</tr>
+<tr>
+<td><code>join_wsola_shift</code></td>
+<td><code>12</code></td>
+<td><code>wsola</code>: maximum shift of the next window</td>
+</tr>
+</tbody>
+</table>
+<h3 id="diffusion-ts">Diffusion-TS<a class="headerlink" href="#diffusion-ts" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>dts_d_model</code>, <code>dts_enc_layers</code>, <code>dts_dec_layers</code>, <code>dts_heads</code>, <code>dts_timesteps</code></td>
+<td><code>64</code>, <code>3</code>, <code>2</code>, <code>4</code>, <code>500</code></td>
+<td>model (official <code>Config/etth.yaml</code>, window length T)</td>
+</tr>
+<tr>
+<td><code>dts_steps</code>, <code>dts_batch</code>, <code>dts_grad_accum</code></td>
+<td><code>18000</code>, <code>128</code>, <code>2</code></td>
+<td>optimiser steps, batch, gradient accumulation</td>
+</tr>
+<tr>
+<td><code>dts_lr</code>, <code>dts_warmup_lr</code>, <code>dts_warmup</code></td>
+<td><code>1e-5</code>, <code>8e-4</code>, <code>500</code></td>
+<td>Adam from <code>dts_lr</code>, linear warm-up to <code>dts_warmup_lr</code> over <code>dts_warmup</code> steps</td>
+</tr>
+<tr>
+<td><code>dts_lr_factor</code>, <code>dts_lr_patience</code>, <code>dts_min_lr</code>, <code>dts_lr_threshold</code></td>
+<td><code>0.5</code>, <code>4000</code>, <code>1e-5</code>, <code>0.1</code></td>
+<td>ReduceLROnPlateau on the training loss</td>
+</tr>
+<tr>
+<td><code>dts_ema_decay</code>, <code>dts_ema_every</code>, <code>dts_ema_after</code></td>
+<td><code>0.995</code>, <code>10</code>, <code>100</code></td>
+<td>EMA of the weights</td>
+</tr>
+<tr>
+<td><code>dts_eval_every</code>, <code>dts_patience_evals</code></td>
+<td><code>500</code>, <code>8</code></td>
+<td>early stopping on the holdout loss of the EMA model</td>
+</tr>
+<tr>
+<td><code>dts_sampling_steps</code></td>
+<td><code>50</code></td>
+<td>DDIM steps of the infill</td>
+</tr>
+<tr>
+<td><code>dts_context_frac</code></td>
+<td><code>0.5</code></td>
+<td>share of the window kept as context in each autoregressive step</td>
+</tr>
+<tr>
+<td><code>dts_infill_coef</code>, <code>dts_infill_lr</code></td>
+<td><code>1e-2</code>, <code>5e-2</code></td>
+<td>infill guidance</td>
+</tr>
+<tr>
+<td><code>dts_train_per_seed</code></td>
+<td><code>False</code></td>
+<td><code>True</code> → one training per seed (<code>max</code>); <code>False</code> → models per dataset (below)</td>
+</tr>
+<tr>
+<td><code>diffusion_train_replicas</code></td>
+<td><code>1</code></td>
+<td>without <code>dts_train_per_seed</code>: k models per dataset, seed s uses model s mod k</td>
+</tr>
+</tbody>
+</table>
+<h3 id="chronos-timesfm-timestral">Chronos, TimesFM, Timestral<a class="headerlink" href="#chronos-timesfm-timestral" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>chronos_model</code></td>
+<td><code>"amazon/chronos-t5-small"</code></td>
+<td>Hugging Face model id (<code>max</code>: <code>amazon/chronos-t5-base</code>)</td>
+</tr>
+<tr>
+<td><code>chronos_context</code></td>
+<td><code>512</code></td>
+<td>context length</td>
+</tr>
+<tr>
+<td><code>chronos_chunk</code></td>
+<td><code>64</code></td>
+<td>points generated per step</td>
+</tr>
+<tr>
+<td><code>timesfm_model</code>, <code>timesfm_revision</code></td>
+<td><code>"google/timesfm-3.0-pytorch"</code>, pinned commit</td>
+<td>TimesFM 3.0 weights</td>
+</tr>
+<tr>
+<td><code>timestral_model</code>, <code>timestral_revision</code></td>
+<td><code>"mistralai/Timestral-209M"</code>, pinned commit</td>
+<td>Timestral weights</td>
+</tr>
+</tbody>
+</table>
+<h3 id="fidelity">Fidelity<a class="headerlink" href="#fidelity" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>fidelity_ref</code></td>
+<td><code>"val"</code></td>
+<td>primary real reference (metric names without suffix)</td>
+</tr>
+<tr>
+<td><code>fidelity_extra_refs</code></td>
+<td><code>["train", "oot"]</code></td>
+<td>further references, suffix <code>@&lt;part&gt;</code>; <code>[]</code> → val only (a third of the stage time)</td>
+</tr>
+<tr>
+<td><code>fidelity_groups</code></td>
+<td><code>None</code></td>
+<td>metric groups to compute; <code>None</code> → every registered group</td>
+</tr>
+<tr>
+<td><code>disc_epochs</code></td>
+<td><code>30</code></td>
+<td>epochs of the post-hoc GRU discriminator (F6.1)</td>
+</tr>
+<tr>
+<td><code>edge_overlap</code></td>
+<td><code>5</code></td>
+<td>F5.7: width of the seam detector's window</td>
+</tr>
+<tr>
+<td><code>stitch_task</code></td>
+<td><code>"clf_up_h24_q90"</code></td>
+<td>task of F8 and of the case-study cells (CS7, CS10, CS12, CS13)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="utility">Utility<a class="headerlink" href="#utility" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tasks</code></td>
+<td><code>None</code></td>
+<td>utility tasks; <code>None</code> → every registered task (14 built-in)</td>
+</tr>
+<tr>
+<td><code>models</code></td>
+<td><code>["linear", "gbdt", "mlp"]</code></td>
+<td>ML models; also registered: <code>sk_linear</code>, <code>sk_hgb</code>, <code>sk_mlp</code> (<a href="../MODELS/">MODELS.md</a>)</td>
+</tr>
+<tr>
+<td><code>model_tasks</code></td>
+<td><code>{"mlp": ["clf_up_h24_q90"]}</code></td>
+<td>models restricted to some tasks; the others run on every task they support (<code>max</code>: <code>{}</code>)</td>
+</tr>
+<tr>
+<td><code>test_splits</code></td>
+<td><code>["val", "oot"]</code></td>
+<td>real test parts</td>
+</tr>
+<tr>
+<td><code>hpo</code></td>
+<td><code>False</code></td>
+<td>hyperparameter search per fit over the grids of <code>model_configs.json</code> (<code>max</code>: <code>True</code>)</td>
+</tr>
+<tr>
+<td><code>hpo_val_frac</code></td>
+<td><code>0.2</code></td>
+<td>share of the regime's own training data (its tail) used to choose</td>
+</tr>
+<tr>
+<td><code>decision_transfer</code></td>
+<td><code>False</code></td>
+<td>the decision-transfer grid U6.1 / U6.4 → RQ5 (c) (<code>max</code>: <code>True</code>)</td>
+</tr>
+<tr>
+<td><code>grid_methods</code></td>
+<td><code>None</code></td>
+<td>methods of that grid; <code>None</code> → <code>case_method</code> and <code>noise_pair[0]</code>; <code>"all"</code> → every method</td>
+</tr>
+<tr>
+<td><code>model_grid_task</code></td>
+<td><code>"clf_up_h24_q90"</code></td>
+<td>task of that grid</td>
+</tr>
+</tbody>
+</table>
+<h3 id="artifacts">Artifacts<a class="headerlink" href="#artifacts" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>save_generator_weights</code></td>
+<td><code>True</code></td>
+<td>write generator weights (pools are always written)</td>
+</tr>
+<tr>
+<td><code>save_model_weights</code></td>
+<td><code>True</code></td>
+<td>write the weights of every utility model (predictions are always written)</td>
+</tr>
+<tr>
+<td><code>weights_dtype</code></td>
+<td><code>"float32"</code></td>
+<td><code>"float16"</code> halves the weight files</td>
+</tr>
+</tbody>
+</table>
+<h3 id="statistics">Statistics<a class="headerlink" href="#statistics" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>alpha</code></td>
+<td><code>0.05</code></td>
+<td>significance level</td>
+</tr>
+<tr>
+<td><code>n_boot</code></td>
+<td><code>2000</code></td>
+<td>bootstrap resamples</td>
+</tr>
+<tr>
+<td><code>boot_block</code></td>
+<td><code>168</code></td>
+<td>block length of the test-row bootstrap (one week)</td>
+</tr>
+<tr>
+<td><code>equivalence_margin_q</code></td>
+<td><code>0.5</code></td>
+<td>SESOI quantile of the single-run noise (<a href="../HYPOTHESES/">HYPOTHESES.md</a> §2)</td>
+</tr>
+</tbody>
+</table>
+<p>These fields, <code>case_method</code>, <code>noise_pair</code> and <code>baselines</code> enter no unit fingerprint. The analysis takes them
+from the configuration saved with the tables (<code>tables/config.json</code>); <code>--config</code> or the flags of
+<a href="#command-line-of-the-analysis">the analysis</a> change them for one analysis run.</p>
+<h3 id="analysis-only-settings">Analysis-only settings<a class="headerlink" href="#analysis-only-settings" title="Permanent link">&para;</a></h3>
+<p><code>Config.ANALYSIS_KEYS</code>: they are never part of a fingerprint, so changing them re-runs only stage 7. Unlike the
+other fields, the analysis does not take them from <code>tables/config.json</code> but from the code defaults of the
+run's profile, then applies the command-line flags; <code>python -m marathonts.hypotheses.run --config FILE</code> uses the values of
+the file instead. Notebook 07 passes its <code>cfg</code> this way, so analysis settings set in its <code>cfg</code> cell
+(<code>dataclasses.replace(cfg, core_metrics=…)</code>) apply to the analysis.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Default</th>
+<th>Flag</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>leaked</code></td>
+<td><code>{"chronos": ["electricity", "beijing_pm25"], "timesfm": ["beijing_pm25", "household", "bitcoin"]}</code></td>
+<td><code>--leaked JSON</code></td>
+<td>method → datasets in its training corpus, left out of the analysis (<a href="../DATASETS/#leakage-into-pretrained-models">DATASETS.md</a>); <code>'{}'</code> → none</td>
+</tr>
+<tr>
+<td><code>rank_exclude</code></td>
+<td><code>None</code></td>
+<td><code>--rank-exclude [METHOD …]</code></td>
+<td>methods left out of the rankings; <code>None</code> → the seam-processing variants unless every assembler has them; <code>[]</code> (flag without names) → rank every method</td>
+</tr>
+<tr>
+<td><code>utility_fail_penalty</code></td>
+<td><code>True</code></td>
+<td><code>--no-fail-penalty</code></td>
+<td>a TSTR cell a method's series could not train enters as a model that learned nothing; <code>False</code> → left out</td>
+</tr>
+<tr>
+<td><code>exclude_datasets</code></td>
+<td><code>[]</code></td>
+<td><code>--exclude-datasets DATASET …</code></td>
+<td>datasets left out of the analysis; their units stay on disk</td>
+</tr>
+<tr>
+<td><code>exclude_metrics</code></td>
+<td><code>[]</code></td>
+<td><code>--exclude-metrics METRIC …</code></td>
+<td>a fidelity id (<code>"F6.1_disc_score"</code> — every reference), one reference (<code>"F6.1_disc_score@val"</code>), a group prefix ending in <code>.</code> (<code>"F12."</code>) or a utility metric (<code>"ece"</code>; not a primary one)</td>
+</tr>
+<tr>
+<td><code>core_metrics</code></td>
+<td><code>None</code></td>
+<td>—</td>
+<td>core fidelity metrics per criterion (core rankings, overall leaderboard, <code>METRIC_VALUES.md</code>); <code>None</code> → <code>hypotheses.leaderboard.CORE_METRICS</code></td>
+</tr>
+<tr>
+<td><code>metric_criteria</code></td>
+<td><code>{}</code></td>
+<td>—</td>
+<td>fidelity group → criterion, merged over <code>leaderboard.FID_CRITERIA</code></td>
+</tr>
+<tr>
+<td><code>task_criteria</code></td>
+<td><code>{}</code></td>
+<td>—</td>
+<td>task type → utility criterion, merged over <code>leaderboard.UT_CRITERIA</code> (<code>classification</code> / <code>regression</code> enter the four rankings)</td>
+</tr>
+<tr>
+<td><code>primary_metrics</code></td>
+<td><code>{}</code></td>
+<td>—</td>
+<td>task type → primary utility metric, merged over <code>catalog.PRIMARY_METRIC</code></td>
+</tr>
+<tr>
+<td><code>metric_orient</code></td>
+<td><code>{}</code></td>
+<td>—</td>
+<td>utility metric → <code>+1</code> (higher is better) / <code>-1</code>, merged over the built-in metrics; a utility metric without one is not analysed</td>
+</tr>
+<tr>
+<td><code>near_copy_ratio</code></td>
+<td><code>2.0</code></td>
+<td>—</td>
+<td>memorisation flag of the overall leaderboard: near-copy share ≥ this × that of the real OOT piece (reported, not ranked)</td>
+</tr>
+</tbody>
+</table>
+<p>The fields without a flag reach the analysis through a JSON file built from the run's saved configuration
+(the paths are set to those of this checkout):</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">dataclasses</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">marathonts.bench.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">Config</span>
+
+<span class="n">base</span> <span class="o">=</span> <span class="n">Config</span><span class="o">.</span><span class="n">profile</span><span class="p">(</span><span class="s2">"min"</span><span class="p">)</span>                                    <span class="c1"># the profile of the run</span>
+<span class="n">run</span> <span class="o">=</span> <span class="n">Config</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">"artifacts/run_h200/tables/config.json"</span><span class="p">)</span><span class="o">.</span><span class="n">read_text</span><span class="p">())</span>
+<span class="n">paths</span> <span class="o">=</span> <span class="p">{</span><span class="n">f</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">dataclasses</span><span class="o">.</span><span class="n">fields</span><span class="p">(</span><span class="n">Config</span><span class="p">)</span> <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">endswith</span><span class="p">((</span><span class="s2">"_dir"</span><span class="p">,</span> <span class="s2">"_file"</span><span class="p">))}</span>
+<span class="n">cfg</span> <span class="o">=</span> <span class="n">dataclasses</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">run</span><span class="p">,</span> <span class="o">**</span><span class="n">paths</span><span class="p">,</span> <span class="n">metric_orient</span><span class="o">=</span><span class="p">{</span><span class="s2">"precision_top10"</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span> <span class="n">near_copy_ratio</span><span class="o">=</span><span class="mf">3.0</span><span class="p">)</span>
+<span class="n">Path</span><span class="p">(</span><span class="s2">"analysis_cfg.json"</span><span class="p">)</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">to_json</span><span class="p">())</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>marathonts.hypotheses.run<span class="w"> </span>--config<span class="w"> </span>analysis_cfg.json
+</code></pre></div>
+<p>At start the analysis warns about roles and choices the tables cannot serve: the noise pair or the case-study
+method missing, core metrics or a task type's primary metric missing, utility columns without an orientation.</p>
+<h3 id="parameters-of-components-extra">Parameters of components: <code>extra</code><a class="headerlink" href="#parameters-of-components-extra" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>extra</code></td>
+<td><code>{}</code></td>
+<td><code>{&lt;component name&gt;: {parameter: value}}</code>: parameters of pool and long-series generators, assemblers, joiners (read from <code>cfg</code> in <code>join</code>), models (over <code>model_configs.json</code>) and fidelity groups</td>
+</tr>
+</tbody>
+</table>
+<h2 id="exogenous-files">Exogenous files<a class="headerlink" href="#exogenous-files" title="Permanent link">&para;</a></h2>
+<p>Two JSON files hold values that are fixed before a run and only read during it. Their contents enter the
+fingerprints of the units that read them, so an edit redoes exactly those units.</p>
+<p><strong><code>marathonts/bench/model_configs.json</code></strong> (<code>Config.model_configs_file</code>) — hyperparameters of every ML model
+(<a href="../MODELS/">MODELS.md</a>): one object per model (<code>linear</code>, <code>mlp</code>, <code>gbdt</code>, <code>sk_linear</code>, <code>sk_hgb</code>, <code>sk_mlp</code>) and,
+under <code>"grids"</code>, the candidate configurations of the search (<code>hpo=True</code>), each merged over the model's fixed
+values. A model receives <code>model_configs_file[&lt;model&gt;]</code> updated by <code>extra[&lt;model&gt;]</code>. A custom model gets its own
+object (or only <code>extra</code>). Editing one model's entry redoes that model's utility cells only.</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"gbdt"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"n_estimators"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="nt">"max_depth"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="nt">"learning_rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.2</span><span class="p">,</span><span class="w"> </span><span class="nt">"max_bin"</span><span class="p">:</span><span class="w"> </span><span class="mi">64</span><span class="p">,</span><span class="w"> </span><span class="nt">"device"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cpu"</span><span class="p">,</span>
+<span class="w">           </span><span class="nt">"multi_strategy_ms"</span><span class="p">:</span><span class="w"> </span><span class="s2">"multi_output_tree"</span><span class="p">},</span>
+<span class="w">  </span><span class="nt">"grids"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"gbdt"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="nt">"max_depth"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="nt">"max_depth"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="nt">"max_depth"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="nt">"max_depth"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">}]}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong><code>marathonts/bench/target_params.json</code></strong> (<code>min</code>, <code>mid</code>) and <strong><code>marathonts/bench/target_params_max.json</code></strong> (<code>max</code>)
+(<code>Config.target_params_file</code>) — task thresholds per dataset in real units, <code>{dataset: {task: {parameter:
+value}}}</code>, plus <code>_split_key</code>: the data settings each dataset's thresholds were computed on. <code>prepare</code> (and the
+stage <code>targets</code>) proposes the missing ones by the task's rule on the train split and writes them; review and
+commit the file. With other data settings (<code>max_points</code>, <code>split</code>, <code>embargo</code>) the file is refused for that
+dataset, because thresholds of another split could come from this run's val or OOT: point
+<code>target_params_file</code> to a new file, and <code>prepare</code> fills it from the new train split. Editing the thresholds of
+one dataset redoes its labels, its utility cells, the fidelity groups F8 and F11 and the assemblers that read
+thresholds (<code>uses_targets</code>) on that dataset only. The files <code>marathonts/bench/target_params*.pinned.json</code> are frozen copies
+used for this per-dataset fingerprinting and are never edited.</p>
+<p><code>marathonts/bench/data_hashes.json</code> holds content hashes of the published prepared data; it is written by the stage
+<code>hashes</code> and enters no fingerprint (<a href="../BENCHMARK/">BENCHMARK.md</a>, stage 1b).</p>
+<h2 id="what-a-change-recomputes">What a change recomputes<a class="headerlink" href="#what-a-change-recomputes" title="Permanent link">&para;</a></h2>
+<p>Each unit stores a fingerprint of what it depends on (<code>Config.unit_fingerprint</code>, <code>Config.COMPONENT_KEYS</code>,
+<code>marathonts/bench/cells.py</code>); a stage redoes the units whose fingerprint changed and skips the others
+(<a href="../BENCHMARK/">BENCHMARK.md</a>, "Stages"). Downstream units follow: a redone series redoes its fidelity and utility.</p>
+<table>
+<thead>
+<tr>
+<th>Change</th>
+<th>Redone</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>datasets</code>, <code>seeds</code>, <code>methods</code>, <code>models</code>, <code>tasks</code>, <code>fidelity_groups</code> extended</td>
+<td>only the added units or cells</td>
+</tr>
+<tr>
+<td><code>max_points</code>, <code>split</code>, <code>embargo</code>, <code>max_gap_interp</code>, <code>T</code></td>
+<td><code>prepare</code> and every unit of every dataset (a new split also needs thresholds, see above)</td>
+</tr>
+<tr>
+<td><code>bitcoin_start</code>, <code>bitcoin_end</code></td>
+<td>the same, for <code>bitcoin</code> only</td>
+</tr>
+<tr>
+<td><code>max_windows</code>, <code>holdout_frac</code></td>
+<td>VAE and Diffusion-TS training and everything after them; not the pretrained generators</td>
+</tr>
+<tr>
+<td><code>vae_latent</code>, <code>vae_beta</code>, <code>vae_epochs</code>, <code>vae_patience</code>, <code>vae_min_epochs</code>, <code>vae_batch</code></td>
+<td>VAE training, the pools, the pool-based methods</td>
+</tr>
+<tr>
+<td><code>pool_size</code>, <code>pool_mult</code>, <code>vae_noise</code>, <code>pool_train_replicas</code></td>
+<td>the pools and the pool-based methods; a stored trained VAE is reused where it fits the new setting (<code>pool_size</code>, <code>pool_mult</code>, <code>vae_noise</code> resample from it)</td>
+</tr>
+<tr>
+<td><code>pctsp_*</code>, <code>mbb_*</code>, <code>knn_*</code>, <code>quilt_tol</code>, <code>herding_*</code></td>
+<td>that assembler's series</td>
+</tr>
+<tr>
+<td><code>join_overlap</code>, <code>join_wsola_shift</code></td>
+<td>the seam-processing variants (<code>join_overlap</code> also <code>vae_quilting</code>)</td>
+</tr>
+<tr>
+<td><code>dts_*</code>, <code>diffusion_train_replicas</code></td>
+<td>Diffusion-TS series; the shared model (<code>min</code>, <code>mid</code>) is retrained only when a training setting changes (<code>dts_d_model</code> … <code>dts_ema_after</code>, not <code>dts_sampling_steps</code>, <code>dts_context_frac</code>, <code>dts_infill_*</code>)</td>
+</tr>
+<tr>
+<td><code>chronos_*</code>, <code>timesfm_*</code>, <code>timestral_*</code></td>
+<td>that generator's series</td>
+</tr>
+<tr>
+<td><code>extra[&lt;component&gt;]</code></td>
+<td>the units of that component</td>
+</tr>
+<tr>
+<td>an entry of <code>model_configs.json</code></td>
+<td>that model's utility cells</td>
+</tr>
+<tr>
+<td>thresholds of a dataset in <code>target_params*.json</code></td>
+<td>that dataset's labels, utility cells, F8 / F11 and assemblers with <code>uses_targets</code></td>
+</tr>
+<tr>
+<td><code>test_splits</code>, <code>hpo</code>, <code>hpo_val_frac</code>, <code>save_model_weights</code>, <code>weights_dtype</code></td>
+<td>every utility cell</td>
+</tr>
+<tr>
+<td><code>decision_transfer</code>, <code>grid_methods</code>, <code>model_grid_task</code></td>
+<td>the decision-transfer cell</td>
+</tr>
+<tr>
+<td><code>fidelity_ref</code>, <code>fidelity_extra_refs</code>, <code>disc_epochs</code>, <code>edge_overlap</code>, <code>stitch_task</code></td>
+<td>every fidelity group</td>
+</tr>
+<tr>
+<td><code>extra[&lt;fidelity group&gt;]</code></td>
+<td>that fidelity group</td>
+</tr>
+<tr>
+<td><code>disabled</code>, <code>frozen_methods</code>, <code>noise_twin</code>, <code>smooth_paths</code>, <code>joiners</code>, <code>pool_suites</code>, <code>extra_assemblers</code>, <code>extra_joiners</code>, <code>long_methods</code></td>
+<td>the method list: added methods are computed, removed ones are left out of the tables by the next <code>collect</code></td>
+</tr>
+<tr>
+<td>statistics fields, <code>case_method</code>, <code>noise_pair</code>, <code>baselines</code>, analysis-only settings</td>
+<td>stage 7 only</td>
+</tr>
+<tr>
+<td><code>device</code>, paths, <code>save_generator_weights</code></td>
+<td>nothing</td>
+</tr>
+</tbody>
+</table>
+<h2 id="command-line-of-the-analysis">Command line of the analysis<a class="headerlink" href="#command-line-of-the-analysis" title="Permanent link">&para;</a></h2>
+<p><code>python -m marathonts.hypotheses.run</code> (<code>marathonts/hypotheses/run.py</code>) — every report of stage 7:</p>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--profile {min,mid,max}</code></td>
+<td>profile (default <code>min</code>); the configuration saved with the tables takes precedence</td>
+</tr>
+<tr>
+<td><code>--artifacts-dir DIR</code></td>
+<td>the run to analyse (default <code>artifacts/&lt;profile&gt;</code>)</td>
+</tr>
+<tr>
+<td><code>--processed-dir DIR</code></td>
+<td>the prepared data (dataset descriptors of RQ7, CS15, CS12 subgroups)</td>
+</tr>
+<tr>
+<td><code>--out-dir DIR</code></td>
+<td>base folder of the results: <code>DIR/reports/</code>, <code>DIR/hypotheses/</code>, <code>DIR/overall/</code>, <code>DIR/leaderboard/</code>, <code>DIR/metric_values/</code> (default: the artifacts folder)</td>
+</tr>
+<tr>
+<td><code>--only ID …</code></td>
+<td>only these questions / hypotheses (<code>RQ2</code>, <code>CS3</code>, …); no confirmatory family, overall leaderboard, ranking files or metric values</td>
+</tr>
+<tr>
+<td><code>--no-case-study</code></td>
+<td>only the research questions, the rankings and the metric values</td>
+</tr>
+<tr>
+<td><code>--plugins FILE …</code></td>
+<td>plugin files: hypotheses, tests, metrics</td>
+</tr>
+<tr>
+<td><code>--config FILE</code></td>
+<td>a JSON written by <code>Config.to_json()</code>, used instead of the saved configuration</td>
+</tr>
+<tr>
+<td><code>--case-method METHOD</code></td>
+<td>method of the case study (default <code>Config.case_method</code>)</td>
+</tr>
+<tr>
+<td><code>--noise-pair A B</code></td>
+<td>two random paths on the same pool</td>
+</tr>
+<tr>
+<td><code>--baselines METHOD …</code></td>
+<td>long-series baselines of the case study</td>
+</tr>
+<tr>
+<td><code>--case-task TASK</code></td>
+<td>task of the case-study cells CS7, CS10, CS12, CS13 (default <code>Config.stitch_task</code>)</td>
+</tr>
+<tr>
+<td><code>--rank-exclude [METHOD …]</code></td>
+<td>methods left out of the rankings; without names — rank every method</td>
+</tr>
+<tr>
+<td><code>--no-fail-penalty</code></td>
+<td>leave out the TSTR cells a series could not train</td>
+</tr>
+<tr>
+<td><code>--exclude-datasets DATASET …</code></td>
+<td>datasets left out of the analysis</td>
+</tr>
+<tr>
+<td><code>--exclude-metrics METRIC …</code></td>
+<td>metrics left out of the analysis</td>
+</tr>
+<tr>
+<td><code>--leaked JSON</code></td>
+<td>replaces <code>Config.leaked</code> (<code>'{}'</code> — nothing left out)</td>
+</tr>
+</tbody>
+</table>
+<p><code>python -m marathonts.hypotheses.leaderboard</code> (<code>LEADERBOARD.md</code>) and <code>python -m marathonts.hypotheses.overall</code> (<code>OVERALL.md</code>) build one
+report each:</p>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--profile</code>, <code>--artifacts-dir</code></td>
+<td>as above</td>
+</tr>
+<tr>
+<td><code>--out DIR</code></td>
+<td>the tables (default <code>&lt;artifacts&gt;/leaderboard</code> or <code>&lt;artifacts&gt;/overall</code>); the report goes to <code>DIR/../reports/</code></td>
+</tr>
+<tr>
+<td><code>--n-boot N</code></td>
+<td>bootstrap resamples (default 1000)</td>
+</tr>
+<tr>
+<td><code>--rank-exclude [METHOD …]</code>, <code>--exclude-datasets</code>, <code>--exclude-metrics</code>, <code>--leaked</code></td>
+<td>as above</td>
+</tr>
+</tbody>
+</table>
+<p><code>python -m marathonts.hypotheses.metric_values</code> (<code>METRIC_VALUES.md</code>) takes <code>--profile</code>, <code>--artifacts-dir</code>, <code>--out DIR</code>
+(default <code>&lt;artifacts&gt;/metric_values</code>), <code>--exclude-datasets</code>, <code>--exclude-metrics</code> and <code>--leaked</code>.</p>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>marathonts.hypotheses.run<span class="w"> </span>--profile<span class="w"> </span>max
+python<span class="w"> </span>-m<span class="w"> </span>marathonts.hypotheses.run<span class="w"> </span>--artifacts-dir<span class="w"> </span>artifacts/run_h200<span class="w"> </span>--out-dir<span class="w"> </span>/tmp/analysis
+python<span class="w"> </span>-m<span class="w"> </span>marathonts.hypotheses.run<span class="w"> </span>--case-method<span class="w"> </span>vae_greedy
+python<span class="w"> </span>-m<span class="w"> </span>marathonts.hypotheses.run<span class="w"> </span>--exclude-datasets<span class="w"> </span>bitcoin<span class="w"> </span>--exclude-metrics<span class="w"> </span>F12.<span class="w"> </span>--leaked<span class="w"> </span><span class="s1">'{}'</span>
+python<span class="w"> </span>-m<span class="w"> </span>marathonts.hypotheses.leaderboard<span class="w"> </span>--rank-exclude
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../GETTING_STARTED/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Getting started">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Getting started
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../EXTENDING/" class="md-footer__link md-footer__link--next" aria-label="Next: Extending">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Extending
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright 2026 zypl Holding Ltd. Code under the Apache License 2.0.
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.sections", "navigation.top", "navigation.footer", "toc.follow", "search.highlight", "content.code.copy"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.525ec568.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
