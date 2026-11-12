@@ -1,0 +1,30 @@
+# Exact versions of the main run (run_h200: 1x NVIDIA H200, Linux x86_64, Python 3.12.13, CUDA 12.8), the core
+# environment with Diffusion-TS, Chronos, TimesFM and Timestral — taken from the run's `pip freeze`. For an exact
+# repetition of the benchmark stages; envs/*.txt are the flexible versions for Colab, Docker and other machines.
+#   python3.12 -m venv .venv-core && .venv-core/bin/pip install -r envs/lock/main-run-core.txt
+# torch: the run used the CUDA 12.8 build (2.9.1+cu128); pip gives the build of the current platform —
+# for CUDA 12.8 add `--index-url https://download.pytorch.org/whl/cu128` to the torch install.
+# The analysis alone (hypotheses.run) rebuilds the published results bit for bit with tests/requirements.txt.
+numpy==2.5.4
+scipy==1.18.1
+pandas==2.3.3
+pyarrow==26.0.0
+psutil==7.2.2
+tqdm==4.70.1
+torch==2.9.1
+scikit-learn==1.9.1
+statsmodels==0.15.0
+xgboost==3.4.1
+ruptures==1.1.10
+hmmlearn==0.3.3
+elkai==2.0.1
+ortools==9.15.6755
+einops==0.8.2
+chronos-forecasting==2.3.2
+timesfm[torch]==3.0.2
+transformers==5.20.2
+accelerate==1.15.0
+huggingface_hub==2.3.0
+safetensors==0.8.0
+tokenizers==0.23.3
+timestral @ git+https://github.com/mistralai/timestral.git@a534bdbd244d64f3d9d743f46c7bf6fc330ed4ff

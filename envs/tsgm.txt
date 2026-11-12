@@ -1,0 +1,6 @@
+# tsgm_vae pool generator (stage `pools --pool-generators tsgm_vae`); no torch needed
+-r base.txt
+tensorflow[and-cuda]; sys_platform == "linux"     # GPU build with its CUDA libraries
+tensorflow; sys_platform != "linux"
+keras
+tsgm==0.1.0       # Python 3.13: setup.py needs a one-line patch — colab_setup.install_tsgm() does it

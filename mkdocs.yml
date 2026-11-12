@@ -1,0 +1,104 @@
+site_name: MarathonTS
+site_description: A benchmark of long synthetic time series from window assembly and long-series generators
+site_url: https://zypl-ai.github.io/MarathonTS/
+repo_url: https://github.com/zypl-ai/MarathonTS
+repo_name: zypl-ai/MarathonTS
+edit_uri: edit/main/docs/
+copyright: Copyright 2026 zypl Holding Ltd. Code under the Apache License 2.0.
+docs_dir: docs
+exclude_docs: |
+  overrides/
+  requirements.txt
+
+theme:
+  name: material
+  features:
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - toc.follow
+    - search.highlight
+    - content.code.copy
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle: {icon: material/brightness-7, name: Dark mode}
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle: {icon: material/brightness-4, name: Light mode}
+
+hooks:
+  - docs/overrides/hooks.py
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - tables
+  - toc: {permalink: true}
+  - pymdownx.superfences
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.arithmatex: {generic: true}
+
+extra_javascript:
+  - https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: ["."]
+          options:
+            docstring_style: sphinx
+            show_source: false
+            show_root_heading: true
+            show_signature_annotations: true
+            separate_signature: true
+            members_order: source
+            filters: ["!^_"]
+            heading_level: 2
+
+extra:
+  version:
+    provider: mike
+
+nav:
+  - Home: index.md
+  - Getting started: GETTING_STARTED.md
+  - Configuration: CONFIGURATION.md
+  - Extending: EXTENDING.md
+  - Benchmark:
+      - Pipeline and protocol: BENCHMARK.md
+      - Methods: BASELINES.md
+      - Datasets: DATASETS.md
+      - Metrics: METRICS.md
+      - Models: MODELS.md
+  - Statistics: HYPOTHESES.md
+  - Protocol amendments: PROTOCOL_AMENDMENTS.md
+  - Figures:
+      - Overview: figures/README.md
+      - Figure 01: figures/fig01_architecture.md
+      - Figure 02: figures/fig02_stage_pipeline.md
+      - Figure 03: figures/fig03_environments.md
+      - Figure 04: figures/fig04_data_preprocessing.md
+      - Figure 05: figures/fig05_temporal_split.md
+      - Figure 06: figures/fig06_pool_generator_vae.md
+      - Figure 08: figures/fig08_method_family.md
+      - Figure 09: figures/fig09_long_generators.md
+      - Figure 10: figures/fig10_utility_pipeline.md
+      - Figure 11: figures/fig11_tasks_models.md
+      - Figure 12: figures/fig12_fidelity_evaluation.md
+      - Figure 13: figures/fig13_statistical_pipeline.md
+      - Figure 14: figures/fig14_hypotheses_map.md
+      - Figure 15: figures/fig15_incremental_recompute.md
+      - Figure 16: figures/fig16_artifact_layout.md
+      - Figure 17: figures/fig17_profiles.md
+      - Figure 18: figures/fig18_extensibility.md
+  - API reference:
+      - Configuration: api/config.md
+      - Registries: api/registry.md
+      - Components: api/components.md
+      - Loading artifacts: api/load.md
+  - Literature: LITERATURE.md
+  - Licences: DATASET_LICENSES.md

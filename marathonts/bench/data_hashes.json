@@ -1,0 +1,26 @@
+{
+  "ae1e2dd1500e": {
+    "_settings": {
+      "max_points": 10000,
+      "split": [
+        0.5,
+        0.25,
+        0.25
+      ],
+      "embargo": 168,
+      "max_gap_interp": 6,
+      "bitcoin_start": "2017-01-01",
+      "bitcoin_end": "2026-10-01",
+      "T": 168
+    },
+    "ett": "a84f966b14c63b36",
+    "electricity": "1861f1de7e6045dd",
+    "household": "4d0851cee748b0f0",
+    "pjm": "95ab314ea32e64fa",
+    "beijing_pm25": "d963f2d1ca4bd1ef",
+    "jena": "c87d602d45e4723e",
+    "metro": "ade3b8777c1c8916",
+    "bike": "510a79bba56e75f8",
+    "bitcoin": "1958c198488ef857"
+  }
+}

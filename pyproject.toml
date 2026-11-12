@@ -1,0 +1,75 @@
+[build-system]
+requires = ["hatchling>=1.24"]
+build-backend = "hatchling.build"
+
+[project]
+name = "marathonts"
+dynamic = ["version"]
+description = "A benchmark of long synthetic time series: window assembly from generated pools against long-series generators"
+readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
+requires-python = ">=3.11,<3.13"
+authors = [
+  { name = "Ilyas Varshavskiy", email = "ilyas.varshavskiy@zypl.ai" },
+  { name = "Sergey Shulgin" },
+  { name = "Shuhrat Khalilbekov" },
+  { name = "Bonu Boboeva" },
+  { name = "Azizjon Azimi" },
+]
+keywords = ["synthetic time series", "generative models", "benchmark", "TSTR", "fidelity metrics", "time series"]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Intended Audience :: Science/Research",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+# the core environment (envs/base.txt + envs/core.txt); lower bounds are the oldest versions the published runs used
+dependencies = [
+  "numpy>=2.1",
+  "scipy>=1.16",
+  "pandas>=2.2,<3",            # pandas 3 changes the hourly resampling: prepared data differ from the published hashes
+  "pyarrow>=18",
+  "psutil",
+  "tqdm",
+  "torch>=2.5",
+  "scikit-learn>=1.6",
+  "statsmodels>=0.14",
+  "xgboost>=2.0",
+  "ruptures",
+  "hmmlearn",
+  "elkai",
+  "ortools>=9.8,<10",
+  "tabulate",                   # Markdown reports of the analysis and of the supplementary checks
+]
+
+[project.optional-dependencies]
+# long-series generators and pool generators with their own requirements (envs/*.txt). Not here: the VAE pool
+# generator (tsgm, TensorFlow; a separate environment, envs/tsgm.txt), Timestral (installed from its Git
+# repository, envs/timestral.txt) and Diffusion-TS (its official code is cloned, docs/GETTING_STARTED.md)
+chronos = ["chronos-forecasting==2.3.2"]
+timesfm = ["timesfm[torch]==3.0.2"]
+diffusion-ts = ["einops"]
+sdv = ["sdv"]
+
+[project.urls]
+Homepage = "https://github.com/zypl-ai/MarathonTS"
+Documentation = "https://zypl-ai.github.io/MarathonTS"
+Repository = "https://github.com/zypl-ai/MarathonTS"
+Data = "https://huggingface.co/datasets/zyplai/MarathonTS"
+Leaderboard = "https://huggingface.co/spaces/zyplai/MarathonTS"
+Changelog = "https://github.com/zypl-ai/MarathonTS/blob/main/CHANGELOG.md"
+
+[tool.hatch.version]
+path = "marathonts/__init__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["marathonts"]
+exclude = ["**/__pycache__"]
+
+[tool.hatch.build.targets.sdist]
+include = ["marathonts", "tests", "README.md", "LICENSE", "NOTICE", "CHANGELOG.md", "CITATION.cff", "pyproject.toml"]
+exclude = ["**/__pycache__"]

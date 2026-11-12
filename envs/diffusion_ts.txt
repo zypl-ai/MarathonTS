@@ -1,0 +1,3 @@
+# diffusion_ts long generator; code: git clone https://github.com/Y-debug-sys/Diffusion-TS external/Diffusion-TS
+-r core.txt
+einops

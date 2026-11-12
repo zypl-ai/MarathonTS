@@ -1,0 +1,51 @@
+cff-version: 1.2.0
+message: "If you use MarathonTS, please cite the paper below and the original source of every dataset you use."
+title: "MarathonTS: A Benchmark of Long Synthetic Time Series from Window Assembly and Long-Series Generators"
+type: software
+version: 1.0.0
+license: Apache-2.0
+repository-code: "https://github.com/zypl-ai/MarathonTS"
+url: "https://zypl-ai.github.io/MarathonTS/"
+keywords:
+  - synthetic time series
+  - generative models
+  - benchmark
+  - TSTR
+  - fidelity metrics
+authors:
+  - family-names: Varshavskiy
+    given-names: Ilyas
+    orcid: "https://orcid.org/0000-0003-4924-2097"
+    email: ilyas.varshavskiy@zypl.ai
+    affiliation: zypl.ai
+  - family-names: Shulgin
+    given-names: Sergey
+    affiliation: zypl.ai
+  - family-names: Khalilbekov
+    given-names: Shuhrat
+    affiliation: zypl.ai
+  - family-names: Boboeva
+    given-names: Bonu
+    affiliation: zypl.ai
+  - family-names: Azimi
+    given-names: Azizjon
+    affiliation: zypl.ai
+# Before the repository is opened: date-released and the arXiv identifier (assigned at submission) in
+# preferred-citation.
+preferred-citation:
+  type: article
+  title: "MarathonTS: A Benchmark of Long Synthetic Time Series from Window Assembly and Long-Series Generators"
+  authors:
+    - family-names: Varshavskiy
+      given-names: Ilyas
+      orcid: "https://orcid.org/0000-0003-4924-2097"
+    - family-names: Shulgin
+      given-names: Sergey
+    - family-names: Khalilbekov
+      given-names: Shuhrat
+    - family-names: Boboeva
+      given-names: Bonu
+    - family-names: Azimi
+      given-names: Azizjon
+  year: 2026
+  journal: arXiv

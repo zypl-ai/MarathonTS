@@ -1,0 +1,9 @@
+MarathonTS
+Copyright 2026 zypl Holding Ltd
+
+This product includes software developed at zypl Holding Ltd, Dubai International Financial Centre
+(https://zypl.ai).
+
+The code is licensed under the Apache License, Version 2.0 (LICENSE). Datasets, synthetic series,
+model weights and other benchmark artifacts are not covered by this licence: their terms are given
+in docs/DATASET_LICENSES.md.

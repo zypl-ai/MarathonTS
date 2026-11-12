@@ -1,0 +1,6 @@
+.venv-core: Python 3.12.13 (203 packages)
+.venv-tsgm: Python 3.12.13 (92 packages)
+name, driver_version, memory.total [MiB]
+NVIDIA H200, 580.173.02, 143771 MiB
+Linux 6.8.0-147-generic x86_64
+PRETTY_NAME="Ubuntu 22.04.5 LTS"

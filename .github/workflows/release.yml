@@ -1,0 +1,21 @@
+# Publish the package on PyPI when a GitHub release is published (Trusted Publishing: no token; the PyPI project
+# has this repository, this workflow file and the environment `pypi` as its publisher — docs/RELEASE_PLAN.md §4.3).
+name: release
+on:
+  release:
+    types: [published]
+jobs:
+  pypi:
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+        with: {lfs: false}
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: pip install build twine
+      - run: python -m build
+      - run: twine check dist/*
+      - uses: pypa/gh-action-pypi-publish@release/v1

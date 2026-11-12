@@ -1,0 +1,9 @@
+# Flexible versions (lower bound: the oldest the published runs used; upper bound where a newer version is known to
+# change the results). Exact versions of the main run: envs/lock/.
+# minimal: data stages, Parquet artifacts, the `pools` stage of any generator (plus its own env file)
+numpy>=2.1
+scipy>=1.16
+pandas<3          # pandas 3 changes the hourly resampling: prepared data differ from the published hashes
+pyarrow>=18
+psutil
+tqdm

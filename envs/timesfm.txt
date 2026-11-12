@@ -1,0 +1,3 @@
+# TimesFM 3.0 long generator (weights: TimesFM Non-Commercial License v1.0)
+-r core.txt
+timesfm[torch]==3.0.2           # package `timesfm3`: TimesFM3Forecaster

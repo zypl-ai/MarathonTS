@@ -1,0 +1,4 @@
+# Timestral long generator (code: Apache 2.0; weights: Modified MIT)
+-r core.txt
+torch>=2.4                      # the package requires it
+timestral @ git+https://github.com/mistralai/timestral.git@a534bdbd244d64f3d9d743f46c7bf6fc330ed4ff

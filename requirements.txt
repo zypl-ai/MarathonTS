@@ -1,0 +1,10 @@
+# everything in one environment — Python ≤ 3.12 (tsgm 0.1.0's setup.py fails on 3.13; see
+# colab/colab_setup.py install_tsgm), and the CUDA builds of TensorFlow and torch may want different
+# cuDNN versions. Colab and Docker use separate environments: envs/*.txt (docs/GETTING_STARTED.md).
+-r envs/core.txt
+-r envs/tsgm.txt
+-r envs/diffusion_ts.txt
+-r envs/chronos.txt
+-r envs/timesfm.txt
+-r envs/timestral.txt
+-r envs/sdv.txt

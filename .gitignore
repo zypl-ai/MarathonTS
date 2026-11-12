@@ -1,0 +1,25 @@
+# data are downloaded by `python -m marathonts.bench.run raw` (licences: DATASET_LICENSES.md)
+/data
+# third-party code cloned at setup (Diffusion-TS)
+external/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.DS_Store
+# virtual environments
+.envs/
+.venv*/
+
+# truncated unit files set aside by the pipeline (marathonts/bench/storage.py)
+*.bad
+# unit files of the published runs: on Hugging Face (zyplai/MarathonTS), not in the repository
+artifacts/*/series/
+artifacts/*/pools/
+artifacts/*/generators/
+artifacts/*/fidelity/
+artifacts/*/records/
+artifacts/*/utility/
+artifacts/*/labels/
+
+# dev-only: the delivery manifest of the main run is never part of the release
+artifacts/run_h200/delivery/
