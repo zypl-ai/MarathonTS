@@ -16,7 +16,7 @@
         <link rel="prev" href="../MODELS/">
       
       
-        <link rel="next" href="../figures/">
+        <link rel="next" href="../PROTOCOL_AMENDMENTS/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -907,10 +907,39 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#8-supplementary-analyses-not-pre-specified" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Supplementary analyses (not pre-specified)
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../PROTOCOL_AMENDMENTS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Protocol amendments
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -934,10 +963,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
         
           
-          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
             
   
   <span class="md-ellipsis">
@@ -948,8 +977,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_7">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
             <span class="md-nav__icon md-icon"></span>
             Figures
           </label>
@@ -1359,10 +1388,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
         
           
-          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
             
   
   <span class="md-ellipsis">
@@ -1373,8 +1402,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_8">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
             <span class="md-nav__icon md-icon"></span>
             API reference
           </label>
@@ -1906,6 +1935,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#8-supplementary-analyses-not-pre-specified" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Supplementary analyses (not pre-specified)
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1925,6 +1963,9 @@
 
 
 <h1 id="research-questions-and-hypotheses">Research questions and hypotheses<a class="headerlink" href="#research-questions-and-hypotheses" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>The protocol was frozen on 21 October 2026, before the main run; every change made after the freeze is listed in <a href="../PROTOCOL_AMENDMENTS/">PROTOCOL_AMENDMENTS.md</a>.</p>
+</blockquote>
 <p>The benchmark compares ways of obtaining a <strong>long synthetic time series</strong>: assembly from a pool of
 short windows (different ways of selecting and ordering windows and of processing seams) and long-series
 generators. The questions below are posed about families of methods and about the benchmark itself.
@@ -2002,7 +2043,7 @@ reference, dataset, task, model and split.</p>
 <tr>
 <td><code>real</code></td>
 <td>reference</td>
-<td>real OOT data (real-data ceiling for fidelity, RQ0) or a model trained on the real train (TRTR, utility reference)</td>
+<td>real OOT data (real-versus-real reference for fidelity, RQ0) or a model trained on the real train (TRTR, utility reference)</td>
 </tr>
 </tbody>
 </table>
@@ -2171,8 +2212,8 @@ the number of datasets, not of seeds.</p>
 <h2 id="3-research-questions">3. Research questions<a class="headerlink" href="#3-research-questions" title="Permanent link">&para;</a></h2>
 <h3 id="rq0-validity-of-the-benchmark">RQ0. Validity of the benchmark<a class="headerlink" href="#rq0-validity-of-the-benchmark" title="Permanent link">&para;</a></h3>
 <p><strong>Question.</strong> Does the benchmark measure what it should? (a) Two random assemblies of one pool
-(<code>vae_rand_b</code> versus <code>vae_rand</code>; <code>mid</code> and <code>max</code> only) are equivalent on all metrics. (b) Real OOT data are better than
-the methods in fidelity. (c) Which metrics discriminate between methods beyond the noise at all.
+(<code>vae_rand_b</code> versus <code>vae_rand</code>; <code>mid</code> and <code>max</code> only) are equivalent on all metrics. (b) How real OOT data compare with
+the methods in fidelity: a reference, not an upper bound, since OOT is shifted in time. (c) Which metrics discriminate between methods beyond the noise at all.
 (d) Which metrics duplicate each other, and how much the conclusion depends on the reference.</p>
 <p><strong>How it is tested.</strong>
 - (a) The noise is estimated on even seeds and TOST on odd seeds, so as not to measure noise and
@@ -2180,8 +2221,10 @@ the methods in fidelity. (c) Which metrics discriminate between methods beyond t
 - (b) The share of datasets where <code>real</code> is better than the method, for each metric
   (<code>ceiling_share_real_better</code>). The real OOT is shorter than the synthetic series (20% of the series
   versus K·T), so each method is evaluated on the first len(OOT) points of its series
-  (<code>&lt;name&gt;@len</code>). A metric is flagged as uninformative (<code>uninformative_metrics</code>) if the median of
-  this share over methods is below 0.5.
+  (<code>&lt;name&gt;@len</code>). A metric is flagged for further inspection (<code>uninformative_metrics</code>) if the median of
+  this share over methods is below 0.5. This may reflect distribution shift between OOT and the reference,
+  sampling variability or limited metric sensitivity; the flag alone does not make the metric invalid and
+  does not remove it from any ranking.
 - (c) For each metric (fidelity against train / val / OOT; TSTR utility for each cell) — Friedman
   across methods, blocks — datasets, BH; plus the ratio of the spread of methods (IQR of the
   methods' means over seeds) to the noise, median over datasets. A metric is <em>discriminative</em> if
@@ -2235,7 +2278,7 @@ metrics does not outweigh a group with two:</p>
 </tr>
 <tr>
 <td>fidelity: dependence</td>
-<td>F3, F4 (without calendar F4.4–F4.5: for Chronos, TimesFM and Timestral the calendar is given)</td>
+<td>F3, F4 (without calendar F4.4–F4.5: for Diffusion-TS, Chronos, TimesFM and Timestral the calendar is given)</td>
 <td>train, val, OOT</td>
 </tr>
 <tr>
@@ -2450,7 +2493,10 @@ val and train — <code>real</code> is a piece of OOT); a memorisation flag — 
 train than the 5th percentile of real-to-real distances (F10.2) against the same share of the real OOT
 piece: flagged when the median ratio over datasets is ≥ 2 and the excess is significant (one-sided
 Wilcoxon over datasets, Holm over the methods). The flag does not change the rank; F10 does not tell
-copying from a collapse onto typical windows.</p>
+copying from a collapse onto typical windows. The near-copy share of the real OOT piece is itself 1 on three datasets and 0 on three
+others, so the flag is raised for none of the controls of the supplementary memorisation check (section 8), an
+exact copy of train included; the signed DCR ratio and the count of exact copies separate these controls and
+are reported with the flag.</p>
 <p><em>Robustness.</em> Sensitivity variants fixed in advance: ordinary average ranks; fidelity against train
 only; against val + OOT only; without the metrics with no anchor check (F5.7 — real data have no seams;
 F6.1 against val — not separated from the noise); every fidelity metric instead of the core set; only the
@@ -2477,8 +2523,7 @@ assembly it is compared with (§2). BH over the whole question.</p>
 type, metric group and over time (val / OOT).</p>
 <hr />
 <h3 id="rq3-within-assembly-window-selection-seam-processing">RQ3. Within assembly: window selection × seam processing<a class="headerlink" href="#rq3-within-assembly-window-selection-seam-processing" title="Permanent link">&para;</a></h3>
-<p><strong>Question.</strong> What matters more when assembling from one pool: how windows are selected and
-ordered, or how seams are processed?</p>
+<p><strong>Question.</strong> Do the selection and order of the windows and the processing of the seams move the series towards the real data, each against its own control, when a series is assembled from one pool?</p>
 <p><strong>Comparisons</strong> (all on one pool — noise <code>vae_rand</code> vs <code>vae_rand_b</code>, in <code>min</code> the between-seed spread of <code>vae_rand</code>).
 With several pool generators (e.g. <code>pool_suites={"vae": …, "gan": …}</code>) RQ3, C3, C4 and the assembly median
 of RQ2 / C2 use the pool of <code>noise_pair</code> only; the other pool's methods are ranked (RQ1, overall leaderboard,
@@ -2513,8 +2558,10 @@ datasets: median ρ, share of datasets with ρ &gt; 0, Wilcoxon of ρ against 0,
 against OOT predicts better than against val or train) and by metric group (<code>by_group</code>), the top 5
 predictors of each criterion. In the ranking the same is visible as Kendall τ between the fidelity
 and utility criteria.</p>
-<p><strong>Supports:</strong> which metrics to use for selecting generators without training models.
-<strong>Does not support:</strong> causality — correlation over ~16 methods per dataset.</p>
+<p><strong>Supports:</strong> which metrics are associated with utility among the compared methods, as candidates for
+selecting generators without training models.
+<strong>Does not support:</strong> causality, or selection of a generator outside the compared families (methods that
+share a pool or a generator are not independent observations).</p>
 <hr />
 <h3 id="rq5-gap-to-real-data-and-robustness">RQ5. Gap to real data and robustness<a class="headerlink" href="#rq5-gap-to-real-data-and-robustness" title="Permanent link">&para;</a></h3>
 <p><strong>Question.</strong> (a) How does each method's TSTR compare with TRTR? (b) Is the ranking stable over
@@ -2727,8 +2774,9 @@ answer to "where better, where worse".</p>
 <code>vae_knn</code>, <code>vae_quilting</code>, <code>vae_herding</code>, <code>vae_zseries_{xfade,wsola,quilt}</code>; (b) the long-series
 generators (<code>baselines</code>, by default all four: Diffusion-TS, Chronos, TimesFM, Timestral).</p>
 <p><strong>Metrics:</strong> all F-metrics against val except F4.4–F4.5: calendar coherence is given by
-construction for Chronos, TimesFM and Timestral (the calendar is extended by time), whereas for VAE and Diffusion-TS it is
-generated, so these two metrics measure different things for the two groups and are left out.</p>
+construction for the long-series generators (Diffusion-TS: the calendar is imposed from a random start; Chronos, TimesFM
+and Timestral: the real calendar continues train), whereas the pool generators (VAE) generate it as part of a window,
+so these two metrics measure different things for the two groups and are left out.</p>
 <p><strong>Comparison and test:</strong> against each method of (a) — the noise of a pair of random assemblies
 (the same pool); against (b) — the between-seed spread of the method under study; BH over all comparisons of the
 hypothesis together. The result is read by metric group (F1…F12) and by dataset.</p>
@@ -2861,7 +2909,7 @@ With 9 datasets — exploratory only.</p>
 <td>CS9</td>
 </tr>
 <tr>
-<td>F4.4–F4.5 (calendar: given for Chronos, TimesFM, Timestral; generated for VAE and Diffusion-TS)</td>
+<td>F4.4–F4.5 (calendar: given for Diffusion-TS, Chronos, TimesFM, Timestral; generated by the pool generators)</td>
 <td>RQ0 (a, b) only</td>
 <td>—</td>
 </tr>
@@ -3097,7 +3145,7 @@ and the report to <code>D/../reports/</code>.</p>
 </tr>
 <tr>
 <td><code>artifacts/&lt;profile&gt;/hypotheses/RQ*_&lt;extra&gt;.parquet</code></td>
-<td>additional tables (ceiling, discriminative power, redundancy, predictors, stability, Pareto)</td>
+<td>additional tables (real-versus-real reference, discriminative power, redundancy, predictors, stability, Pareto)</td>
 </tr>
 <tr>
 <td><code>artifacts/&lt;profile&gt;/hypotheses/CS*_*.parquet</code>, <code>case_cell.parquet</code></td>
@@ -3133,6 +3181,138 @@ and the report to <code>D/../reports/</code>.</p>
   default <code>Config.stitch_task</code>).</li>
 </ul>
 <p>Examples — <a href="../EXTENDING/">EXTENDING.md</a>.</p>
+<h2 id="8-supplementary-analyses-not-pre-specified">8. Supplementary analyses (not pre-specified)<a class="headerlink" href="#8-supplementary-analyses-not-pre-specified" title="Permanent link">&para;</a></h2>
+<p>Checks added after the main run, in answer to review. They do not change the pre-specified analysis, and their
+verdicts are exploratory. All run on CPU in seconds to minutes, locally or in Colab, after the analysis stage
+(<code>python -m marathonts.hypotheses.run</code>); no GPU and no new generation are needed.</p>
+<table>
+<thead>
+<tr>
+<th>Check</th>
+<th>Command</th>
+<th>Input</th>
+<th>Output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>The analysis with the zEDGE pool in place of the VAE pool (assembly median of RQ2 / C2, contrasts of RQ3 / C3 / C4)</td>
+<td><code>python -m marathonts.hypotheses.run --artifacts-dir &lt;run&gt; --noise-pair zedge_rand zedge_rand_b --no-case-study --out-dir &lt;run&gt;/supplementary/zedge_pool</code></td>
+<td><code>&lt;run&gt;/tables/</code></td>
+<td><code>artifacts/run_h200/supplementary/zedge_pool/</code></td>
+</tr>
+<tr>
+<td>Pools: values replaced for NaN, range of the value, flat windows</td>
+<td><code>python -m marathonts.hypotheses.pool_check --artifacts-dir &lt;run&gt;</code></td>
+<td><code>&lt;run&gt;/pools/</code> (Hugging Face; not for ETT and PJM)</td>
+<td><code>artifacts/run_*/supplementary/pool_check/</code></td>
+</tr>
+<tr>
+<td>Calendar of the series: share of steps at which the hour of the week advances by one, error of the hour of the week inside a piece against the closest valid calendar</td>
+<td><code>python -m marathonts.hypotheses.calendar_check --artifacts-dir &lt;run&gt;</code></td>
+<td><code>&lt;run&gt;/series/</code> (Hugging Face; not for ETT and PJM)</td>
+<td><code>artifacts/run_*/supplementary/calendar_check/</code></td>
+</tr>
+<tr>
+<td>The analysis without the fidelity metrics that use the calendar of the series (value-only fidelity; utility unchanged, since every task uses the hour of the week as a feature)</td>
+<td><code>python -m marathonts.hypotheses.run --artifacts-dir &lt;run&gt; --no-case-study --exclude-metrics F3.8_calendar_corr_err F4.1_how_mean F4.2_how_std F4.3_hod_mean F4.4_calendar_continuity F4.5_calendar_seam_breaks F8.4_event_by_how --out-dir &lt;run&gt;/supplementary/value_only</code></td>
+<td><code>&lt;run&gt;/tables/</code></td>
+<td><code>artifacts/run_h200/supplementary/value_only/</code></td>
+</tr>
+<tr>
+<td>Noise margin under other estimators (supplementary): every pair of seeds, random orderings of the seeds, a margin ×0.5 and ×2</td>
+<td><code>python -m marathonts.hypotheses.run --artifacts-dir &lt;run&gt; --no-case-study --noise-estimator pairs</code> (or <code>perm:&lt;n&gt;</code>, or <code>--noise-scale 0.5</code>) <code>--out-dir &lt;variant&gt;</code></td>
+<td><code>&lt;run&gt;/tables/</code></td>
+<td><code>artifacts/run_h200/supplementary/noise_sensitivity/&lt;variant&gt;/</code> (global verdicts of RQ2, RQ3, C1–C4)</td>
+</tr>
+<tr>
+<td>Noise check: the margins, their zero and near-zero values, and the verdicts that change under the variants</td>
+<td><code>python -m marathonts.hypotheses.noise_check --analysis-dir &lt;run&gt; --variant pairs=&lt;dir&gt; perm1=&lt;dir&gt; …</code></td>
+<td>the outputs above</td>
+<td><code>artifacts/run_h200/supplementary/noise_check/</code></td>
+</tr>
+<tr>
+<td>Bootstrap interval of the median over datasets (the statistic of the reported effect) next to the pre-specified interval of the mean; verdicts unchanged</td>
+<td><code>python -m marathonts.hypotheses.run --artifacts-dir &lt;run&gt; --no-case-study --ci-stat median --out-dir &lt;dir&gt;</code></td>
+<td><code>&lt;run&gt;/tables/</code></td>
+<td><code>artifacts/run_*/supplementary/ci_median/</code> (global tables of RQ2, RQ3 and C1–C4)</td>
+</tr>
+<tr>
+<td>Utility cells a series could not train: counts by method, task and model, and the reason (one-class labels, no rows, or a failed fit)</td>
+<td><code>python -m marathonts.hypotheses.failure_check --artifacts-dir &lt;run&gt; --series-dir &lt;run&gt;/series</code></td>
+<td><code>&lt;run&gt;/tables/</code>, <code>&lt;run&gt;/series/</code> (Hugging Face; not for ETT and PJM)</td>
+<td><code>artifacts/run_*/supplementary/failure_check/</code></td>
+</tr>
+<tr>
+<td>The analysis with a fixed chance-level penalty for such cells, and with the cells left out</td>
+<td><code>python -m marathonts.hypotheses.run --artifacts-dir &lt;run&gt; --no-case-study --fail-rule chance</code> (or <code>--no-fail-penalty</code>) <code>--out-dir &lt;dir&gt;</code></td>
+<td><code>&lt;run&gt;/tables/</code></td>
+<td><code>artifacts/run_*/supplementary/fail_rule/{chance,none}/</code> (overall leaderboard, RQ2, RQ3, C1–C4)</td>
+</tr>
+<tr>
+<td>Noise-aware ranks: a worked example, order invariance, the share of non-transitive ties, and the places and top tier against ordinary average ranks</td>
+<td><code>python -m marathonts.hypotheses.tie_check --artifacts-dir &lt;run&gt;</code></td>
+<td><code>&lt;run&gt;/tables/</code></td>
+<td><code>artifacts/run_*/supplementary/tie_check/</code></td>
+</tr>
+<tr>
+<td>Top tier: the paired datasets with the observed leader, and the set of methods that no other method is shown to beat when every pair is tested (Holm over all pairs; accounts for the selection of the leader)</td>
+<td><code>python -m marathonts.hypotheses.tier_check --artifacts-dir &lt;run&gt;</code></td>
+<td><code>&lt;run&gt;/tables/</code></td>
+<td><code>artifacts/run_*/supplementary/tier_check/</code></td>
+</tr>
+<tr>
+<td>RQ4 by generator family: leave one family out, a metric chosen on the other families applied to the held-out family (share of correctly ordered pairs, bootstrap interval over datasets), and RQ4 on the methods of the other run</td>
+<td><code>python -m marathonts.hypotheses.family_check --artifacts-dir &lt;run&gt; [--restrict-to &lt;other run&gt;]</code></td>
+<td><code>&lt;run&gt;/tables/</code></td>
+<td><code>artifacts/run_*/supplementary/family_check/</code></td>
+</tr>
+<tr>
+<td>C1: the method-by-dataset eligibility mask, a permutation calibration of the Friedman test, Skillings-Mack with the incomplete datasets kept, every method on the complete datasets, the methods of the other run, and Holm over C1–C4 with the permutation p</td>
+<td><code>python -m marathonts.hypotheses.c1_check --artifacts-dir &lt;run&gt; [--restrict-to &lt;other run&gt;]</code></td>
+<td><code>&lt;run&gt;/tables/</code>, <code>&lt;run&gt;/hypotheses/confirmatory.parquet</code></td>
+<td><code>artifacts/run_*/supplementary/c1_check/</code></td>
+</tr>
+<tr>
+<td>C3 without the task-aware assembler zseries (the open assemblers against the random path), with Holm over C1–C4 recomputed</td>
+<td><code>python -m marathonts.hypotheses.c3_check --artifacts-dir &lt;run&gt;</code></td>
+<td><code>&lt;run&gt;/tables/</code>, <code>&lt;run&gt;/hypotheses/confirmatory.parquet</code></td>
+<td><code>artifacts/run_*/supplementary/c3_check/</code></td>
+</tr>
+<tr>
+<td>RQ0: the inventory of the 297 units of the validity check (fidelity outputs × references, memorisation, utility units), mapped to the metric IDs, with the outputs left out and those in redundant pairs</td>
+<td><code>python -m marathonts.hypotheses.rq0_inventory --artifacts-dir &lt;run&gt;</code></td>
+<td><code>&lt;run&gt;/hypotheses/RQ0_*.parquet</code></td>
+<td><code>artifacts/run_*/supplementary/rq0_inventory/</code></td>
+</tr>
+<tr>
+<td>RQ5 (a): absolute TSTR and TRTR scores by task, model and split, the ROC AUC cells with an undefined ratio, and the tests by criterion</td>
+<td><code>python -m marathonts.hypotheses.rq5_check --artifacts-dir &lt;run&gt;</code></td>
+<td><code>&lt;run&gt;/tables/</code>, <code>&lt;run&gt;/hypotheses/RQ5_global.parquet</code></td>
+<td><code>artifacts/run_*/supplementary/rq5_check/</code></td>
+</tr>
+<tr>
+<td>F5.6 against the density of the seams: the share of positions near a seam and F5.6 against its chance level (circular shifts of the seams)</td>
+<td><code>python -m marathonts.hypotheses.seam_check --artifacts-dir &lt;run&gt; --series-dir &lt;series&gt;</code></td>
+<td><code>&lt;run&gt;/tables/</code>, the series of the run</td>
+<td><code>artifacts/run_*/supplementary/seam_check/</code></td>
+</tr>
+<tr>
+<td>The analysis on the seam metrics defined for every method (F5.5 only; the seam criterion leaves the core rankings for every method)</td>
+<td><code>python -m marathonts.hypotheses.run --artifacts-dir &lt;run&gt; --no-case-study --exclude-metrics F5.1_ks_seam_vs_real F5.2_ks_seam_vs_inside F5.3_seam_z_mean F5.3_seam_z_p95 F5.4_seam_local_acf F5.6_cp_at_seams F5.7_seam_detect_auc_dev --out-dir &lt;run&gt;/supplementary/common_metrics</code></td>
+<td><code>&lt;run&gt;/tables/</code></td>
+<td><code>artifacts/run_*/supplementary/common_metrics/</code></td>
+</tr>
+<tr>
+<td>Memorisation diagnostics F10: the signed DCR ratio, near copies with bootstrap intervals, exact copies; controls with exact copies of train, copies with noise and partial copies, flagged by the rule of the analysis</td>
+<td><code>python -m marathonts.hypotheses.memorisation_check --artifacts-dir &lt;run&gt; --series-dir &lt;series&gt; --data-dir data/processed/min</code></td>
+<td><code>&lt;run&gt;/tables/</code>, the series of the run, the prepared data</td>
+<td><code>artifacts/run_*/supplementary/memorisation_check/</code></td>
+</tr>
+</tbody>
+</table>
+<p>A family C1–C4 in the zEDGE-pool output is computed in the same way as the confirmatory family, but it is not
+confirmatory: only the family on the VAE pool was fixed in advance.</p>
 
 
 
@@ -3185,13 +3365,13 @@ and the report to <code>D/../reports/</code>.</p>
         
         
           
-          <a href="../figures/" class="md-footer__link md-footer__link--next" aria-label="Next: Overview">
+          <a href="../PROTOCOL_AMENDMENTS/" class="md-footer__link md-footer__link--next" aria-label="Next: Protocol amendments">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Overview
+                Protocol amendments
               </div>
             </div>
             <div class="md-footer__button md-icon">

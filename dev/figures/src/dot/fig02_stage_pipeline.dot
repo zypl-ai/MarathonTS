@@ -13,7 +13,7 @@ digraph fig02_stage_pipeline {
   tgt [label=<<b>1a · targets (manual, once)</b><br/><font point-size="8.5">propose task thresholds on train<br/>→ committed target_params.json</font>>, fillcolor="#D6E6F4"];
   pools [label=<<b>2 · pools</b><br/><font point-size="8.5">fit pool generator (own env),<br/>sample N windows per seed</font>>, fillcolor="#F9DCC2"];
   gen [label=<<b>3 · generate</b><br/><font point-size="8.5">12 methods (min; published results skipped): assemble K·T series from pools;<br/>run long-series generators (Diffusion-TS, Chronos, TimesFM, Timestral)</font>>, fillcolor="#FCEFB4"];
-  fid [label=<<b>4 · fidelity</b><br/><font point-size="8.5">F1–F12 vs real val, train, OOT<br/>(+ real ceiling, @len)</font>>, fillcolor="#F6D5DA"];
+  fid [label=<<b>4 · fidelity</b><br/><font point-size="8.5">F1–F12 vs real val, train, OOT<br/>(+ real reference, @len)</font>>, fillcolor="#F6D5DA"];
   utl [label=<<b>5 · utility</b><br/><font point-size="8.5">labels; TSTR &amp; TRTR × 14 tasks × 3 models<br/>× {val, OOT}</font>>, fillcolor="#D5ECD0"];
   col [label=<<b>6 · collect</b><br/><font point-size="8.5">merge unit files into tables</font>>, fillcolor="#EDEDED"];
   sci [label=<<b>7 · hypotheses</b><br/><font point-size="8.5">leaderboard, ranking, metric values, RQ0–RQ9, C1–C4,<br/>case study → reports/: OVERALL.md, LEADERBOARD.md,<br/>METRIC_VALUES.md, REPORT.md</font>>, fillcolor="#E3DAF0"];

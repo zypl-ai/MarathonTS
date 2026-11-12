@@ -10,8 +10,8 @@ digraph fig12_fidelity_evaluation {
   rankdir=LR; nodesep=0.18; ranksep=0.4;
   subgraph cluster_in { label=<<b>Series under test</b>>; style="rounded"; color="#3A3A3A";
     s  [label="method m, seed k\n(length K·T)", fillcolor="#FCEFB4"];
-    sl [label="m@len: first len(OOT) points\n(seed 0; equal-length ceiling)", fillcolor="#FCEFB4"];
-    re [label="real: OOT series\n(seed 0; ceiling, RQ0;\nnot scored against OOT)", fillcolor="#D5ECD0"];
+    sl [label="m@len: first len(OOT) points\n(seed 0; equal-length comparison)", fillcolor="#FCEFB4"];
+    re [label="real: OOT series\n(seed 0; real-vs-real, RQ0;\nnot scored against OOT)", fillcolor="#D5ECD0"];
   }
   subgraph cluster_ref { label=<<b>Real references</b>>; style="rounded"; color="#3A3A3A";
     rv [label="val — primary reference\n(no suffix)", fillcolor="#D6E6F4", penwidth=1.3];

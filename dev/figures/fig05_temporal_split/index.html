@@ -510,6 +510,26 @@
       
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PROTOCOL_AMENDMENTS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Protocol amendments
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
     
   
   
@@ -527,10 +547,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked>
         
           
-          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
             
   
   <span class="md-ellipsis">
@@ -541,8 +561,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_7">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_8">
             <span class="md-nav__icon md-icon"></span>
             Figures
           </label>
@@ -1010,10 +1030,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
         
           
-          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
             
   
   <span class="md-ellipsis">
@@ -1024,8 +1044,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_8">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
             <span class="md-nav__icon md-icon"></span>
             API reference
           </label>
@@ -1249,7 +1269,7 @@ sets.</p>
   measures generalisation and OOT generalisation under
   drift. Two of the four rankings measure fidelity against val and OOT (<code>holdout_clf</code>,
   <code>holdout_reg</code>), two against train (<code>train_clf</code>, <code>train_reg</code>).</li>
-<li><strong>Real-data ceiling.</strong> Pseudo-method <code>real</code> uses the OOT series as a "synthetic" series (RQ0). OOT
+<li><strong>Real-versus-real reference.</strong> Pseudo-method <code>real</code> uses the OOT series as a "synthetic" series (RQ0); it is a reference, not an upper bound, since OOT is shifted in time. OOT
   is shorter than K·T, so each method is also scored on its first len(OOT) points (<code>@len</code>) to
   compare at equal length.</li>
 <li><strong>Utility</strong> uses the same real val and OOT rows for TSTR and TRTR. OOT checks robustness to a

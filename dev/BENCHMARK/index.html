@@ -773,6 +773,26 @@
   
   
   
+    <li class="md-nav__item">
+      <a href="../PROTOCOL_AMENDMENTS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Protocol amendments
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
     
     
     
@@ -786,10 +806,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
         
           
-          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
             
   
   <span class="md-ellipsis">
@@ -800,8 +820,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_7">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
             <span class="md-nav__icon md-icon"></span>
             Figures
           </label>
@@ -1211,10 +1231,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
         
           
-          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
             
   
   <span class="md-ellipsis">
@@ -1225,8 +1245,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_8">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
             <span class="md-nav__icon md-icon"></span>
             API reference
           </label>
@@ -1976,9 +1996,12 @@ and the rest of train (core) there is an embargo of <code>embargo</code> = 168 r
 <h3 id="pool-generator-vae">Pool generator: VAE<a class="headerlink" href="#pool-generator-vae" title="Permanent link">&para;</a></h3>
 <p>Recipe: <code>tsgm</code> <code>vae_conv5</code> + <code>BetaVAE</code>, latent 16, β = 2, Adam 1e-3, batch 64, up to 400 epochs.
 Early stopping on holdout loss (<code>z = z_mean</code>), patience 50 epochs, the best weights are kept.
-The first 150 epochs (<code>vae_min_epochs</code>) do not stop and are not considered for the best weights: holdout
-minima at epochs 4–23 give an almost flat pool (beijing_pm25, pjm, ett).
-Sampling: <code>z ~ N(0, 1) · 0.5</code>, the output is clipped to <code>[0, 1]</code>.</p>
+The first 150 epochs (<code>vae_min_epochs</code>) do not stop and are not considered for the best weights.
+Sampling: <code>z ~ N(0, 1) · 0.5</code>.
+The learning rate (the Adam default) and the batch size follow TSGM and its VAE tutorial. β, the latent size,
+the epoch limits and the prior scale were taken from earlier exploratory work of the authors on other data and
+were not tuned on this benchmark. The decoder of <code>vae_conv5</code> ends with a sigmoid, so its output is already in
+(0, 1): <code>nan_to_num</code> replaces a NaN by 0.5, and the clipping to <code>[0, 1]</code> is only a safeguard.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">os</span><span class="p">;</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">"KERAS_BACKEND"</span><span class="p">,</span> <span class="s2">"tensorflow"</span><span class="p">)</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">keras</span><span class="o">,</span><span class="w"> </span><span class="nn">tensorflow</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tf</span><span class="o">,</span><span class="w"> </span><span class="nn">tsgm</span>
 
@@ -2082,8 +2105,13 @@ for an assembly effect is the difference between two independent random assembli
 <li><code>N ≥ K</code>; every method yields a synthetic series of the same length <code>K·T</code>.</li>
 </ul>
 <h2 id="published-runs">Published runs<a class="headerlink" href="#published-runs" title="Permanent link">&para;</a></h2>
-<p>Two runs of profile <code>min</code> are published. They use the same code, configuration, datasets, task thresholds
-and seeds and differ in hardware.</p>
+<p>Two runs of profile <code>min</code> are published. They use the same configuration, datasets, task thresholds and
+seeds on different hardware and software stacks. They used different commits of the code (the replication run
+the frozen commit of 21 October 2026, the main run a commit of 23 October), which differ in names and in the
+handling of results published without code; the fingerprints of all 1 440 common generation units match. Eight datasets
+are identical; the prepared ETT series differs at the value level. The environment manifests of the main run
+(the raw <code>pip freeze</code> of both environments, system and driver) are in <code>artifacts/run_h200/env/</code>; <code>envs/lock/</code>
+holds the installable exact versions taken from them.</p>
 <table>
 <thead>
 <tr>
@@ -2105,7 +2133,7 @@ and seeds and differ in hardware.</p>
 </tr>
 <tr>
 <td>System</td>
-<td>Ubuntu 22.04.5, driver 580.173.02; Python 3.12.13, PyTorch 2.9.1, TensorFlow 2.20.0</td>
+<td>Ubuntu 22.04.5, driver 580.173.02; Python 3.12.13, PyTorch 2.9.1, TensorFlow 2.20.0 (manifests in <code>artifacts/run_h200/env/</code>)</td>
 <td>Google Colab (Linux 6.6); the pinned requirements of <code>envs/</code> (exact versions not recorded)</td>
 </tr>
 <tr>
@@ -2154,10 +2182,12 @@ are compared with the replication run:</p>
    reproduces the ETT data of the replication run, not of the main run. The effect on the metrics is small (at
    most 3·10⁻⁴ for the real series); the other eight datasets are identical in both runs.</li>
 </ol>
-<p>The deterministic TimesFM and Timestral produce the same series on both GPUs and the same fidelity values,
-which confirms the attribution. The reported uncertainty covers the variation between runs, and the
-leaderboard is read by tier, not by place (<a href="../HYPOTHESES/">HYPOTHESES.md</a>, "Uncertainty and tests"): tier
-membership reproduces up to a borderline method, the exact place within the tier does not.</p>
+<p>The deterministic TimesFM and Timestral produce practically the same series on both GPUs (the median difference of
+their fidelity values is 0; fewer than 0.3 % of the values differ by more than 1 %, at most 2.7 %),
+which confirms the attribution. The agreement of the two runs is a reproducibility check, not a validation that the reported
+intervals cover the variability of training, software, hardware and data. The leaderboard is read by tier, not by
+place (<a href="../HYPOTHESES/">HYPOTHESES.md</a>, "Uncertainty and tests"): in this check tier membership reproduced up to a
+borderline method, the exact place within the tier did not.</p>
 <h2 id="hardware">Hardware<a class="headerlink" href="#hardware" title="Permanent link">&para;</a></h2>
 <p>The benchmark is not tied to hardware: the torch part (assembly, Diffusion-TS, Chronos, models <code>linear</code> and
 <code>mlp</code>, heavy fidelity metrics) runs on CUDA if available, otherwise on CPU; the <code>gbdt</code> model (XGBoost; scikit-learn
@@ -2367,8 +2397,8 @@ window and of the chunk at each point, a seam flag.</p>
   <code>beijing_pm25</code>: Chronos is left out on <code>electricity</code> and <code>beijing_pm25</code>. ETT is used by Chronos for
   zero-shot evaluation only; the other datasets are not in the corpus. Loaded once per process; the loading
   time is recorded as <code>fit_wall_s</code> of each seed.</li>
-<li><strong>TimesFM</strong> and <strong>Timestral</strong>: pretrained point forecasters used strictly as documented, zero-shot,
-  package defaults, no sampling. The context is the whole train split (within the model's limit: 15 360
+<li><strong>TimesFM</strong> and <strong>Timestral</strong>: pretrained quantile forecasters in their median-output configurations, used
+  strictly as documented, zero-shot, package defaults, no sampling. The context is the whole train split (within the model's limit: 15 360
   and 32 768 steps); the series is the median forecast of the K·T steps after it — TimesFM 3.0
   (<code>google/timesfm-3.0-pytorch</code>, package <code>timesfm</code> 3.0.2) in one non-autoregressive pass, Timestral-209M
   (<code>mistralai/Timestral-209M</code>, package <code>timestral</code>) block by block (1024 steps), each block's median fed
@@ -2440,7 +2470,7 @@ references triple the stage time (the F6.1 GRU discriminator is trained per refe
 <code>fidelity_extra_refs=[]</code> evaluates against val only. Each metric has an orientation (<code>ORIENT</code>). Pairwise distances (MMD, nearest neighbours, precision / recall) and the
 GRU discriminator are computed in torch on GPU.</p>
 <p>The pseudo-method <code>real</code> is the real OOT; the variants <code>&lt;method&gt;@len</code> are the method's series cut to the OOT length
-(for comparison with the ceiling at equal length, RQ0).</p>
+(for comparison with the real series at equal length, RQ0).</p>
 <table>
 <thead>
 <tr>
@@ -2555,6 +2585,10 @@ for the datasets, seeds and settings of their published results only (<code>tabl
 <tr>
 <td><code>datasets.parquet</code></td>
 <td>dataset: n, K, N, period, gaps</td>
+</tr>
+<tr>
+<td><code>descriptors.parquet</code></td>
+<td>dataset: descriptors of the train part (autocorrelation, kurtosis, volatility clustering, trend, gaps) for RQ7 and CS15, so that the analysis needs no data</td>
 </tr>
 <tr>
 <td><code>inventory.parquet</code></td>

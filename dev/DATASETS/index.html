@@ -695,6 +695,26 @@
   
   
   
+    <li class="md-nav__item">
+      <a href="../PROTOCOL_AMENDMENTS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Protocol amendments
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
     
     
     
@@ -708,10 +728,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
         
           
-          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
             
   
   <span class="md-ellipsis">
@@ -722,8 +742,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_7">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
             <span class="md-nav__icon md-icon"></span>
             Figures
           </label>
@@ -1133,10 +1153,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
         
           
-          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
             
   
   <span class="md-ellipsis">
@@ -1147,8 +1167,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_8">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
             <span class="md-nav__icon md-icon"></span>
             API reference
           </label>
@@ -1502,12 +1522,12 @@ To this end, for all datasets:</p>
 </tr>
 <tr>
 <td>U2.2</td>
-<td 168="168" 1_="1," 6_="6,">The same at horizons h ∈</td>
+<td 168 1_ 6_>The same at horizons h ∈</td>
 <td>binary classification</td>
 </tr>
 <tr>
 <td>U2.3</td>
-<td 0.95_="0.95," 0.99="0.99">Rare events: q ∈</td>
+<td 0.95_ 0.99>Rare events: q ∈</td>
 <td>binary classification (strong imbalance)</td>
 </tr>
 <tr>
@@ -1522,7 +1542,7 @@ To this end, for all datasets:</p>
 </tr>
 <tr>
 <td>U2.6</td>
-<td 168="168" 1_="1," 24_="24,">Value <code>x[t+h]</code>, h ∈</td>
+<td 168 1_ 24_>Value <code>x[t+h]</code>, h ∈</td>
 <td>regression</td>
 </tr>
 <tr>
@@ -1772,7 +1792,7 @@ calendar. Columns of <code>hour.csv</code>: <code>instant</code>, <code>dteday</
 data with a trend between years.</p>
 <ul>
 <li>Source: <a href="https://archive.ics.uci.edu/dataset/275/bike+sharing+dataset">UCI #275</a></li>
-<li>Paper: Fanaee-T H., Gama J. <em>Event labeling combining ensemble detectors and background knowledge</em>. Progress in Artificial Intelligence 2, 2014</li>
+<li>Paper: Fanaee-T H., Gama J. <em>Event labeling combining ensemble detectors and background knowledge</em>. Progress in Artificial Intelligence 2(2–3), 113–127, 2014</li>
 </ul>
 <h3 id="9-bitcoin-historical-data">9. Bitcoin Historical Data<a class="headerlink" href="#9-bitcoin-historical-data" title="Permanent link">&para;</a></h3>
 <p>Minute-level OHLCV data for BTC/USD (Bitstamp), from 2012 to the present. Columns: <code>Timestamp</code>,
@@ -1781,6 +1801,8 @@ from <code>bitcoin_start</code> = 2017-01-01 to <code>bitcoin_end</code> = 2026-
 volatility clustering, heavy-tailed increments.</p>
 <ul>
 <li>Source: <a href="https://www.kaggle.com/datasets/mczielinski/bitcoin-historical-data">kaggle.com/datasets/mczielinski/bitcoin-historical-data</a></li>
+<li>Author: Mark Zielinski (Kaggle display name "Zielak"; the full name is that of the GitHub account
+  <a href="https://github.com/mczielinski/kaggle-bitcoin">mczielinski</a> linked from the dataset description)</li>
 <li><strong>Leakage for TimesFM:</strong> GiftEvalPretrain includes the Monash "Bitcoin" set (18 daily series, among
   them the Bitcoin price, 2009 – mid-2021). The same asset at a daily resolution: a related pair, so
   TimesFM is left out on <code>bitcoin</code> in every profile — also in <code>min</code>, whose window (2025–2026) lies after
@@ -1825,8 +1847,8 @@ the release note.</p>
 </tr>
 <tr>
 <td>Timestral 209M</td>
-<td>not disclosed (mostly synthetic; real post-training sets unnamed)</td>
-<td>— cannot be checked</td>
+<td>technical report (Petralia et al., 2026): pretraining on synthetic data only; post-training on a mix of real and synthetic data, the real data not listed</td>
+<td>— unknown, cannot be checked (kept)</td>
 </tr>
 <tr>
 <td>Diffusion-TS, VAE</td>

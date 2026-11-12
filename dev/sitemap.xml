@@ -2,138 +2,142 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://zypl-ai.github.io/MarathonTS/dev/</loc>
-         <lastmod>2026-10-29</lastmod>
+         <lastmod>2026-11-12</lastmod>
     </url>
     <url>
          <loc>https://zypl-ai.github.io/MarathonTS/dev/BASELINES/</loc>
-         <lastmod>2026-10-29</lastmod>
+         <lastmod>2026-11-12</lastmod>
     </url>
     <url>
          <loc>https://zypl-ai.github.io/MarathonTS/dev/BENCHMARK/</loc>
-         <lastmod>2026-10-29</lastmod>
+         <lastmod>2026-11-12</lastmod>
     </url>
     <url>
          <loc>https://zypl-ai.github.io/MarathonTS/dev/CONFIGURATION/</loc>
-         <lastmod>2026-10-29</lastmod>
+         <lastmod>2026-11-12</lastmod>
     </url>
     <url>
          <loc>https://zypl-ai.github.io/MarathonTS/dev/DATASETS/</loc>
-         <lastmod>2026-10-29</lastmod>
+         <lastmod>2026-11-12</lastmod>
     </url>
     <url>
          <loc>https://zypl-ai.github.io/MarathonTS/dev/DATASET_LICENSES/</loc>
-         <lastmod>2026-10-29</lastmod>
+         <lastmod>2026-11-12</lastmod>
     </url>
     <url>
          <loc>https://zypl-ai.github.io/MarathonTS/dev/EXTENDING/</loc>
-         <lastmod>2026-10-29</lastmod>
+         <lastmod>2026-11-12</lastmod>
     </url>
     <url>
          <loc>https://zypl-ai.github.io/MarathonTS/dev/GETTING_STARTED/</loc>
-         <lastmod>2026-10-29</lastmod>
+         <lastmod>2026-11-12</lastmod>
     </url>
     <url>
          <loc>https://zypl-ai.github.io/MarathonTS/dev/HYPOTHESES/</loc>
-         <lastmod>2026-10-29</lastmod>
+         <lastmod>2026-11-12</lastmod>
     </url>
     <url>
          <loc>https://zypl-ai.github.io/MarathonTS/dev/LITERATURE/</loc>
-         <lastmod>2026-10-29</lastmod>
+         <lastmod>2026-11-12</lastmod>
     </url>
     <url>
          <loc>https://zypl-ai.github.io/MarathonTS/dev/METRICS/</loc>
-         <lastmod>2026-10-29</lastmod>
+         <lastmod>2026-11-12</lastmod>
     </url>
     <url>
          <loc>https://zypl-ai.github.io/MarathonTS/dev/MODELS/</loc>
-         <lastmod>2026-10-29</lastmod>
+         <lastmod>2026-11-12</lastmod>
+    </url>
+    <url>
+         <loc>https://zypl-ai.github.io/MarathonTS/dev/PROTOCOL_AMENDMENTS/</loc>
+         <lastmod>2026-11-12</lastmod>
     </url>
     <url>
          <loc>https://zypl-ai.github.io/MarathonTS/dev/api/components/</loc>
-         <lastmod>2026-10-29</lastmod>
+         <lastmod>2026-11-12</lastmod>
     </url>
     <url>
          <loc>https://zypl-ai.github.io/MarathonTS/dev/api/config/</loc>
-         <lastmod>2026-10-29</lastmod>
+         <lastmod>2026-11-12</lastmod>
     </url>
     <url>
          <loc>https://zypl-ai.github.io/MarathonTS/dev/api/load/</loc>
-         <lastmod>2026-10-29</lastmod>
+         <lastmod>2026-11-12</lastmod>
     </url>
     <url>
          <loc>https://zypl-ai.github.io/MarathonTS/dev/api/registry/</loc>
-         <lastmod>2026-10-29</lastmod>
+         <lastmod>2026-11-12</lastmod>
     </url>
     <url>
          <loc>https://zypl-ai.github.io/MarathonTS/dev/figures/</loc>
-         <lastmod>2026-10-29</lastmod>
+         <lastmod>2026-11-12</lastmod>
     </url>
     <url>
          <loc>https://zypl-ai.github.io/MarathonTS/dev/figures/fig01_architecture/</loc>
-         <lastmod>2026-10-29</lastmod>
+         <lastmod>2026-11-12</lastmod>
     </url>
     <url>
          <loc>https://zypl-ai.github.io/MarathonTS/dev/figures/fig02_stage_pipeline/</loc>
-         <lastmod>2026-10-29</lastmod>
+         <lastmod>2026-11-12</lastmod>
     </url>
     <url>
          <loc>https://zypl-ai.github.io/MarathonTS/dev/figures/fig03_environments/</loc>
-         <lastmod>2026-10-29</lastmod>
+         <lastmod>2026-11-12</lastmod>
     </url>
     <url>
          <loc>https://zypl-ai.github.io/MarathonTS/dev/figures/fig04_data_preprocessing/</loc>
-         <lastmod>2026-10-29</lastmod>
+         <lastmod>2026-11-12</lastmod>
     </url>
     <url>
          <loc>https://zypl-ai.github.io/MarathonTS/dev/figures/fig05_temporal_split/</loc>
-         <lastmod>2026-10-29</lastmod>
+         <lastmod>2026-11-12</lastmod>
     </url>
     <url>
          <loc>https://zypl-ai.github.io/MarathonTS/dev/figures/fig06_pool_generator_vae/</loc>
-         <lastmod>2026-10-29</lastmod>
+         <lastmod>2026-11-12</lastmod>
     </url>
     <url>
          <loc>https://zypl-ai.github.io/MarathonTS/dev/figures/fig08_method_family/</loc>
-         <lastmod>2026-10-29</lastmod>
+         <lastmod>2026-11-12</lastmod>
     </url>
     <url>
          <loc>https://zypl-ai.github.io/MarathonTS/dev/figures/fig09_long_generators/</loc>
-         <lastmod>2026-10-29</lastmod>
+         <lastmod>2026-11-12</lastmod>
     </url>
     <url>
          <loc>https://zypl-ai.github.io/MarathonTS/dev/figures/fig10_utility_pipeline/</loc>
-         <lastmod>2026-10-29</lastmod>
+         <lastmod>2026-11-12</lastmod>
     </url>
     <url>
          <loc>https://zypl-ai.github.io/MarathonTS/dev/figures/fig11_tasks_models/</loc>
-         <lastmod>2026-10-29</lastmod>
+         <lastmod>2026-11-12</lastmod>
     </url>
     <url>
          <loc>https://zypl-ai.github.io/MarathonTS/dev/figures/fig12_fidelity_evaluation/</loc>
-         <lastmod>2026-10-29</lastmod>
+         <lastmod>2026-11-12</lastmod>
     </url>
     <url>
          <loc>https://zypl-ai.github.io/MarathonTS/dev/figures/fig13_statistical_pipeline/</loc>
-         <lastmod>2026-10-29</lastmod>
+         <lastmod>2026-11-12</lastmod>
     </url>
     <url>
          <loc>https://zypl-ai.github.io/MarathonTS/dev/figures/fig14_hypotheses_map/</loc>
-         <lastmod>2026-10-29</lastmod>
+         <lastmod>2026-11-12</lastmod>
     </url>
     <url>
          <loc>https://zypl-ai.github.io/MarathonTS/dev/figures/fig15_incremental_recompute/</loc>
-         <lastmod>2026-10-29</lastmod>
+         <lastmod>2026-11-12</lastmod>
     </url>
     <url>
          <loc>https://zypl-ai.github.io/MarathonTS/dev/figures/fig16_artifact_layout/</loc>
-         <lastmod>2026-10-29</lastmod>
+         <lastmod>2026-11-12</lastmod>
     </url>
     <url>
          <loc>https://zypl-ai.github.io/MarathonTS/dev/figures/fig17_profiles/</loc>
-         <lastmod>2026-10-29</lastmod>
+         <lastmod>2026-11-12</lastmod>
     </url>
     <url>
          <loc>https://zypl-ai.github.io/MarathonTS/dev/figures/fig18_extensibility/</loc>
-         <lastmod>2026-10-29</lastmod>
+         <lastmod>2026-11-12</lastmod>
     </url>
 </urlset>

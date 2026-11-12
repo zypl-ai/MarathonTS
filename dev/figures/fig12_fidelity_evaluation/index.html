@@ -510,6 +510,26 @@
       
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PROTOCOL_AMENDMENTS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Protocol amendments
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
     
   
   
@@ -527,10 +547,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked>
         
           
-          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
             
   
   <span class="md-ellipsis">
@@ -541,8 +561,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_7">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_8">
             <span class="md-nav__icon md-icon"></span>
             Figures
           </label>
@@ -1019,10 +1039,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
         
           
-          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
             
   
   <span class="md-ellipsis">
@@ -1033,8 +1053,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_8">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
             <span class="md-nav__icon md-icon"></span>
             API reference
           </label>
@@ -1246,14 +1266,14 @@
 <p><img alt="fig12_fidelity_evaluation" src="../fig12_fidelity_evaluation.svg" style="background:#fff;padding:12px;border-radius:6px;max-width:100%" /></p>
 <p><a href="../fig12_fidelity_evaluation.pdf">Vector PDF</a></p>
 <p><strong>File:</strong> <code>fig12_fidelity_evaluation.pdf</code></p>
-<p><strong>Suggested caption.</strong> Fidelity evaluation. Every generated series, the real OOT series (ceiling),
+<p><strong>Suggested caption.</strong> Fidelity evaluation. Every generated series, the real OOT series (real-versus-real reference),
 and length-matched truncations of the generated series are scored by the same code against three
 real references: val (primary), train and OOT. The metrics are organised in 12 groups (83 metrics);
 memorisation (F10) is computed once, against train.</p>
 <h2 id="inputs">Inputs<a class="headerlink" href="#inputs" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Series under test:</strong> each (method, seed) series of length K·T; <code>m@len</code>, the first len(OOT)
-  points of each method (seed 0), for an equal-length comparison with the ceiling; <code>real</code>, the OOT
+  points of each method (seed 0), for an equal-length comparison with the real series; <code>real</code>, the OOT
   series (seed 0).</li>
 <li><strong>References:</strong> val (primary, no suffix); train (<code>@train</code>): how well a method reproduces the
   data it was fitted on — methods fitted on train, and methods that take reference statistics from train, use this data

@@ -119,7 +119,7 @@ def fig02():
   {stage("tgt", "1a · targets (manual, once)", "propose task thresholds on train<br/>→ committed target_params.json", "data")}
   {stage("pools", "2 · pools", "fit pool generator (own env),<br/>sample N windows per seed", "gen")}
   {stage("gen", "3 · generate", "12 methods (min; published results skipped): assemble K·T series from pools;<br/>run long-series generators (Diffusion-TS, Chronos, TimesFM, Timestral)", "stitch")}
-  {stage("fid", "4 · fidelity", "F1–F12 vs real val, train, OOT<br/>(+ real ceiling, @len)", "eval")}
+  {stage("fid", "4 · fidelity", "F1–F12 vs real val, train, OOT<br/>(+ real reference, @len)", "eval")}
   {stage("utl", "5 · utility", "labels; TSTR &amp; TRTR × 14 tasks × 3 models<br/>× {val, OOT}", "ml")}
   {stage("col", "6 · collect", "merge unit files into tables", "store")}
   {stage("sci", "7 · hypotheses", "leaderboard, ranking, metric values, RQ0–RQ9, C1–C4,<br/>case study → reports/: OVERALL.md, LEADERBOARD.md,<br/>METRIC_VALUES.md, REPORT.md", "stats")}
@@ -279,7 +279,7 @@ def fig05():
     uses = [
         (n_tr / 2, "scaler lo/hi · T, K, N · task thresholds\nreference statistics · TRTR training · fidelity '@train'"),
         (n_tr + emb + n_val / 2, "fidelity reference (primary)\nutility test (val)"),
-        (n_tr + 2 * emb + n_val + n_oot / 2, "utility test (OOT) · fidelity '@oot'\n'real' ceiling (RQ0)"),
+        (n_tr + 2 * emb + n_val + n_oot / 2, "utility test (OOT) · fidelity '@oot'\n'real' reference (RQ0)"),
     ]
     for xc, t in uses:
         ax.text(xc, y1 + hgt + 0.08, t, ha="center", va="bottom", **kw)
@@ -376,7 +376,7 @@ def fig08():
   B [label={tbl("B · Seam joiners on the vae_zseries path — 3 methods", b_rows, C['stitch'],
                 "overlap 12 points; vae_zseries_{xfade,wsola,quilt}: published results;<br/>max: over every assembler but random and vae_quilting")}];
   Cc [label={tbl("C · Long-series generators (no pool) — 4 methods", c_rows, C['gen'])}];
-  R [label={tbl("Reference (not a method)", [("real", "OOT series (fidelity ceiling); real-train model (TRTR)", None)], C['ml'])}];
+  R [label={tbl("Reference (not a method)", [("real", "OOT series (fidelity reference); real-train model (TRTR)", None)], C['ml'])}];
   out [shape=box, style="rounded,filled", fillcolor="{C['white']}", penwidth=1.2, margin="0.12,0.06",
        label="17 methods (min: 16, without vae_rand_b; 4 of them published results) × 10 seeds × 9 datasets\\n→ one series per unit, length K·T; real units + hour-of-week, window / piece id, seam flag"];
   pool -> A; A -> B [label=" path of vae_zseries"];
@@ -528,8 +528,8 @@ def fig12():
   rankdir=LR; nodesep=0.18; ranksep=0.4;
   subgraph cluster_in {{ label=<<b>Series under test</b>>; style="rounded"; color="{C['edge']}";
     s  [label="method m, seed k\\n(length K·T)", fillcolor="{C['stitch']}"];
-    sl [label="m@len: first len(OOT) points\\n(seed 0; equal-length ceiling)", fillcolor="{C['stitch']}"];
-    re [label="real: OOT series\\n(seed 0; ceiling, RQ0;\\nnot scored against OOT)", fillcolor="{C['ml']}"];
+    sl [label="m@len: first len(OOT) points\\n(seed 0; equal-length comparison)", fillcolor="{C['stitch']}"];
+    re [label="real: OOT series\\n(seed 0; real-vs-real, RQ0;\\nnot scored against OOT)", fillcolor="{C['ml']}"];
   }}
   subgraph cluster_ref {{ label=<<b>Real references</b>>; style="rounded"; color="{C['edge']}";
     rv [label="val — primary reference\\n(no suffix)", fillcolor="{C['data']}", penwidth=1.3];
@@ -587,7 +587,7 @@ def fig13():
 def fig14():
     U, O, M = C["ml"], C["store"], C["white"]
     rows = [
-        ("RQ0", "benchmark validity: noise, real-data ceiling, which metrics discriminate, redundancy",
+        ("RQ0", "benchmark validity: noise, real-versus-real reference, which metrics discriminate, redundancy",
          "all F (3 references), TSTR", "rand vs rand_b (mid, max); real; Friedman", M, ""),
         ("RQ1", "<B>ranking of every method in every slice</B>", "all leaves: F × reference, U × split, cost",
          "all methods", M, "leaderboard"),
