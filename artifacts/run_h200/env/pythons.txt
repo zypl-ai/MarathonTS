@@ -1,0 +1,2 @@
+.venv-core: Python 3.12.13 (203 packages)
+.venv-tsgm: Python 3.12.13 (92 packages)

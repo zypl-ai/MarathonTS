@@ -1,0 +1,11 @@
+# the analysis environment of the tests and the CI smoke test (.github/workflows/tests.yml): these versions rebuild
+# the published results from the published tables (newer pandas / scipy change a few RQ4 rows)
+numpy==2.4.6
+scipy==1.17.1
+pandas==2.3.3
+pyarrow==18.1.0
+scikit-learn==1.8.0
+statsmodels==0.14.5
+psutil
+tqdm
+pytest

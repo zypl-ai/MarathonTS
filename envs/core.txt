@@ -1,0 +1,13 @@
+# Flexible versions (lower bound: the oldest the published runs used; upper bound where a newer version is known to
+# change the results). Exact versions of the main run: envs/lock/.
+# main environment: stitching, fidelity, utility, collect, hypotheses
+-r base.txt
+torch>=2.5           # Colab and the Docker image bring their own build
+scikit-learn>=1.6
+statsmodels>=0.14
+xgboost>=2.0        # gbdt (quantile + multi-output); falls back to scikit-learn without it
+ruptures            # F5.5–F5.6 change points (metric is NaN without it)
+hmmlearn            # F7.7 regimes (metric is NaN without it)
+elkai               # vae_atsp: LKH solver (the LKH licence is non-commercial)
+ortools>=9.8,<10    # vae_pctsp: prize-collecting TSP (constraint_solver.pywrapcp routing API)
+tabulate            # Markdown reports of the analysis and of the supplementary checks

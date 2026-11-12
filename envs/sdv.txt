@@ -1,0 +1,3 @@
+# sdv_par pool generator (stage `pools --pool-generators sdv_par`)
+-r base.txt
+sdv

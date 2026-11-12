@@ -1,0 +1,8 @@
+data/
+artifacts/
+external/
+colab/
+**/__pycache__
+.git
+.envs/
+.venv*/

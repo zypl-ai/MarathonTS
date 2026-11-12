@@ -1,0 +1,7 @@
+# building the documentation site (mkdocs.yml): mkdocs serve | mkdocs build
+mkdocs==1.6.1
+mkdocs-material==9.5.39
+mkdocstrings==1.0.8
+mkdocstrings-python==2.0.10
+mkdocs-autorefs==1.4.4
+mike==2.1.3

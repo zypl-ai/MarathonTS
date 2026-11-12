@@ -1,0 +1,3 @@
+# chronos long generator
+-r core.txt
+chronos-forecasting==2.3.2      # pinned version; ChronosPipeline (T5 models)

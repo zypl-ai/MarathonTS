@@ -1,0 +1,29 @@
+# Documentation site (mkdocs.yml) on GitHub Pages, one version per release tag (mike) and `dev` for main.
+name: docs
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: pip install -r docs/requirements.txt
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+      - name: Deploy the version
+        run: |
+          if [[ "$GITHUB_REF" == refs/tags/v* ]]; then
+            mike deploy --push --update-aliases "${GITHUB_REF_NAME#v}" latest
+            mike set-default --push latest
+          else
+            mike deploy --push dev
+          fi

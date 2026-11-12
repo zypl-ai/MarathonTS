@@ -1,0 +1,23 @@
+# Exact versions of the main run (run_h200: Linux x86_64, Python 3.12.13), the VAE pool environment (TensorFlow,
+# tsgm) — taken from the run's `pip freeze`. tsgm 0.1.0 has no resolvable dependency set (it pins antropy 0.1.6,
+# whose dependency `stochastic` pins numpy<2, while tsgm needs numpy>=2), so it is installed in two steps:
+#   python3.12 -m venv .venv-tsgm
+#   .venv-tsgm/bin/pip install -r envs/lock/main-run-tsgm.txt
+#   .venv-tsgm/bin/pip install --no-deps stochastic==0.6.0 antropy==0.1.6 tsgm==0.1.0
+tensorflow[and-cuda]==2.20.0; sys_platform == "linux"
+tensorflow==2.20.0; sys_platform != "linux"
+keras==3.15.1
+numpy==2.5.4
+scipy==1.18.1
+pandas==2.3.3
+pyarrow==26.0.0
+psutil==7.2.2
+tqdm==4.70.1
+scikit-learn==1.9.1
+statsmodels==0.14.5
+networkx==3.2.1
+seaborn==0.13.2
+prettytable==3.16.0
+yfinance==0.2.61
+dtaidistance==2.3.13
+numba==0.68.0

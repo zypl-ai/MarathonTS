@@ -1,0 +1,51 @@
+# The benchmark in two environments sharing ./data and ./artifacts.
+#
+#   docker compose build
+#   docker compose run --rm bench raw                 # download + convert data (Kaggle: ~/.kaggle)
+#   docker compose run --rm bench prepare
+#   docker compose run --rm tsgm                      # VAE pools in the TensorFlow / tsgm environment
+#   docker compose run --rm bench generate            # every stitching method + the long-series generators
+#   docker compose run --rm bench fidelity
+#   docker compose run --rm bench utility
+#   docker compose run --rm bench collect
+#   docker compose run --rm hypotheses
+#
+# Extra flags go after the stage: `docker compose run --rm bench generate --datasets ett --seeds 0 1 2`.
+# Profile: `--profile min` (default), `--profile mid` (min + the VAE per seed and the noise twin) or `--profile max` (everything on), for every stage and
+# for hypotheses: `docker compose run --rm tsgm pools --pool-generators tsgm_vae --profile max`.
+# Without an NVIDIA GPU remove the `deploy` blocks (everything then runs on CPU).
+
+x-volumes: &volumes
+  - ./data:/app/data
+  - ./artifacts:/app/artifacts
+  - ${HOME}/.kaggle:/root/.kaggle:ro
+
+x-gpu: &gpu
+  resources:
+    reservations:
+      devices:
+        - driver: nvidia
+          count: all
+          capabilities: [gpu]
+
+services:
+  tsgm:
+    build: {context: ., target: tsgm}
+    image: marathonts:tsgm
+    volumes: *volumes
+    deploy: *gpu
+    command: ["pools", "--pool-generators", "tsgm_vae"]
+
+  bench:
+    build: {context: ., target: bench}
+    image: marathonts:bench
+    volumes: *volumes
+    deploy: *gpu
+    command: ["all"]
+
+  hypotheses:                     # stage 7: reports → artifacts/<profile>/reports/ (REPORT.md, OVERALL.md,
+                                  #   LEADERBOARD.md, METRIC_VALUES.md), tables → hypotheses/, overall/, leaderboard/, metric_values/
+    image: marathonts:bench
+    volumes: *volumes
+    entrypoint: ["python", "-m", "marathonts.hypotheses.run"]
+    command: []
