@@ -1,0 +1,3421 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A benchmark of long synthetic time series from window assembly and long-series generators">
+      
+      
+      
+        <link rel="canonical" href="https://zypl-ai.github.io/MarathonTS/1.0.0/HYPOTHESES/">
+      
+      
+        <link rel="prev" href="../MODELS/">
+      
+      
+        <link rel="next" href="../PROTOCOL_AMENDMENTS/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.39">
+    
+    
+      
+        <title>Statistics - MarathonTS</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.8c3ca2c6.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#research-questions-and-hypotheses" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="MarathonTS" class="md-header__button md-logo" aria-label="MarathonTS" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            MarathonTS
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Statistics
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/zypl-ai/MarathonTS" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    zypl-ai/MarathonTS
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="MarathonTS" class="md-nav__button md-logo" aria-label="MarathonTS" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    MarathonTS
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/zypl-ai/MarathonTS" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    zypl-ai/MarathonTS
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GETTING_STARTED/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Getting started
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CONFIGURATION/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Configuration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../EXTENDING/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Extending
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Benchmark
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Benchmark
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../BENCHMARK/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Pipeline and protocol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../BASELINES/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Methods
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DATASETS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Datasets
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../METRICS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Metrics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MODELS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Models
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Statistics
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Statistics
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-methods-and-roles" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Methods and roles
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-general-testing-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. General testing rules
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-research-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Research questions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Research questions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rq0-validity-of-the-benchmark" class="md-nav__link">
+    <span class="md-ellipsis">
+      RQ0. Validity of the benchmark
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rq1-ranking-of-all-methods-in-all-slices" class="md-nav__link">
+    <span class="md-ellipsis">
+      RQ1. Ranking of all methods in all slices
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rq2-assembly-from-a-window-pool-versus-long-series-generators" class="md-nav__link">
+    <span class="md-ellipsis">
+      RQ2. Assembly from a window pool versus long-series generators
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rq3-within-assembly-window-selection-seam-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      RQ3. Within assembly: window selection × seam processing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rq4-does-fidelity-predict-utility" class="md-nav__link">
+    <span class="md-ellipsis">
+      RQ4. Does fidelity predict utility
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rq5-gap-to-real-data-and-robustness" class="md-nav__link">
+    <span class="md-ellipsis">
+      RQ5. Gap to real data and robustness
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rq6-speed-and-cost" class="md-nav__link">
+    <span class="md-ellipsis">
+      RQ6. Speed and cost
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rq7-moderators-exploratory" class="md-nav__link">
+    <span class="md-ellipsis">
+      RQ7. Moderators (exploratory)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rq8-class-balance" class="md-nav__link">
+    <span class="md-ellipsis">
+      RQ8. Class balance
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rq9-outliers-and-extremes" class="md-nav__link">
+    <span class="md-ellipsis">
+      RQ9. Outliers and extremes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#39-confirmatory-family-c1c4" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.9. Confirmatory family C1–C4
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-case-study-one-method-against-its-controls" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Case study: one method against its controls
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Case study: one method against its controls">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cs1-distribution-and-dependence-against-train" class="md-nav__link">
+    <span class="md-ellipsis">
+      CS1. Distribution and dependence against train
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cs2-distribution-and-dependence-against-val" class="md-nav__link">
+    <span class="md-ellipsis">
+      CS2. Distribution and dependence against val
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cs3-seam-artefacts" class="md-nav__link">
+    <span class="md-ellipsis">
+      CS3. Seam artefacts
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cs4-structure-longer-than-a-window" class="md-nav__link">
+    <span class="md-ellipsis">
+      CS4. Structure longer than a window
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cs5-target-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      CS5. Target structure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cs6-assembly-does-not-change-the-realism-of-individual-windows-and-does-not-increase-memorisation" class="md-nav__link">
+    <span class="md-ellipsis">
+      CS6. Assembly does not change the realism of individual windows and does not increase memorisation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cs7-tstr-against-a-random-assembly-pre-specified-cell-of-the-case-study" class="md-nav__link">
+    <span class="md-ellipsis">
+      CS7. TSTR against a random assembly — pre-specified cell of the case study
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cs8-tstr-on-the-other-tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      CS8. TSTR on the other tasks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cs9-fidelity-against-other-assemblers-and-long-series-generators" class="md-nav__link">
+    <span class="md-ellipsis">
+      CS9. Fidelity against other assemblers and long-series generators
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cs10-tstr-against-other-assemblers-and-long-series-generators" class="md-nav__link">
+    <span class="md-ellipsis">
+      CS10. TSTR against other assemblers and long-series generators
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cs11-the-effect-of-assembly-on-tstr-does-not-depend-on-the-model-class-exploratory" class="md-nav__link">
+    <span class="md-ellipsis">
+      CS11. The effect of assembly on TSTR does not depend on the model class (exploratory)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cs12-the-effect-is-stable-over-time-and-across-subgroups" class="md-nav__link">
+    <span class="md-ellipsis">
+      CS12. The effect is stable over time and across subgroups
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cs13-tstr-of-the-method-under-study-against-trtr" class="md-nav__link">
+    <span class="md-ellipsis">
+      CS13. TSTR of the method under study against TRTR
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cs14-computational-cost" class="md-nav__link">
+    <span class="md-ellipsis">
+      CS14. Computational cost
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cs15-moderators-where-assembly-is-better-or-worse-exploratory" class="md-nav__link">
+    <span class="md-ellipsis">
+      CS15. Moderators: where assembly is better or worse (exploratory)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-metrics-questions-and-case-study" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Metrics, questions and case study
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-how-to-read-the-result" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. How to read the result
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Pipeline
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Pipeline">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#data-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data flow
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modules" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modules
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#running" class="md-nav__link">
+    <span class="md-ellipsis">
+      Running
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#results" class="md-nav__link">
+    <span class="md-ellipsis">
+      Results
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-is-required-from-the-benchmark" class="md-nav__link">
+    <span class="md-ellipsis">
+      What is required from the benchmark
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-methods-tests-and-hypotheses" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom methods, tests and hypotheses
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-supplementary-analyses-not-pre-specified" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Supplementary analyses (not pre-specified)
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../PROTOCOL_AMENDMENTS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Protocol amendments
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Figures
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Figures
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig01_architecture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 01
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig02_stage_pipeline/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 02
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig03_environments/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 03
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig04_data_preprocessing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 04
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig05_temporal_split/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 05
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig06_pool_generator_vae/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 06
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig08_method_family/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 08
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig09_long_generators/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 09
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig10_utility_pipeline/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 10
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig11_tasks_models/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 11
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig12_fidelity_evaluation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 12
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig13_statistical_pipeline/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 13
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig14_hypotheses_map/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 14
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig15_incremental_recompute/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 15
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig16_artifact_layout/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 16
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig17_profiles/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 17
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig18_extensibility/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 18
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    API reference
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            API reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/config/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Configuration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/registry/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Registries
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/components/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Components
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/load/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Loading artifacts
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LITERATURE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Literature
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DATASET_LICENSES/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Licences
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-methods-and-roles" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Methods and roles
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-general-testing-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. General testing rules
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-research-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Research questions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Research questions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rq0-validity-of-the-benchmark" class="md-nav__link">
+    <span class="md-ellipsis">
+      RQ0. Validity of the benchmark
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rq1-ranking-of-all-methods-in-all-slices" class="md-nav__link">
+    <span class="md-ellipsis">
+      RQ1. Ranking of all methods in all slices
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rq2-assembly-from-a-window-pool-versus-long-series-generators" class="md-nav__link">
+    <span class="md-ellipsis">
+      RQ2. Assembly from a window pool versus long-series generators
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rq3-within-assembly-window-selection-seam-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      RQ3. Within assembly: window selection × seam processing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rq4-does-fidelity-predict-utility" class="md-nav__link">
+    <span class="md-ellipsis">
+      RQ4. Does fidelity predict utility
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rq5-gap-to-real-data-and-robustness" class="md-nav__link">
+    <span class="md-ellipsis">
+      RQ5. Gap to real data and robustness
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rq6-speed-and-cost" class="md-nav__link">
+    <span class="md-ellipsis">
+      RQ6. Speed and cost
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rq7-moderators-exploratory" class="md-nav__link">
+    <span class="md-ellipsis">
+      RQ7. Moderators (exploratory)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rq8-class-balance" class="md-nav__link">
+    <span class="md-ellipsis">
+      RQ8. Class balance
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rq9-outliers-and-extremes" class="md-nav__link">
+    <span class="md-ellipsis">
+      RQ9. Outliers and extremes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#39-confirmatory-family-c1c4" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.9. Confirmatory family C1–C4
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-case-study-one-method-against-its-controls" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Case study: one method against its controls
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Case study: one method against its controls">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cs1-distribution-and-dependence-against-train" class="md-nav__link">
+    <span class="md-ellipsis">
+      CS1. Distribution and dependence against train
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cs2-distribution-and-dependence-against-val" class="md-nav__link">
+    <span class="md-ellipsis">
+      CS2. Distribution and dependence against val
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cs3-seam-artefacts" class="md-nav__link">
+    <span class="md-ellipsis">
+      CS3. Seam artefacts
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cs4-structure-longer-than-a-window" class="md-nav__link">
+    <span class="md-ellipsis">
+      CS4. Structure longer than a window
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cs5-target-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      CS5. Target structure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cs6-assembly-does-not-change-the-realism-of-individual-windows-and-does-not-increase-memorisation" class="md-nav__link">
+    <span class="md-ellipsis">
+      CS6. Assembly does not change the realism of individual windows and does not increase memorisation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cs7-tstr-against-a-random-assembly-pre-specified-cell-of-the-case-study" class="md-nav__link">
+    <span class="md-ellipsis">
+      CS7. TSTR against a random assembly — pre-specified cell of the case study
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cs8-tstr-on-the-other-tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      CS8. TSTR on the other tasks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cs9-fidelity-against-other-assemblers-and-long-series-generators" class="md-nav__link">
+    <span class="md-ellipsis">
+      CS9. Fidelity against other assemblers and long-series generators
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cs10-tstr-against-other-assemblers-and-long-series-generators" class="md-nav__link">
+    <span class="md-ellipsis">
+      CS10. TSTR against other assemblers and long-series generators
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cs11-the-effect-of-assembly-on-tstr-does-not-depend-on-the-model-class-exploratory" class="md-nav__link">
+    <span class="md-ellipsis">
+      CS11. The effect of assembly on TSTR does not depend on the model class (exploratory)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cs12-the-effect-is-stable-over-time-and-across-subgroups" class="md-nav__link">
+    <span class="md-ellipsis">
+      CS12. The effect is stable over time and across subgroups
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cs13-tstr-of-the-method-under-study-against-trtr" class="md-nav__link">
+    <span class="md-ellipsis">
+      CS13. TSTR of the method under study against TRTR
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cs14-computational-cost" class="md-nav__link">
+    <span class="md-ellipsis">
+      CS14. Computational cost
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cs15-moderators-where-assembly-is-better-or-worse-exploratory" class="md-nav__link">
+    <span class="md-ellipsis">
+      CS15. Moderators: where assembly is better or worse (exploratory)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-metrics-questions-and-case-study" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Metrics, questions and case study
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-how-to-read-the-result" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. How to read the result
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Pipeline
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Pipeline">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#data-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data flow
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modules" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modules
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#running" class="md-nav__link">
+    <span class="md-ellipsis">
+      Running
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#results" class="md-nav__link">
+    <span class="md-ellipsis">
+      Results
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-is-required-from-the-benchmark" class="md-nav__link">
+    <span class="md-ellipsis">
+      What is required from the benchmark
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-methods-tests-and-hypotheses" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom methods, tests and hypotheses
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-supplementary-analyses-not-pre-specified" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Supplementary analyses (not pre-specified)
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="research-questions-and-hypotheses">Research questions and hypotheses<a class="headerlink" href="#research-questions-and-hypotheses" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>The protocol was frozen on 21 October 2026, before the main run; every change made after the freeze is listed in <a href="../PROTOCOL_AMENDMENTS/">PROTOCOL_AMENDMENTS.md</a>.</p>
+</blockquote>
+<p>The benchmark compares ways of obtaining a <strong>long synthetic time series</strong>: assembly from a pool of
+short windows (different ways of selecting and ordering windows and of processing seams) and long-series
+generators. The questions below are posed about families of methods and about the benchmark itself.
+The quality of synthetic data is measured in two ways: fidelity (how closely the series resembles
+the real one in its statistics, F1–F12, against three real references — train, val and OOT) and
+utility — <strong>TSTR versus TRTR</strong>: a model trained only on synthetic data (TSTR — train on synthetic,
+test on real) is compared with the same model trained on real data (TRTR — train on real, test on
+real), on the same real test rows of val and OOT, in classification and regression tasks. Metrics
+are described in <a href="../METRICS/">METRICS.md</a>.</p>
+<p>The benchmark result consists of four parts:</p>
+<ol>
+<li><strong>Overall leaderboard</strong> (<code>marathonts/hypotheses/overall.py</code> → <code>artifacts/&lt;profile&gt;/reports/OVERALL.md</code>, §3, RQ1,
+   <strong>Overall leaderboard</strong>) — one ranking of every method by fidelity on the core metrics (against train,
+   val and OOT) and utility (classification and regression), with noise-aware ranks and robustness checks;
+   privacy and cost are not part of it.</li>
+<li><strong>Ranking</strong> (RQ1, <code>marathonts/hypotheses/leaderboard.py</code> → <code>artifacts/&lt;profile&gt;/reports/LEADERBOARD.md</code>) —
+   the rank of each method in each slice: fidelity × reference (train / val / OOT), utility × task
+   family × split (val / OOT), cost; with confidence intervals and tests; four rankings — fidelity
+   against val + OOT or against train × utility classification or regression; privacy (F10) and cost
+   are ranked separately and are not part of them.</li>
+<li><strong>Research questions RQ0–RQ9</strong> (<code>marathonts/hypotheses/questions.py</code>) — conclusions with statistical tests;
+   the confirmatory family C1–C4 (§3.9) gives the main conclusion of the paper.</li>
+<li><strong>Case study</strong> CS1–CS15 (<code>marathonts/hypotheses/catalog.py</code>, §4) — one method under study (flag <code>--case-method</code>,
+   by default <code>vae_zseries</code>) against its controls and alternatives. Secondary; any method can be analysed this way.</li>
+</ol>
+<p>The overall leaderboard heads <code>artifacts/&lt;profile&gt;/reports/REPORT.md</code>; everything else goes into it too (<code>&lt;profile&gt;</code> — <code>min</code>, <code>mid</code> or <code>max</code>;
+default <code>min</code>). The values of the metrics behind the rankings — <code>artifacts/&lt;profile&gt;/reports/METRIC_VALUES.md</code>
+(<code>marathonts/hypotheses/metric_values.py</code>): values of the core fidelity metrics and the primary utility metrics by
+reference, dataset, task, model and split.</p>
+<h2 id="1-methods-and-roles">1. Methods and roles<a class="headerlink" href="#1-methods-and-roles" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Family</th>
+<th>Role in the analysis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>vae_rand</code></td>
+<td>assembly: random selection</td>
+<td>the simplest assembly from the VAE pool: K windows in random order; reference point for RQ2–RQ3</td>
+</tr>
+<tr>
+<td><code>vae_rand_b</code></td>
+<td>assembly: random selection</td>
+<td>a second random order of the same pool — <strong>noise</strong> (the difference between two equally random assemblies); <code>mid</code> and <code>max</code> only; not ranked, serves as a check (RQ0, RQ1)</td>
+</tr>
+<tr>
+<td><code>vae_zseries</code>, <code>vae_greedy</code>, <code>vae_atsp</code>, <code>vae_pctsp</code>, <code>vae_mbb</code>, <code>vae_knn</code>, <code>vae_quilting</code>, <code>vae_herding</code></td>
+<td>assembly: optimised selection</td>
+<td>different ways of selecting and ordering windows from the same pool (<a href="../BASELINES/">BASELINES.md</a>, section A); <code>vae_zseries</code> — zseries, the proprietary assembler of zypl.ai (under development): its results are published (<code>Config.frozen_methods</code>), its code is not part of the repository</td>
+</tr>
+<tr>
+<td><code>vae_zseries_{xfade,wsola,quilt}</code></td>
+<td>assembly: seam processing</td>
+<td>crossfade, WSOLA, quilting on top of the <code>vae_zseries</code> path (section B; published results; <code>max</code>: in addition on top of every assembler except the random path and <code>vae_quilting</code>)</td>
+</tr>
+<tr>
+<td><code>diffusion_ts</code></td>
+<td>long-series generator</td>
+<td>Diffusion-TS, autoregressive extension (trained once per dataset in <code>min</code> / <code>mid</code>, on each seed in <code>max</code>)</td>
+</tr>
+<tr>
+<td><code>chronos</code></td>
+<td>long-series generator</td>
+<td>Chronos, trajectory sampling without training</td>
+</tr>
+<tr>
+<td><code>timesfm</code>, <code>timestral</code></td>
+<td>long-series generator</td>
+<td>TimesFM 3.0 and Timestral: the median forecast after train, without training; the same series on every seed: no between-seed spread of their own, so in RQ2 the margin is the spread of the compared method (§2)</td>
+</tr>
+<tr>
+<td><code>real</code></td>
+<td>reference</td>
+<td>real OOT data (real-versus-real reference for fidelity, RQ0) or a model trained on the real train (TRTR, utility reference)</td>
+</tr>
+</tbody>
+</table>
+<p>A method's family is determined from its description (<code>bench.methods</code>: pool + assembler + seam
+processing, or a long-series generator), so custom methods (<a href="../EXTENDING/">EXTENDING.md</a>) enter
+the ranking and the questions automatically.</p>
+<h2 id="2-general-testing-rules">2. General testing rules<a class="headerlink" href="#2-general-testing-rules" title="Permanent link">&para;</a></h2>
+<p><strong>Direction of the effect.</strong> For a pair "A versus B" the difference
+<code>d = orientation × (A − B)</code> is computed, where the orientation is +1 for "higher is better" metrics
+and −1 for "lower is better" metrics. <strong>d &gt; 0 always means "A is better than B".</strong> Which method
+plays the role of A is stated in each question (for example, in RQ2 A is the long-series generator,
+in RQ3 A is a way of selecting windows or of processing seams).</p>
+<p><strong>Units of replication.</strong>
+- <em>Within a dataset</em> — seeds (10). A seed determines generator training, the pool, the random paths
+  and the models. Methods with the same seed form a pair (and a block in the ranking).
+- <em>Across datasets</em> — datasets (9). The global conclusion is drawn from dataset means, not from
+  pooled seeds; otherwise large datasets would not be independent.</p>
+<p><strong>What a seed changes in different profiles.</strong> In <code>max</code>, VAE and Diffusion-TS are retrained on each
+seed: the per-dataset conclusion generalises over the training procedure. In <code>min</code>, the VAE is
+trained once per dataset, and seeds change only pool sampling and random paths: the per-dataset
+conclusion is conditional on this trained model, and the between-seed spread (the noise for
+comparisons with independently trained methods) does not include training variability and is
+therefore smaller; Diffusion-TS in <code>min</code> is also trained once per dataset. In <code>mid</code> the VAE is retrained
+on every seed (seeds are independent and include training variability) and Diffusion-TS is one model per
+dataset as in <code>min</code>: its between-seed spread covers sampling only; <code>diffusion_train_replicas</code> (or
+<code>dts_train_per_seed</code>) adds training variability to it. Comparisons on
+a single pool (RQ3, CS1–CS8) are not affected by this: all assembly methods use the same pool. The
+global conclusion over the 9 datasets generalises over datasets in any profile.</p>
+<p><strong>Tasks a synthetic series could not train.</strong> A TSTR cell (task × model × split) can be missing for a
+method whose series exists: its labels have one class (a smooth median forecast has no move above the
+threshold), it gives no rows, or the fit failed. Left out, such a cell would rank the method only where
+it succeeded — on the easier datasets. With <code>Config.utility_fail_penalty = True</code> (default; <code>--no-fail-penalty</code>
+turns it off) the cell enters as a model that learned nothing (<code>hypotheses.catalog.impute_failed_utility</code>,
+column <code>imputed</code>). Each metric takes the worse of two values: the chance level — ROC AUC 0.5, PR AUC =
+positive share p of the test rows, log-loss H(p) for a binary task and ln K for a K-class task, Brier
+p(1 − p) — and the worst value any method has in that block (dataset, seed, task, model, split); a
+metric without a chance level — regression ones and the metrics of plugin tasks — takes the worst value
+of the block. An imputed cell therefore never ranks above a method whose series trained the task. The
+chance level is the score of a constant prediction, so AUC is not set below 0.5: an AUC below 0.5 is an
+inverted ranking, not an absence of skill. The expected cells are those of TRTR
+on the same (dataset, seed), so the rule covers every method, task and model, built-in or plugin. A
+method left out on a dataset for leakage (<code>Config.leaked</code>) is not imputed there, and neither is a method
+with no unit at all. The raw tables in <code>artifacts/&lt;profile&gt;/tables/</code> are not changed.</p>
+<p><strong>Noise and the smallest effect size of interest.</strong> For each (dataset, metric) pair, the noise is
+the median of |<code>vae_rand</code> − <code>vae_rand_b</code>| over seeds: how much two equally random assemblies of one
+pool typically differ within one run. In <code>min</code>, where <code>vae_rand_b</code> is not run, it is the median of
+|<code>vae_rand</code>(seed k) − <code>vae_rand</code>(seed k+1)|: the pool is resampled on every seed, so this noise also
+contains the pool's sampling variance and is wider — the verdicts are more conservative. This is the pre-specified smallest effect size of interest
+(SESOI): it serves both as the threshold of practical significance ("better" only if the effect is
+larger) and as the equivalence margin ("the same" if the effect is shown to be smaller). The median
+rather than the 95th percentile: with 10 seeds the 95th percentile is close to the maximum, and
+"the same" would be obtained almost always. Noise is a property of the pool, not of any method.</p>
+<p>For comparisons with independently trained methods (long-series generators in RQ2, C2), the noise is
+the median of |A(seed k) − A(seed k+1)| — the between-seed spread, including generator retraining — of
+whichever of the two compared methods has the larger one. A pair of random assemblies of one pool does
+not have this component, and a generator used without sampling (TimesFM, Timestral: the same series on
+every seed) has none of its own, so the comparator's spread sets the margin.</p>
+<p>Global effects are expressed <strong>in noise units</strong> (<code>z = d / noise</code>), so datasets and metrics of
+different scales are comparable.</p>
+<p><strong>Verdict for each unit of analysis</strong> (a metric, or task × model × regime × split):</p>
+<table>
+<thead>
+<tr>
+<th>Verdict</th>
+<th>Condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>better</strong></td>
+<td>the one-sided Wilcoxon "A is better" is significant after correction at level α/2, and the effect exceeds the noise (per dataset — the Hodges–Lehmann estimate, globally — median z &gt; 1)</td>
+</tr>
+<tr>
+<td><strong>worse</strong></td>
+<td>the same in the opposite direction</td>
+</tr>
+<tr>
+<td><strong>same</strong></td>
+<td>equivalence is demonstrated: TOST (two one-sided Wilcoxon tests) with margin ±noise is significant</td>
+</tr>
+<tr>
+<td><strong>inconclusive</strong></td>
+<td>none of the conditions: the data are insufficient to say "better", "worse" or "the same"</td>
+</tr>
+</tbody>
+</table>
+<p>"Same" is <strong>demonstrated</strong> absence of a difference, not absence of significance. Absence of
+significance is inconclusive.</p>
+<p>The verdict can go either way, so each one-sided p is compared with α/2: together this is a
+two-sided test at level α, and the probability of a false directional conclusion does not exceed
+α. TOST is tested at level α. If the noise of a metric on a dataset is zero (a discrete metric,
+all values coincide), the smallest effect size of interest is undefined: the per-dataset verdict is
+inconclusive, the dataset is excluded from the global test, and the number of such datasets is
+shown in the column <code>n_datasets_zero_margin</code>.</p>
+<p><strong>Tests.</strong></p>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Test</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dataset, over seeds</td>
+<td>Wilcoxon signed-rank (one-sided in both directions), TOST, Hodges–Lehmann, rank-biserial</td>
+<td>non-parametric paired test: metric distributions over seeds are not normal</td>
+</tr>
+<tr>
+<td>global, over datasets</td>
+<td>Wilcoxon on dataset means, sign test (share of datasets where better), t-test on dataset means, two-level bootstrap (datasets → seeds) for the confidence interval, TOST with margin ±1 noise unit</td>
+<td>several tests with different assumptions; the conclusion is robust if they agree. The unit is the dataset: seeds of one dataset are not independent</td>
+</tr>
+<tr>
+<td>many methods (ranking, RQ0, C1)</td>
+<td>Friedman (blocks — datasets); each method against the best — one-sided Wilcoxon over datasets with Holm (Benavoli et al., 2016); Nemenyi CD — for reference</td>
+<td>whether there are any differences at all, and who is statistically indistinguishable from the best. The Nemenyi CD grows with the number of methods, and its conclusion depends on the set of methods</td>
+</tr>
+<tr>
+<td>ranks</td>
+<td>two-level bootstrap of ranks (datasets → seeds), probability of being first / in the top 3</td>
+<td>uncertainty of the position in the ranking</td>
+</tr>
+<tr>
+<td>ranking agreement (RQ1, RQ5)</td>
+<td>Kendall τ</td>
+<td>whether the order of methods coincides across slices</td>
+</tr>
+<tr>
+<td>relations between metrics (RQ0, RQ4)</td>
+<td>Spearman within a dataset across methods, Wilcoxon over datasets, BH</td>
+<td>which metrics duplicate each other, which predict utility</td>
+</tr>
+<tr>
+<td>over test rows (CS7, CS12, CS13)</td>
+<td>predictions are averaged over seeds, ΔAUC on the same test rows — block bootstrap by weeks</td>
+<td>the difference is visible on the test itself. Not DeLong per seed: rows are autocorrelated (labels at horizon h overlap), and DeLong gives false positives several times more often than nominal; the seeds share one test</td>
+</tr>
+<tr>
+<td>cost</td>
+<td>median time with bootstrap over datasets, slope of log(time) on log(K)</td>
+<td>how much a method costs and how time grows with series length</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Multiple comparisons.</strong> Three levels.
+- <em>Confirmatory</em> — the family C1–C4 (§3.9): two pre-specified cells (classification and
+  regression), Holm correction over all tests of the family together; a missing test enters with
+  p = 1 and receives the verdict <code>missing</code>, so the correction is not weakened. The result is the
+  first section of <code>REPORT.md</code> and <code>confirmatory.parquet</code>. Only these give the main conclusion of
+  the paper. The cells and the composition of the family are fixed (§3.9).
+- <em>Secondary</em> (RQ0, RQ2–RQ6, case study): Benjamini–Hochberg within a question. The conclusion is
+  "where better, where worse", with false discovery rate control.
+- <em>Exploratory</em> (RQ7, CS11, CS12 subgroups, CS15): p-values are shown, but conclusions are
+  formulated as hypotheses for future work.</p>
+<p>The correction is applied at two levels: global p-values — within a question, over all units of
+analysis and comparisons; p-values of per-dataset verdicts — within each "question × dataset" pair,
+by the same method. The number of datasets with each verdict in the global table is counted from
+the corrected verdicts.</p>
+<p><strong>Power.</strong> With 10 seeds the minimal one-sided Wilcoxon p ≈ 0.001, so a verdict on a single dataset
+is possible. With 9 datasets the minimal one-sided p ≈ 0.002. A global conclusion over dozens of
+metrics after correction will be obtained only for large and consistent effects. An effect visible
+on 2–3 datasets remains inconclusive globally and is visible in the per-dataset verdicts. The main lever of power is
+the number of datasets, not of seeds.</p>
+<h2 id="3-research-questions">3. Research questions<a class="headerlink" href="#3-research-questions" title="Permanent link">&para;</a></h2>
+<h3 id="rq0-validity-of-the-benchmark">RQ0. Validity of the benchmark<a class="headerlink" href="#rq0-validity-of-the-benchmark" title="Permanent link">&para;</a></h3>
+<p><strong>Question.</strong> Does the benchmark measure what it should? (a) Two random assemblies of one pool
+(<code>vae_rand_b</code> versus <code>vae_rand</code>; <code>mid</code> and <code>max</code> only) are equivalent on all metrics. (b) How real OOT data compare with
+the methods in fidelity: a reference, not an upper bound, since OOT is shifted in time. (c) Which metrics discriminate between methods beyond the noise at all.
+(d) Which metrics duplicate each other, and how much the conclusion depends on the reference.</p>
+<p><strong>How it is tested.</strong>
+- (a) The noise is estimated on even seeds and TOST on odd seeds, so as not to measure noise and
+  equivalence on the same data (<code>noise_floor</code>).
+- (b) The share of datasets where <code>real</code> is better than the method, for each metric
+  (<code>ceiling_share_real_better</code>). The real OOT is shorter than the synthetic series (20% of the series
+  versus K·T), so each method is evaluated on the first len(OOT) points of its series
+  (<code>&lt;name&gt;@len</code>). A metric is flagged for further inspection (<code>uninformative_metrics</code>) if the median of
+  this share over methods is below 0.5. This may reflect distribution shift between OOT and the reference,
+  sampling variability or limited metric sensitivity; the flag alone does not make the metric invalid and
+  does not remove it from any ranking.
+- (c) For each metric (fidelity against train / val / OOT; TSTR utility for each cell) — Friedman
+  across methods, blocks — datasets, BH; plus the ratio of the spread of methods (IQR of the
+  methods' means over seeds) to the noise, median over datasets. A metric is <em>discriminative</em> if
+  p_BH &lt; α and the spread &gt; 1 noise unit. Summary — the share of discriminative metrics by group and
+  reference.
+- (d) Spearman between metrics over (dataset, method) pairs after ranking the methods within a
+  dataset: pairs with |ρ| ≥ 0.9 (<code>redundant_pairs</code>) and the agreement of one metric against
+  different references (<code>reference_agreement</code>: ρ val ↔ train, val ↔ OOT).</p>
+<p><strong>Supports:</strong> that the verdicts of the other questions are calibrated, and shows which metrics to
+rely on. <strong>Does not support:</strong> anything about the quality of the methods.</p>
+<hr />
+<h3 id="rq1-ranking-of-all-methods-in-all-slices">RQ1. Ranking of all methods in all slices<a class="headerlink" href="#rq1-ranking-of-all-methods-in-all-slices" title="Permanent link">&para;</a></h3>
+<p><strong>Question.</strong> How do the methods rank in each slice and in each of the four rankings, and with what
+uncertainty?</p>
+<p><strong>Ranked methods.</strong> Every method of the tables, the published results of <code>frozen_methods</code> included, except
+the second path of the noise pair and — unless every assembler has them — the
+seam-processing variants (<code>*_xfade</code>, <code>*_wsola</code>, <code>*_quilt</code>). Seam processing runs over <code>vae_zseries</code> only, so
+ranking its variants would let <code>vae_zseries</code> enter four times and every other assembler once. With
+<code>smooth_paths="all"</code> (<code>max</code>) every assembler but the random path has every seam processing and the
+variants are ranked. <code>vae_quilting</code> (choice of windows and boundary cut together) is one method, not a
+variant, and is always ranked.
+<code>Config.rank_exclude</code> / <code>--rank-exclude</code> sets the list explicitly (no names — rank every method). The
+methods left out of the rankings take part in every other question and in the case study.</p>
+<p><strong>Slices (leaves).</strong> Fidelity — one metric against one real reference: train, val or OOT
+(suffix <code>@train</code> / <code>@oot</code>, no suffix — val; group F10 — distance to train — is computed once,
+slice "—"). Utility — TSTR of one task × model × split (val / OOT) × metric. Cost — time (total,
+training, generation) and memory.</p>
+<p><strong>Ranks.</strong> Within a leaf, methods are ranked for each (dataset, seed) pair — methods of one seed
+share the pool and the test rows and form a block; rank 1 is the best, ties receive the average
+rank; if a method is missing from a block, the ranks of the others are rescaled to 1…k (a TSTR cell
+the method's series could not train is not missing: it enters as a model that learned nothing, see
+§2). Ranks are
+averaged along a fixed hierarchy with equal weights at each level, so that a group with dozens of
+metrics does not outweigh a group with two:</p>
+<div class="highlight"><pre><span></span><code>leaf (metric | task × model × metric) → group (F-group | task type) → criterion × slice (reference / split)
+     → criterion (mean over its slices) → domain (fidelity | utility) → ranking
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th>Groups</th>
+<th>Slices</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fidelity: distribution</td>
+<td>F1, F2, F12 (outliers and extremes)</td>
+<td>train, val, OOT</td>
+</tr>
+<tr>
+<td>fidelity: dependence</td>
+<td>F3, F4 (without calendar F4.4–F4.5: for Diffusion-TS, Chronos, TimesFM and Timestral the calendar is given)</td>
+<td>train, val, OOT</td>
+</tr>
+<tr>
+<td>fidelity: windows</td>
+<td>F6, F9</td>
+<td>train, val, OOT</td>
+</tr>
+<tr>
+<td>fidelity: long_structure</td>
+<td>F7</td>
+<td>train, val, OOT</td>
+</tr>
+<tr>
+<td>fidelity: target</td>
+<td>F8, F11 (class balance)</td>
+<td>train, val, OOT</td>
+</tr>
+<tr>
+<td>fidelity: seams</td>
+<td>F5</td>
+<td>train, val, OOT</td>
+</tr>
+<tr>
+<td>fidelity: privacy</td>
+<td>F10</td>
+<td>—</td>
+</tr>
+<tr>
+<td>utility: classification</td>
+<td>U2.1–U2.5 (clf., multiclass)</td>
+<td>val, OOT</td>
+</tr>
+<tr>
+<td>utility: regression</td>
+<td>U2.6–U2.9 (regression, quantiles, multi-step, volatility)</td>
+<td>val, OOT</td>
+</tr>
+<tr>
+<td>cost</td>
+<td>time and memory of the series</td>
+<td>total (total time), training (generator training), generation (sampling + assembly of a new series by the trained model), memory (peak GPU memory and RSS increase)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Thematic slices</strong> — separate rankings by cross-cutting properties; leaves are taken from
+different groups, each metric has equal weight, and they do not enter the rankings (their
+leaves are already in the criteria):</p>
+<table>
+<thead>
+<tr>
+<th>Theme</th>
+<th>Fidelity (train / val / OOT)</th>
+<th>Utility (val / OOT)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>class balance</td>
+<td>F8.1, F11.1–F11.4</td>
+<td>ECE of binary classifiers: a shift of the class share in the synthetic data gives poor calibration on real data</td>
+</tr>
+<tr>
+<td>outliers and extremes</td>
+<td>F1.5 (q01, q99), F1.6 (kurtosis), F1.10 (Hill), F2.4, F7.4, F12.1–F12.5</td>
+<td>regression error on the extreme 10% of the target (<code>mae_extreme</code>), PR AUC of rare events</td>
+</tr>
+</tbody>
+</table>
+<p>A utility criterion includes the primary metric of the task type (AUC, log-loss, MASE, pinball) and
+the models trained on all tasks of the criterion (in <code>min</code> / <code>mid</code> — linear and boosting; the MLP, trained
+on one task only, is kept as a separate leaf).</p>
+<p><strong>Rankings</strong> (<code>leaderboard.RANKINGS</code>). Four rankings, each the mean of two domains with equal weight:
+fidelity — the mean of the six fidelity criteria (distribution, dependence, windows, long_structure,
+target, seams), each averaged over its references; utility — one criterion, TSTR on val and OOT.</p>
+<table>
+<thead>
+<tr>
+<th>Ranking</th>
+<th>Fidelity</th>
+<th>Utility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>holdout_clf</code></td>
+<td>val, OOT</td>
+<td>classification (val, OOT)</td>
+</tr>
+<tr>
+<td><code>holdout_reg</code></td>
+<td>val, OOT</td>
+<td>regression (val, OOT)</td>
+</tr>
+<tr>
+<td><code>train_clf</code></td>
+<td>train</td>
+<td>classification (val, OOT)</td>
+</tr>
+<tr>
+<td><code>train_reg</code></td>
+<td>train</td>
+<td>regression (val, OOT)</td>
+</tr>
+</tbody>
+</table>
+<p>Within a fidelity criterion the references are averaged equally. Not part of the four rankings:
+privacy (F10, computed once against train; its own table — the criterion <code>fidelity:privacy@—</code>), cost
+(time and memory), the thematic slices. Cost is reported next to each ranking: the same ranking with
+cost as a third domain of equal weight (total time and peak memory; <code>with_cost:&lt;ranking&gt;</code>) and the
+Pareto front "rank × median time" (on the front: no other method has both a lower-or-equal rank and a
+lower-or-equal time, one of them strictly lower). Training of a shared generator (the pool VAE,
+Diffusion-TS in <code>min</code> / <code>mid</code>) is charged to each method and seed that uses it; times from different
+hardware are not comparable. Every table in <code>LEADERBOARD.md</code> is preceded by its composition and the
+meaning of each of its columns.</p>
+<p><strong>Core-metric rankings</strong> (<code>leaderboard.CORE_RANKINGS</code>, <code>core_&lt;ranking&gt;</code>). The same four rankings with
+the fidelity domain restricted to a core set of one or two canonical metrics per criterion
+(<code>leaderboard.CORE_METRICS</code>); utility is unchanged. The core rankings give the order on a small set of
+metrics with a defined interpretation; the full rankings, over every fidelity leaf, are reported next to them.</p>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th>Core metrics</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>distribution</td>
+<td>F1.2 Wasserstein of values, F2.1 KS of 24 h changes</td>
+</tr>
+<tr>
+<td>dependence</td>
+<td>F3.5 log power spectrum (every lag), F4.1 weekly profile</td>
+</tr>
+<tr>
+<td>windows</td>
+<td>F6.1 discriminative score, F6.4 MMD of windows</td>
+</tr>
+<tr>
+<td>long structure</td>
+<td>F7.1 and F7.2 KS of the rolling mean and rolling spread</td>
+</tr>
+<tr>
+<td>target</td>
+<td>F11.1 class shares of every classification task</td>
+</tr>
+<tr>
+<td>seams</td>
+<td>F5.7 detectability of the seams</td>
+</tr>
+</tbody>
+</table>
+<p>The set is fixed in advance by what the metrics measure, not by how well they separated the methods
+in a run: choosing the metrics that discriminate (RQ0 (c)) on the same data as the ranking would select
+noise that happens to favour some method and inflate the differences.</p>
+<p><strong>Normalised scores</strong> (<code>normalized_summary.parquet</code>, <code>normalized.parquet</code>). Each core metric on the scale
+random assembly (<code>noise_pair[0]</code>) = 0, real data = 1: (x − x_random) / (x_real − x_random); above 1 — closer
+to the reference than the real data, below 0 — worse than a random assembly. Fidelity: against val and
+train, on the series cut to the length of the real reference (<code>&lt;method&gt;@len</code>, seed 0), the same length
+as <code>real</code>; utility: TSTR against TRTR, seeds averaged within a dataset, models fitted on every task. A
+dataset is left out of a metric when its anchors differ by no more than the noise. Summary: median over
+the metrics of a criterion within a dataset, then over datasets. The scores give the size of the effect
+next to the ranks and do not enter the rankings.</p>
+<p><strong>Anchor check</strong> (<code>anchor_check.parquet</code>). For every fidelity metric (against val and train) and every
+utility cell: per dataset, gap = |real − random assembly| and noise = median over seeds of |random −
+twin|; ratio = gap / noise, median over datasets; separated — ratio &gt; 1, i.e. the metric tells real data
+from a random assembly beyond the noise. The competing methods are not used, so the check does not
+depend on who wins. Computed on all seeds and separately on even and odd seeds: a flip — the verdict
+differs between the two halves. Fidelity: <code>real</code> is a piece of OOT, shorter than the synthetic series,
+so for distance metrics the gap is underestimated and the check is conservative. The check is a
+diagnostic of the metrics; it does not change the core set.</p>
+<p><strong>Domains</strong> (<code>leaderboard.DOMAINS</code>) — fidelity or utility ranks as a whole, alongside the criteria:
+fidelity against train, val, OOT and over all three (without F10), utility on val, OOT and on both.</p>
+<p><strong>Uncertainty and tests.</strong> Two-level bootstrap (datasets, then seeds within a dataset) of mean
+ranks → rank interval, probability of being first and of entering the top 3. Friedman with blocks —
+datasets. The top tier is the best method and all methods that are not significantly worse than it
+(one-sided Wilcoxon over datasets, Holm). <strong>Place and tier.</strong> The place of a method is its position by mean
+rank; the tier is a test against the best. The tests do not separate the places within the tier, and these
+places do not reproduce between runs on different hardware (BENCHMARK.md, "Published runs"), so the
+leaderboard is read by tier. Tier membership is not monotone in the place: a method that loses to the best on
+almost every dataset leaves the tier even with a close mean rank, while a method with variable ranks, or one
+ranked on fewer datasets because of leakage, can stay in it. Sensitivity to weights: each ranking under 2000 random
+criterion weights (Dirichlet(1) within each domain) — share of first places, top 3, and Kendall τ
+with equal weights. Noise check (<code>mid</code>, <code>max</code>): <code>vae_rand</code> and <code>vae_rand_b</code>, ranked together with all others, must
+be indistinguishable in each criterion — two-sided Wilcoxon over datasets for the difference of
+their ranks, Holm over criteria (<code>twin.parquet</code>). The Nemenyi CD is reported for reference only: with
+a dozen or more methods it exceeds the rank differences this check tests.</p>
+<p><strong>Result:</strong> <code>artifacts/&lt;profile&gt;/reports/LEADERBOARD.md</code> and the tables in <code>artifacts/&lt;profile&gt;/leaderboard/</code> — <code>rankings.parquet</code> (the four rankings),
+<code>rankings_summary.parquet</code> (rank, P(first) and tier in each ranking), <code>rankings_cost.parquet</code> (rank with
+cost, median time and the Pareto front for each ranking),
+<code>by_column.parquet</code> (each ranking, ranking with cost, domain, criterion × slice with intervals), <code>by_group.parquet</code>, <code>leaves.parquet</code>
+(each leaf), <code>tests.parquet</code>, <code>stability.parquet</code>, <code>kendall.parquet</code>, <code>weights.parquet</code>,
+<code>transfer_ratio.parquet</code>, <code>twin.parquet</code> (<code>mid</code>, <code>max</code>); core-metric rankings — <code>rankings_core.parquet</code>,
+<code>rankings_core_summary.parquet</code>; <code>normalized.parquet</code>, <code>normalized_summary.parquet</code>, <code>anchor_check.parquet</code>.</p>
+<p><strong>Overall leaderboard</strong> (<code>marathonts/hypotheses/overall.py</code>). One ranking, its composition fixed in advance. Fidelity —
+the core criteria (<code>CORE_METRICS</code>), each the mean of its ranks against train, val and OOT with equal weights:
+the aim is synthetic data close to the real series, and the three parts are three pieces of it (train — the
+longest and most precise reference; val and OOT — not seen by the generator); the split exists for utility,
+so that TSTR has no leakage. Utility — TSTR classification and regression with equal weights, each tested on
+val and OOT. Overall = the mean of the two domains. Privacy (F10) and cost are not part of it.</p>
+<p><em>Noise-aware ranks.</em> Within a leaf (dataset, seed, metric × reference or task × model × metric × split) two
+methods whose scores differ by no more than the noise of the leaf tie: rank = 1 + #{methods better beyond
+the noise} + ½ #{other methods within the noise}; with zero noise this is the ordinary average rank. Noise of
+a (dataset, leaf) — the estimate of the anchor check: median over seeds of |<code>vae_rand</code> − <code>vae_rand_b</code>|, or,
+without the twin (<code>min</code>), of the between-seed difference of <code>vae_rand</code>. Between seeds the pool changes too,
+so the estimate bounds the within-seed noise from above and the ties are conservative. Near-identical
+methods then share a place instead of splitting the ranks of the others. Ranks are averaged as in the four
+rankings; uncertainty and the tier — two-level bootstrap, one-sided Wilcoxon against the first, Holm.</p>
+<p><em>Next to the rank.</em> Fidelity and utility ranks alone and their Pareto front; normalised scores (random
+assembly = 0, real data = 1; criteria and domains averaged with the same equal weights; fidelity against
+val and train — <code>real</code> is a piece of OOT); a memorisation flag — the share of synthetic windows closer to
+train than the 5th percentile of real-to-real distances (F10.2) against the same share of the real OOT
+piece: flagged when the median ratio over datasets is ≥ 2 and the excess is significant (one-sided
+Wilcoxon over datasets, Holm over the methods). The flag does not change the rank; F10 does not tell
+copying from a collapse onto typical windows. The near-copy share of the real OOT piece is itself 1 on three datasets and 0 on three
+others, so the flag is raised for none of the controls of the supplementary memorisation check (section 8), an
+exact copy of train included; the signed DCR ratio and the count of exact copies separate these controls and
+are reported with the flag.</p>
+<p><em>Robustness.</em> Sensitivity variants fixed in advance: ordinary average ranks; fidelity against train
+only; against val + OOT only; without the metrics with no anchor check (F5.7 — real data have no seams;
+F6.1 against val — not separated from the noise); every fidelity metric instead of the core set; only the
+datasets where every method is ranked — each with Kendall τ against the leaderboard. One method per
+generator: each method ranked in a field of one method per generator (the random assembly represents the
+VAE pool), so that many variants of one generator cannot move the others. Leave-one-dataset-out: best and
+worst place. Random criterion weights: Dirichlet(1) within each domain, 2000 draws.</p>
+<p><strong>Result:</strong> <code>artifacts/&lt;profile&gt;/reports/OVERALL.md</code> and the tables in <code>artifacts/&lt;profile&gt;/overall/</code> — <code>overall.parquet</code> (the leaderboard with the
+columns next to the rank), <code>criteria.parquet</code>, <code>variants.parquet</code>, <code>sensitivity.parquet</code>, <code>field.parquet</code>,
+<code>lodo.parquet</code>, <code>weights.parquet</code>.</p>
+<hr />
+<h3 id="rq2-assembly-from-a-window-pool-versus-long-series-generators">RQ2. Assembly from a window pool versus long-series generators<a class="headerlink" href="#rq2-assembly-from-a-window-pool-versus-long-series-generators" title="Permanent link">&para;</a></h3>
+<p><strong>Question.</strong> How does assembly from a pool of short windows compare with generating a long series as
+a whole?</p>
+<p><strong>Comparisons.</strong> Each long-series generator (A: <code>diffusion_ts</code>, <code>chronos</code>, <code>timesfm</code>, <code>timestral</code>, custom ones) against
+(1) the simplest assembly — the random path <code>vae_rand</code>, and (2) the <strong>assembly median</strong> — the median
+of all pool assembly methods for each (dataset, seed, metric), the pseudo-method <code>assembly_median</code>.
+The median rather than the best assembly method: the best method would be selected on the same
+data on which the comparison is made.</p>
+<p><strong>Metrics:</strong> utility — TSTR on the primary metric of each task × model × split; fidelity — all
+metrics against val and OOT. Noise — the larger of the between-seed spreads of generator A and of the
+assembly it is compared with (§2). BH over the whole question.</p>
+<p><strong>Supports:</strong> where assembly from windows is better than, worse than or equivalent to holistic generation — by task
+type, metric group and over time (val / OOT).</p>
+<hr />
+<h3 id="rq3-within-assembly-window-selection-seam-processing">RQ3. Within assembly: window selection × seam processing<a class="headerlink" href="#rq3-within-assembly-window-selection-seam-processing" title="Permanent link">&para;</a></h3>
+<p><strong>Question.</strong> Do the selection and order of the windows and the processing of the seams move the series towards the real data, each against its own control, when a series is assembled from one pool?</p>
+<p><strong>Comparisons</strong> (all on one pool — noise <code>vae_rand</code> vs <code>vae_rand_b</code>, in <code>min</code> the between-seed spread of <code>vae_rand</code>).
+With several pool generators (e.g. <code>pool_suites={"vae": …, "gan": …}</code>) RQ3, C3, C4 and the assembly median
+of RQ2 / C2 use the pool of <code>noise_pair</code> only; the other pool's methods are ranked (RQ1, overall leaderboard,
+normalised against their own pool's random assembly) and the analysis warns at start. Run the analysis with
+<code>--noise-pair gan_rand gan_rand_b</code> for the contrasts within the other pool:
+- (a) each selection method (<code>zseries</code>, <code>greedy</code>, <code>atsp</code>, <code>pctsp</code>, <code>mbb</code>, <code>knn</code>, <code>quilting</code>,
+  <code>herding</code>) against the random path <code>vae_rand</code>;
+- (b) each seam processing against the same path without processing (<code>*_xfade</code>, <code>*_wsola</code>,
+  <code>*_quilt</code> against <code>vae_zseries</code>; in <code>max</code> against every assembler);
+- (c) the <strong>main effect of each processing</strong> (processing − no processing, averaged over the assemblers
+  that have every processing: <code>vae_zseries</code>; in <code>max</code> every assembler except the random path).</p>
+<p>The random path has no seam processing, so there is no factorial contrast "selection × processing"
+with a random level.
+In <code>min</code> and <code>mid</code> (b) and (c) rest on the published results of <code>vae_zseries</code>, whose code is not part of the
+repository (§3.9).</p>
+<p><strong>Metrics:</strong> as in RQ2. BH over the whole question. The smallest effect size of interest is the
+same for all comparisons and contrasts — the noise of §2: it is a threshold of practical significance,
+not an estimate of the contrast's variance (for main effects, which are means over several methods, the
+variance is smaller).</p>
+<p><strong>Supports:</strong> the contribution of each assembly factor. Comparing a specific
+method with its controls is the case study (§4).</p>
+<hr />
+<h3 id="rq4-does-fidelity-predict-utility">RQ4. Does fidelity predict utility<a class="headerlink" href="#rq4-does-fidelity-predict-utility" title="Permanent link">&para;</a></h3>
+<p><strong>Question.</strong> Which fidelity metrics — and against which reference — tell us which synthetic data
+will train models better?</p>
+<p><strong>How it is tested.</strong> For each fidelity metric (oriented: higher is better; against train, val and
+OOT) and each utility criterion (transfer ratio of a task family on val or OOT; median over seeds,
+tasks and models of the criterion), Spearman ρ across methods is computed within a dataset. Over
+datasets: median ρ, share of datasets with ρ &gt; 0, Wilcoxon of ρ against 0, BH over all
+"metric × criterion" pairs. A metric is <em>predictive</em> if p_BH &lt; α and median ρ &gt; 0.</p>
+<p><strong>Result:</strong> a table of metrics with ρ; a summary by reference (<code>by_reference</code>: whether fidelity
+against OOT predicts better than against val or train) and by metric group (<code>by_group</code>), the top 5
+predictors of each criterion. In the ranking the same is visible as Kendall τ between the fidelity
+and utility criteria.</p>
+<p><strong>Supports:</strong> which metrics are associated with utility among the compared methods, as candidates for
+selecting generators without training models.
+<strong>Does not support:</strong> causality, or selection of a generator outside the compared families (methods that
+share a pool or a generator are not independent observations).</p>
+<hr />
+<h3 id="rq5-gap-to-real-data-and-robustness">RQ5. Gap to real data and robustness<a class="headerlink" href="#rq5-gap-to-real-data-and-robustness" title="Permanent link">&para;</a></h3>
+<p><strong>Question.</strong> (a) How does each method's TSTR compare with TRTR? (b) Is the ranking stable over
+time (val → OOT) and across model classes (linear ↔ boosting)? (c) Do decisions made on synthetic
+data transfer to real data?</p>
+<p><strong>How it is tested.</strong>
+- (a) Transfer ratio by method × criterion × split: median over datasets, bootstrap interval over
+  datasets, one-sided Wilcoxon (ratio − 1 &lt; 0) over datasets, BH. Verdict <code>worse than real</code> or
+  inconclusive.
+- (b) Kendall τ between the val ↔ OOT and model ↔ model (linear ↔ gbdt; every pair of models fitted on every
+  task of a criterion) rankings (from the ranking) and the
+  rank shift OOT − val of each method.
+- (c) Only the <code>max</code> profile (<code>decision_transfer=True</code>): Spearman between the ranking of a grid of
+  11 model configurations on real data and on the method's synthetic data (U6.1), threshold
+  transfer (U6.4).</p>
+<hr />
+<h3 id="rq6-speed-and-cost">RQ6. Speed and cost<a class="headerlink" href="#rq6-speed-and-cost" title="Permanent link">&para;</a></h3>
+<p><strong>Question.</strong> How fast is each method — in training and in generating a new series — how much
+memory does it need, and which methods lie on the Pareto front "quality × time"?</p>
+<p><strong>How it is tested.</strong> Median total time over datasets with a bootstrap interval, time relative to
+the fastest, slope of log(time) on log(K) with bootstrap over datasets (how time grows with series
+length); cost components — generator training, generation of a new series by the trained model
+(sampling + assembly), peak GPU memory, RSS increase (<code>cost_parts</code>); cost ranks over these slices
+with the tests from the ranking (<code>cost_ranks</code>); for each of the four rankings of RQ1 the Pareto front
+"rank × time" and the rank with cost as a third domain (<code>pareto</code>). Generation is separated from training because in practice a
+generator is trained once, while series are generated many times. Times from different hardware are
+not comparable — the report warns about this.</p>
+<hr />
+<h3 id="rq7-moderators-exploratory">RQ7. Moderators (exploratory)<a class="headerlink" href="#rq7-moderators-exploratory" title="Permanent link">&para;</a></h3>
+<p><strong>Question.</strong> How do the effects of method families vary with dataset properties?</p>
+<p><strong>Test:</strong> Spearman between dataset descriptors (ACF at 24 and 168, kurtosis of increments,
+volatility clustering, trend, share of missing values) and the dataset effects from RQ2 and the
+main effects of RQ3 (median over metrics, in noise units), BH. With 9 datasets — exploratory only.
+Needs the prepared data (<code>data/processed</code>, for the descriptors) and at least 4 datasets with an effect;
+without the data RQ7 and CS15 are skipped with a message, the rest of the report is unaffected.</p>
+<hr />
+<h3 id="rq8-class-balance">RQ8. Class balance<a class="headerlink" href="#rq8-class-balance" title="Permanent link">&para;</a></h3>
+<p><strong>Question.</strong> Do the methods preserve class shares in all classification tasks — above all for rare
+events — and how much does an error in the share cost for models trained on synthetic data?</p>
+<p><strong>How it is tested.</strong>
+- (a) Ranking on the "class balance" theme (RQ1) with Friedman tests and Wilcoxon against the best.
+- (b) Family comparisons on the theme's metrics (F8.1, F11 against val and OOT; TSTR ECE of binary
+  and multiclass tasks where computed): each assembly method against the random path (pool noise) and each long-series generator
+  against the assembly median (between-seed spread of the generator); BH over the question.
+- (c) Relation: within a dataset, Spearman across methods between each balance metric and the
+  theme's utility (mean ECE rank), Wilcoxon over datasets, BH — whether a wrong class share explains
+  poor TSTR calibration.</p>
+<p><strong>Why separately.</strong> A random assembly of windows preserves the class share only on average; any
+method may shift class shares or under-represent rare events (F11.4). In fidelity aggregates such
+shifts are averaged with dozens of other metrics.</p>
+<hr />
+<h3 id="rq9-outliers-and-extremes">RQ9. Outliers and extremes<a class="headerlink" href="#rq9-outliers-and-extremes" title="Permanent link">&para;</a></h3>
+<p><strong>Question.</strong> Do the methods preserve the tails, outliers and extremes of the real series, and does
+this matter for models that must predict extremes?</p>
+<p><strong>How it is tested.</strong> As RQ8, on the metrics of the "outliers and extremes" theme: fidelity — tail
+quantiles, kurtosis, Hill index, large jumps, outlier durations, F12 (frequency and magnitude of
+exceedances of the real 0.5% / 99.5%, local spikes, weekly maxima and minima); utility — regression
+error on the extreme 10% of the target and PR AUC of rare events. (a) Theme ranking, (b) family
+comparisons, (c) relation of fidelity tail metrics to quality on extremes.</p>
+<p><strong>Why separately.</strong> Generation and seam processing can change the tails of the series and the
+spikes at window boundaries; metrics over the whole distribution are little affected by such changes.</p>
+<hr />
+<h3 id="39-confirmatory-family-c1c4">3.9. Confirmatory family C1–C4<a class="headerlink" href="#39-confirmatory-family-c1c4" title="Permanent link">&para;</a></h3>
+<p>Two pre-specified cells: <strong>classification</strong> — U2.1 (upper tail, h = 24, q = 0.90), AUC, and
+<strong>regression</strong> — U2.6 (h = 24), MASE; both — TSTR, linear model, OOT
+(<code>questions.CONFIRMATORY_CELLS</code>). In each cell:</p>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>What it tests</th>
+<th>How</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C1</td>
+<td>whether the methods differ at all</td>
+<td>Friedman over the methods of the default ranking (not changed by <code>--rank-exclude</code>), blocks — datasets; a method left out on a dataset (<code>Config.leaked</code>) drops out of the test, the dataset stays</td>
+</tr>
+<tr>
+<td>C2</td>
+<td><code>diffusion_ts</code> and <code>chronos</code> against the assembly median</td>
+<td>as RQ2, noise — the larger of the two between-seed spreads; the composition is fixed (<code>CONFIRMATORY_GENERATORS</code>): custom long-series generators are compared in RQ2 but do not enter the family</td>
+</tr>
+<tr>
+<td>C3</td>
+<td>main effect of window selection</td>
+<td>the mean of every selection strategy of the default ranking (no seam processing) against the random path</td>
+</tr>
+<tr>
+<td>C4</td>
+<td>main effect of seam processing</td>
+<td>all processings against no processing, averaged over the assemblers that have every processing (<code>vae_zseries</code>; <code>max</code>: every assembler but the random path)</td>
+</tr>
+</tbody>
+</table>
+<p>In total 10 tests (2 + 4 + 2 + 2) with a single Holm correction on the two-sided p. Verdict: C1 —
+<code>differ</code> / inconclusive; C2–C4 — better / worse if p_Holm &lt; α and |median z| &gt; 1, same if TOST
+(Holm) is significant.</p>
+<p>In <code>min</code> and <code>mid</code> the seam processing runs over <code>vae_zseries</code> only (<code>smooth_paths=["zseries"]</code>), whose code is not
+part of the repository (<code>frozen_methods</code>). C4 and RQ3 (b, c) therefore rest on its published results: they can be
+checked from the tables, not recomputed. The seam processings themselves are open; <code>smooth_paths=["greedy"]</code> (or
+any open assembler) computes them over an open path — an addition outside the pre-specified protocol, not a
+replacement of C4.</p>
+<h2 id="4-case-study-one-method-against-its-controls">4. Case study: one method against its controls<a class="headerlink" href="#4-case-study-one-method-against-its-controls" title="Permanent link">&para;</a></h2>
+<p>The questions of §3 compare families. The case study answers a question about one method — by
+default <code>vae_zseries</code> (<code>Config.case_method</code>, flag <code>--case-method</code>): how it compares with its controls on the
+same pool (<code>vae_rand</code>), other assemblers of the same pool and long-series
+generators, and what drives it. Below, "the method under study" is this method; the sign of the
+effect d &gt; 0 means it is better than the method it is compared with. The case study is secondary
+(BH within a hypothesis; the pre-specified cell CS7 + CS10 — Holm within it) and does not enter the
+confirmatory conclusion of the benchmark. <code>vae_zseries</code> is zseries, the proprietary assembler of zypl.ai (under development): the case study reports its
+results against its controls; its code is not part of the repository (<code>Config.frozen_methods</code>). The benchmark evaluates the quality of synthetic data (TSTR
+versus TRTR), not the benefit of augmentation.</p>
+<h3 id="cs1-distribution-and-dependence-against-train">CS1. Distribution and dependence against train<a class="headerlink" href="#cs1-distribution-and-dependence-against-train" title="Permanent link">&para;</a></h3>
+<p><strong>Hypothesis.</strong> <code>vae_zseries</code> is better than <code>vae_rand</code> on the metrics of the marginal distribution,
+increments and temporal dependence measured against train — the data the pool generator was trained on.</p>
+<p><strong>Metrics:</strong> the metrics of F1–F3 against train (<code>@train</code>), except F3.2 (it belongs to CS4).</p>
+<p><strong>Comparison and test:</strong> against <code>vae_rand</code>; BH.</p>
+<p><strong>Supports:</strong> that the method changes the distribution and dependence of the series relative to a random
+assembly of the same pool.
+<strong>Does not support:</strong> realism on unseen data (this is CS2) or usefulness for models (CS7, CS8, CS13).</p>
+<hr />
+<h3 id="cs2-distribution-and-dependence-against-val">CS2. Distribution and dependence against val<a class="headerlink" href="#cs2-distribution-and-dependence-against-val" title="Permanent link">&para;</a></h3>
+<p><strong>Hypothesis.</strong> <code>vae_zseries</code> is better than <code>vae_rand</code> on the same metrics measured against val.</p>
+<p><strong>Metrics:</strong> the metrics of F1–F3 against val, except F3.2.</p>
+<p><strong>Comparison and test:</strong> against <code>vae_rand</code>; BH.</p>
+<p><strong>Supports:</strong> that what the method changes against train holds on unseen data. Read together with CS1.
+<strong>Does not support:</strong> usefulness for models (this is CS7, CS8, CS13); realism of long structure (CS4) and of seams (CS3).</p>
+<hr />
+<h3 id="cs3-seam-artefacts">CS3. Seam artefacts<a class="headerlink" href="#cs3-seam-artefacts" title="Permanent link">&para;</a></h3>
+<p><strong>Hypothesis.</strong> The seams of <code>vae_zseries</code> are less noticeable than those of a random assembly.</p>
+<p><strong>Metrics:</strong> F5.1–F5.7. Checks: F5.4 (local ACF), F5.5–F5.6 (a change-point detector finds the seams), F5.7 (a
+classifier distinguishes a segment containing a seam from a random one).</p>
+<p><strong>Comparison and test:</strong> against <code>vae_rand</code>; BH. In addition, in CS9 and CS10 the seams are
+compared with the chunks of the generation of Diffusion-TS, Chronos and Timestral (there a
+"seam" is a chunk boundary).</p>
+<p><strong>Supports:</strong> that the method changes the seam metrics relative to a random assembly.
+<strong>Does not support:</strong> that the seams are indistinguishable from real transitions: for that, F5.7
+should be about 0.5, while the comparison with <code>vae_rand</code> only says "better than random".</p>
+<hr />
+<h3 id="cs4-structure-longer-than-a-window">CS4. Structure longer than a window<a class="headerlink" href="#cs4-structure-longer-than-a-window" title="Permanent link">&para;</a></h3>
+<p><strong>Hypothesis.</strong> <code>vae_zseries</code> is better than <code>vae_rand</code> on properties at scales larger than the window
+length T.</p>
+<p><strong>Metrics:</strong> F3.2 (ACF at lags T…3T), F6.4 on 2T
+windows (MMD of windows spanning a seam), F7.1–F7.7 (rolling statistics, level crossings, outlier
+durations, drawdowns, trend, regimes).</p>
+<p><strong>Comparison and test:</strong> against <code>vae_rand</code>; BH.</p>
+<p><strong>Supports:</strong> a difference between assembly and random assembly of short windows in the long
+structure of the series.
+<strong>Does not support:</strong> that the long structure is better than that of a long-series generator (this
+is CS9).</p>
+<hr />
+<h3 id="cs5-target-structure">CS5. Target structure<a class="headerlink" href="#cs5-target-structure" title="Permanent link">&para;</a></h3>
+<p><strong>Hypothesis.</strong> <code>vae_zseries</code> is better than <code>vae_rand</code> on the metrics of the target: class shares and
+event dynamics.</p>
+<p><strong>Metrics:</strong> F8.1 (class shares), F8.2 (event duration), F8.3 (time between events), F8.4 (events by
+hour of the week), F8.5 (conditional probability of an event given features), F8.6 (conditional
+distribution of the future change).</p>
+<p><strong>Comparison and test:</strong> against <code>vae_rand</code>; BH.</p>
+<p><strong>Supports:</strong> that the method changes the target structure of the series relative to a random
+assembly of the same pool.
+<strong>Does not support:</strong> usefulness for a classifier (this is CS7).</p>
+<hr />
+<h3 id="cs6-assembly-does-not-change-the-realism-of-individual-windows-and-does-not-increase-memorisation">CS6. Assembly does not change the realism of individual windows and does not increase memorisation<a class="headerlink" href="#cs6-assembly-does-not-change-the-realism-of-individual-windows-and-does-not-increase-memorisation" title="Permanent link">&para;</a></h3>
+<p><strong>Hypothesis (equivalence).</strong> <code>vae_zseries</code> and <code>vae_rand</code> <strong>do not differ</strong> on metrics of individual
+windows of length T and on memorisation.</p>
+<p><strong>Metrics:</strong> F6.1, F6.2, F6.4 (T windows), F6.6, F6.8, F9.1–F9.2, F10.1–F10.2.</p>
+<p><strong>Comparison and test:</strong> against <code>vae_rand</code>; expected verdict "same" (TOST); BH.</p>
+<p><strong>Why.</strong> Assembly does not change the content of windows; it only selects and orders them. Hence,
+on metrics of individual windows it should coincide with a random assembly. If assembly is
+"better" on them, it systematically selects more typical windows; F9.1 (recall, coverage) then shows
+whether diversity decreases.</p>
+<p><strong>Supports:</strong> that the effects of CS2–CS4, if any, are obtained by ordering and selection, without loss of
+diversity and without copying train.
+<strong>Does not support:</strong> that VAE windows are realistic in an absolute sense — this is a property of
+the generator, visible in CS9.</p>
+<hr />
+<h3 id="cs7-tstr-against-a-random-assembly-pre-specified-cell-of-the-case-study">CS7. TSTR against a random assembly — pre-specified cell of the case study<a class="headerlink" href="#cs7-tstr-against-a-random-assembly-pre-specified-cell-of-the-case-study" title="Permanent link">&para;</a></h3>
+<p><strong>Hypothesis.</strong> On task U2.1 (<code>stitch_task</code>), a model trained only on <code>vae_zseries</code> synthetic data performs better
+on real data than one trained only on <code>vae_rand</code> synthetic data. TRTR is common
+to all methods (the same real data, the same model seed), so "higher TSTR" and "closer to TRTR" are
+the same thing.</p>
+<p><strong>Metrics:</strong> task U2.1 (upper tail, h = 24, q = 0.90), ROC AUC — the task of the case-study cells
+(<code>stitch_task</code>); it carries no extra weight in the benchmark. The pre-specified cell of the case study is the linear model, OOT (Holm together with CS10, <code>case_cell.parquet</code>); the other models and val
+are secondary. It does not enter the benchmark's confirmatory family (§3.9).</p>
+<p><strong>Comparison and test:</strong> against <code>vae_rand</code>; noise — a pair of random assemblies of one pool (<code>min</code>: the
+between-seed spread of <code>vae_rand</code>); Holm; block bootstrap over test rows.</p>
+<p><strong>Supports:</strong> that it is the assembly, and not the VAE pool itself (<code>vae_rand</code>), that brings the
+synthetic data closer to real data.</p>
+<p><strong>Does not support:</strong> transfer to other tasks (CS8) and models (CS11).</p>
+<hr />
+<h3 id="cs8-tstr-on-the-other-tasks">CS8. TSTR on the other tasks<a class="headerlink" href="#cs8-tstr-on-the-other-tasks" title="Permanent link">&para;</a></h3>
+<p><strong>Hypothesis.</strong> TSTR of <code>vae_zseries</code> is higher than TSTR of <code>vae_rand</code> on tasks
+U2.2–U2.9: other horizons, rare events, lower tail, multiclass, regression, quantiles, multi-step
+forecasting, volatility.</p>
+<p><strong>Metrics:</strong> the primary metric of the task — AUC (binary), log-loss (multiclass), MASE
+(regression, multi-step forecasting, volatility), pinball (quantiles). All models and both splits.</p>
+<p><strong>Comparison and test:</strong> against <code>vae_rand</code>; BH.</p>
+<p><strong>Supports:</strong> that assembly brings the whole series closer to the real one across tasks.
+<code>clf_down_h24_q10</code> is the opposite tail.</p>
+<p><strong>Does not support:</strong> that the effect is the same across tasks. The per-task verdicts are the
+answer to "where better, where worse".</p>
+<hr />
+<h3 id="cs9-fidelity-against-other-assemblers-and-long-series-generators">CS9. Fidelity against other assemblers and long-series generators<a class="headerlink" href="#cs9-fidelity-against-other-assemblers-and-long-series-generators" title="Permanent link">&para;</a></h3>
+<p><strong>Hypothesis (two-sided).</strong> On which metrics the method under study is better than, worse than or equivalent to
+(a) other ways of assembling a series from the same VAE pool — sections A and B of
+<a href="../BASELINES/">BASELINES.md</a>: <code>vae_greedy</code>, <code>vae_atsp</code>, <code>vae_pctsp</code>, <code>vae_mbb</code>,
+<code>vae_knn</code>, <code>vae_quilting</code>, <code>vae_herding</code>, <code>vae_zseries_{xfade,wsola,quilt}</code>; (b) the long-series
+generators (<code>baselines</code>, by default all four: Diffusion-TS, Chronos, TimesFM, Timestral).</p>
+<p><strong>Metrics:</strong> all F-metrics against val except F4.4–F4.5: calendar coherence is given by
+construction for the long-series generators (Diffusion-TS: the calendar is imposed from a random start; Chronos, TimesFM
+and Timestral: the real calendar continues train), whereas the pool generators (VAE) generate it as part of a window,
+so these two metrics measure different things for the two groups and are left out.</p>
+<p><strong>Comparison and test:</strong> against each method of (a) — the noise of a pair of random assemblies
+(the same pool); against (b) — the between-seed spread of the method under study; BH over all comparisons of the
+hypothesis together. The result is read by metric group (F1…F12) and by dataset.</p>
+<p><strong>Supports:</strong> a "where better / where worse" map relative to all alternatives. The comparison with
+<code>vae_herding</code>
+separates the effect of window selection from that of their order; with <code>vae_zseries_{xfade,wsola,quilt}</code>
+— what seam processing adds on top of the method's own path.</p>
+<p><strong>Does not support:</strong> that a difference from (b) is due to assembly rather than the VAE. This is
+separated by the pair CS9 + CS2/CS4: if <code>vae_rand</code> also differs from the baseline in the same
+direction, the difference is attributed to the generator, not to the assembler.</p>
+<hr />
+<h3 id="cs10-tstr-against-other-assemblers-and-long-series-generators">CS10. TSTR against other assemblers and long-series generators<a class="headerlink" href="#cs10-tstr-against-other-assemblers-and-long-series-generators" title="Permanent link">&para;</a></h3>
+<p><strong>Hypothesis (two-sided).</strong> On which tasks and models the TSTR of the method under study is higher than, lower than
+or equivalent to the TSTR of (a) other assemblers of the same pool (as in CS9) and (b) the long-series
+generators (as in CS9).</p>
+<p><strong>Metrics:</strong> primary metrics of all tasks, regime S. <strong>Test:</strong> against (a) — the noise of a pair of
+random assemblies, against (b) — the between-seed spread of the method under study; BH over all comparisons
+together. The cell "U2.1, linear model, OOT, AUC" against Diffusion-TS and Chronos (fixed in advance,
+<code>PRESPECIFIED_LONG</code>) enters the pre-specified cell of the case study (Holm together with CS7).</p>
+<p><strong>Supports:</strong> a practical comparison: whose synthetic data are more useful to models.</p>
+<p><strong>Does not support:</strong> the reason for the differences. This is shown by the comparison with CS7: if
+<code>vae_rand</code> also scores below the baseline, the difference is attributed to the VAE generator, not to
+the assembler.</p>
+<hr />
+<h3 id="cs11-the-effect-of-assembly-on-tstr-does-not-depend-on-the-model-class-exploratory">CS11. The effect of assembly on TSTR does not depend on the model class (exploratory)<a class="headerlink" href="#cs11-the-effect-of-assembly-on-tstr-does-not-depend-on-the-model-class-exploratory" title="Permanent link">&para;</a></h3>
+<p><strong>Hypothesis.</strong> The effect of assembly (S <code>vae_zseries</code> − S <code>vae_rand</code>) has the same sign and a comparable
+size for the linear model, boosting and MLP.</p>
+<p><strong>Test:</strong> Friedman across models with datasets as blocks: tasks, splits and seeds within a dataset
+are averaged (they share a series and are not independent as separate blocks); before averaging,
+the effect of each task is divided by a single number — the median |effect| of that task over all
+models — so that tasks of different scales are comparable and the order of models does not change.
+Share of blocks where the sign of the effect coincides for all models. Only tasks on which all
+models are trained enter: in <code>min</code> and <code>mid</code> the MLP is trained only on U2.1, so there
+CS11 is about U2.1; in <code>max</code> — all 14 tasks (without XGBoost the fallback boosting has no multi-step
+task, which then drops out).</p>
+<p><strong>Supports:</strong> that the effect is not an artefact of one model.</p>
+<p><strong>Does not support:</strong> transfer to models outside the set (sequential networks, MiniRocket).</p>
+<hr />
+<h3 id="cs12-the-effect-is-stable-over-time-and-across-subgroups">CS12. The effect is stable over time and across subgroups<a class="headerlink" href="#cs12-the-effect-is-stable-over-time-and-across-subgroups" title="Permanent link">&para;</a></h3>
+<p><strong>Hypothesis.</strong> (a) The effect on the TSTR of the case-study task (U2.1) is the same on val and on OOT (the shift
+in time does not destroy it). (b) The effect is not concentrated in one subgroup of test rows:
+weekends / weekdays, calm / medium / turbulent periods (volatility terciles).</p>
+<p><strong>Test:</strong> (a) for each dataset, the shift of the effect <code>d_OOT − d_val</code> (mean over seeds) is
+divided by the median of the same shift for the noise pair (<code>vae_rand − vae_rand_b</code>) — this is also
+a difference of differences, with the same variance (<code>min</code>, without the twin: the between-seed spread of
+the shift of <code>vae_rand</code>); TOST ±1 over datasets, against <code>vae_rand</code> and every long-series generator
+(<code>baselines</code>); BH. (b) ΔAUC within subgroups over rows (regime S), Wilcoxon over
+datasets, BH — exploratory; requires <code>data/processed</code> (calendar and volatility of the test rows),
+skipped without it.</p>
+<p><strong>Supports:</strong> that the conclusion of CS7 is not an accident of one period or market regime.</p>
+<p><strong>Does not support:</strong> stability at horizons beyond OOT.</p>
+<hr />
+<h3 id="cs13-tstr-of-the-method-under-study-against-trtr">CS13. TSTR of the method under study against TRTR<a class="headerlink" href="#cs13-tstr-of-the-method-under-study-against-trtr" title="Permanent link">&para;</a></h3>
+<p><strong>Hypothesis (two-sided).</strong> A model trained only on <code>vae_zseries</code> synthetic data (TSTR, regime S) is worse
+than, better than or as good as a model trained on the real train (TRTR, regime R) on real val / OOT.</p>
+<p><strong>Metrics:</strong> the primary metric of each task (AUC, log-loss, MASE, pinball), all models and both
+splits. In addition — the <strong>transfer ratio</strong> of each method (TSTR relative to TRTR; 1 means the
+synthetic data train the model as well as real data): for AUC — (TSTR − 0.5) / (TRTR − 0.5), the
+share of quality above chance; for other "higher is better" metrics — TSTR / TRTR; for losses —
+TRTR / TSTR. Tables <code>CS13_transfer_ratio_case_cell</code> (pre-specified cell by dataset) and
+<code>CS13_transfer_ratio_by_task</code>.</p>
+<p><strong>Comparison and test:</strong> <code>vae_zseries</code> in regime S against <code>real</code> in regime R; general procedure (noise —
+the between-seed spread of the method under study); BH. Over test rows — block bootstrap of ΔAUC by weeks for
+seed-averaged predictions (U2.1).</p>
+<p><strong>Supports:</strong> how close the synthetic data are to real data in terms of information useful to the
+model: a verdict of same means TSTR is equivalent to TRTR within the margin for this task and model.</p>
+<p><strong>Does not support:</strong> that the closeness is due to assembly — this is CS7 / CS8; who is closest to
+TRTR — RQ1.</p>
+<hr />
+<h3 id="cs14-computational-cost">CS14. Computational cost<a class="headerlink" href="#cs14-computational-cost" title="Permanent link">&para;</a></h3>
+<p><strong>Hypothesis (two-sided).</strong> (a) The total time of the method under study (VAE training + pool sampling + assembly)
+is lower than, higher than or the same as (±10%) that of every other method (the random path, the alternative
+assemblers, the long-series generators), and how much the
+assembly itself adds compared with a random assembly. (b) Assembly time grows polynomially with
+K; the exponent is estimated.</p>
+<p><strong>Metrics:</strong> <code>fit_wall_s</code>, <code>sample_wall_s</code>, <code>assemble_wall_s</code>, <code>total_wall_s</code>, peak GPU memory and
+RAM — recorded by the benchmark for each run together with the hardware.</p>
+<p><strong>Test:</strong> Wilcoxon on the log ratio of times (over datasets), TOST ±10%, bootstrap interval of the
+ratio; slope of log(time) on log(K) with bootstrap over datasets.</p>
+<p><strong>Supports:</strong> the cost of quality and scalability to long series (PJM, K = 519).
+<strong>Does not support:</strong> anything if times were measured on different hardware — the analysis issues a
+warning when the table contains more than one GPU type.</p>
+<hr />
+<h3 id="cs15-moderators-where-assembly-is-better-or-worse-exploratory">CS15. Moderators: where assembly is better or worse (exploratory)<a class="headerlink" href="#cs15-moderators-where-assembly-is-better-or-worse-exploratory" title="Permanent link">&para;</a></h3>
+<p><strong>Hypothesis.</strong> The size of the assembly effect (CS2, CS4, CS7, CS10) is related to dataset properties:
+daily (ACF 24) and weekly (ACF 168) seasonality, heaviness of the increment tails, volatility
+clustering, trend, length K, share of missing values.</p>
+<p><strong>Test:</strong> Spearman correlation between the dataset effect (in noise units) and a descriptor, BH.
+With 9 datasets — exploratory only.</p>
+<p><strong>Supports:</strong> hypotheses about which series show a larger or smaller assembly effect.
+<strong>Does not support:</strong> a causal relationship — 9 points and many correlated descriptors.</p>
+<h2 id="5-metrics-questions-and-case-study">5. Metrics, questions and case study<a class="headerlink" href="#5-metrics-questions-and-case-study" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Metrics</th>
+<th>Questions</th>
+<th>Case study</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>all F-metrics against train, val and OOT</td>
+<td>RQ0 (c, d), RQ1, RQ4</td>
+<td>—</td>
+</tr>
+<tr>
+<td>F-metrics against val and OOT</td>
+<td>RQ2, RQ3</td>
+<td>—</td>
+</tr>
+<tr>
+<td>F1–F3 against train</td>
+<td>RQ0–RQ4</td>
+<td>CS1</td>
+</tr>
+<tr>
+<td>F1–F3 against val</td>
+<td>RQ0–RQ4</td>
+<td>CS2, CS9</td>
+</tr>
+<tr>
+<td>F3.2, F6.4 (2T), F7.1–F7.7</td>
+<td>RQ0–RQ4</td>
+<td>CS4, CS9</td>
+</tr>
+<tr>
+<td>F4.1–F4.3</td>
+<td>RQ0–RQ4</td>
+<td>CS9</td>
+</tr>
+<tr>
+<td>F4.4–F4.5 (calendar: given for Diffusion-TS, Chronos, TimesFM, Timestral; generated by the pool generators)</td>
+<td>RQ0 (a, b) only</td>
+<td>—</td>
+</tr>
+<tr>
+<td>F5.1–F5.7</td>
+<td>RQ0–RQ4 (seams criterion)</td>
+<td>CS3, CS9</td>
+</tr>
+<tr>
+<td>F6.1–F6.8, F9.1–F9.2</td>
+<td>RQ0–RQ4</td>
+<td>CS6, CS9</td>
+</tr>
+<tr>
+<td>F8.1–F8.6</td>
+<td>RQ0–RQ4</td>
+<td>CS5, CS9</td>
+</tr>
+<tr>
+<td>F10.1–F10.2</td>
+<td>RQ0, RQ1 (privacy, ranked separately), RQ4</td>
+<td>CS6, CS9</td>
+</tr>
+<tr>
+<td>F8.1, F11.1–F11.4; ECE of binary tasks (TSTR)</td>
+<td>RQ1 ("class balance" theme), RQ8</td>
+<td>CS5 (F8.1), CS9 (F11)</td>
+</tr>
+<tr>
+<td>F1.5, F1.6, F1.10, F2.4, F7.4, F12.1–F12.5; <code>mae_extreme</code>, PR AUC of rare events (TSTR)</td>
+<td>RQ1 ("outliers and extremes" theme), RQ9</td>
+<td>CS2 (F1, F2), CS4 (F7.4), CS9 (all F-metrics)</td>
+</tr>
+<tr>
+<td>F9.4 (diversity across seeds)</td>
+<td>descriptive, in the <code>cross_seed</code> table</td>
+<td>—</td>
+</tr>
+<tr>
+<td>all tasks, regime S (TSTR), primary metric</td>
+<td>RQ0 (c), RQ1, RQ2, RQ3</td>
+<td>CS7, CS8, CS10</td>
+</tr>
+<tr>
+<td>all tasks, all metrics, regime S</td>
+<td>RQ1 (leaves)</td>
+<td>—</td>
+</tr>
+<tr>
+<td>all tasks, regime S against R (TRTR): transfer ratio</td>
+<td>RQ1 (effect size), RQ4, RQ5</td>
+<td>CS13</td>
+</tr>
+<tr>
+<td>U2.1 (AUC) and U2.6 h = 24 (MASE), linear model, OOT</td>
+<td>confirmatory family C1–C4</td>
+<td>—</td>
+</tr>
+<tr>
+<td>U6.1, U6.4</td>
+<td>RQ5 (c)</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>*_wall_s</code>, <code>*_gpu_peak_mb</code>, <code>*_rss_delta_mb</code></td>
+<td>RQ1 (cost slices, rankings with cost), RQ6</td>
+<td>CS14</td>
+</tr>
+<tr>
+<td>dataset descriptors</td>
+<td>RQ7</td>
+<td>CS15</td>
+</tr>
+</tbody>
+</table>
+<p>A metric, task or model added to the benchmark (EXTENDING.md) does not change the procedure — only the
+set of leaves and units of analysis.</p>
+<h2 id="6-how-to-read-the-result">6. How to read the result<a class="headerlink" href="#6-how-to-read-the-result" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Confirmatory conclusion</strong> (<code>REPORT.md</code>, after the overall leaderboard) — the main conclusion of the paper:
+   whether the methods differ (C1), how assembly from windows compares with long-series
+   generators (C2), what window selection (C3) and seam processing (C4) contribute — in
+   classification and regression.</li>
+<li><strong>Overall leaderboard</strong> (<code>OVERALL.md</code>, first section of <code>REPORT.md</code>) — one
+   order of the methods by fidelity and utility, the top tier and how stable it is under the sensitivity
+   variants, a field of one method per generator, dataset removal and random weights.</li>
+<li><strong>Ranking</strong> (<code>LEADERBOARD.md</code>) — the order of methods in each slice, the top tier, rank intervals; how
+   stable the ranking is with respect to the reference, split, model and weights.
+   <strong>Metric values</strong> (<code>METRIC_VALUES.md</code>) — the measured values behind the ranks: the core fidelity metrics
+   and the primary utility metrics by reference, dataset, task, model and split, TRTR (<code>real</code>) for scale.</li>
+<li><strong>Questions RQ0–RQ9</strong> — a map of "where better, where worse, where the same" by method family
+   with false discovery rate control; RQ0 — which metrics can be relied on, RQ4 — which of them
+   predict utility.</li>
+<li><strong>Case study</strong> — secondary: where one method differs from its controls and alternatives.</li>
+</ol>
+<p>All four reports are in <code>artifacts/&lt;profile&gt;/reports/</code>.</p>
+<p>Inconclusive is not "no effect" but "the effect is smaller than the noise or inconsistent across
+datasets". "Same" is demonstrated equivalence.</p>
+<h2 id="7-pipeline">7. Pipeline<a class="headerlink" href="#7-pipeline" title="Permanent link">&para;</a></h2>
+<p>The analysis (<code>marathonts/hypotheses/</code>) runs on the benchmark tables (<a href="../BENCHMARK/">BENCHMARK.md</a>). It does
+not generate data or train generators: it needs <code>artifacts/&lt;profile&gt;/tables/*.parquet</code>, and the case study
+also needs the utility predictions and labels (<code>artifacts/&lt;profile&gt;/utility</code>, <code>artifacts/&lt;profile&gt;/labels</code>); dataset
+descriptors (RQ7, CS15) and the CS12 subgroups read <code>data/processed</code> (without it these parts are
+skipped). It runs on CPU. The per-dataset tests of all comparisons run as matrices (the exact
+sign-flip permutation test that scipy's Wilcoxon uses for tied or zero differences with ≤ 13 seeds
+is computed in one matrix product, with the same p-values), and every bootstrap draws all its
+resamples at once.</p>
+<h3 id="data-flow">Data flow<a class="headerlink" href="#data-flow" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>artifacts/&lt;profile&gt;/tables/fidelity.parquet  (metrics against val, @train, @oot)
+artifacts/&lt;profile&gt;/tables/utility.parquet   (TSTR / TRTR × task × model × val / OOT)
+artifacts/&lt;profile&gt;/tables/timing.parquet
+        │
+        ├─► leaderboard.py: rank per (dataset, seed) in each leaf → group → criterion × slice → criterion → domain → four rankings
+        │      rank bootstrap, Friedman, Wilcoxon against the best (Holm), Kendall τ, weights → leaderboard/, reports/LEADERBOARD.md
+        │
+        ├─► questions.py: RQ0–RQ9 — long tables (dataset, seed, unit, method, value)
+        │      noise: median |vae_rand − vae_rand_b| (or between-seed spread of method A)
+        │      pairs / contrasts: d = orientation · (A − B) → per dataset and globally → BH → verdict
+        │      confirmatory family C1–C4 → Holm → confirmatory.parquet
+        │
+        ├─► overall.py: noise-aware ranks, robustness checks → overall/, reports/OVERALL.md
+        │
+        ├─► metric_values.py: median / IQR over seeds of every metric → metric_values/, reports/METRIC_VALUES.md
+        │
+        └─► catalog.py: case study CS1–CS15 (method --case-method) + row-level bootstrap by weeks
+                                           ▼
+             hypotheses/RQ*_*.parquet, CS*_*.parquet, confirmatory.parquet; reports/REPORT.md
+             (folders under artifacts/&lt;profile&gt;/)
+</code></pre></div>
+<h3 id="modules">Modules<a class="headerlink" href="#modules" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>marathonts/hypotheses/stats.py</code></td>
+<td>tests: Wilcoxon, sign, t-test, TOST, Hodges–Lehmann, rank-biserial, Holm, BH, two-level and block bootstrap, Friedman + Nemenyi, Page. DeLong, Diebold–Mariano and Stouffer are implemented but not used in the conclusions: test rows are autocorrelated, and the seeds share one test</td>
+</tr>
+<tr>
+<td><code>marathonts/hypotheses/engine.py</code></td>
+<td>noise, paired differences, per-dataset and global summary, verdicts</td>
+</tr>
+<tr>
+<td><code>marathonts/hypotheses/overall.py</code></td>
+<td>overall leaderboard: noise-aware ranks, next-to-the-rank columns, robustness checks (RQ1)</td>
+</tr>
+<tr>
+<td><code>marathonts/hypotheses/leaderboard.py</code></td>
+<td>ranking of all methods in all slices (RQ1)</td>
+</tr>
+<tr>
+<td><code>marathonts/hypotheses/metric_values.py</code></td>
+<td>values of the core fidelity metrics and the primary utility metrics by reference, dataset, task, model and split (median and IQR over seeds)</td>
+</tr>
+<tr>
+<td><code>marathonts/hypotheses/questions.py</code></td>
+<td>RQ0–RQ9 and the confirmatory family C1–C4</td>
+</tr>
+<tr>
+<td><code>marathonts/hypotheses/catalog.py</code></td>
+<td>loading of long tables, transfer ratio, case study CS1–CS15</td>
+</tr>
+<tr>
+<td><code>marathonts/hypotheses/run.py</code></td>
+<td>runs everything, writes the tables and the reports <code>REPORT.md</code>, <code>OVERALL.md</code>, <code>LEADERBOARD.md</code>, <code>METRIC_VALUES.md</code> to <code>reports/</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="running">Running<a class="headerlink" href="#running" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>marathonts.hypotheses.run<span class="w">                        </span><span class="c1"># questions, ranking, metric values, case study</span>
+python<span class="w"> </span>-m<span class="w"> </span>marathonts.hypotheses.run<span class="w"> </span>--no-case-study<span class="w">        </span><span class="c1"># questions, ranking and metric values only</span>
+python<span class="w"> </span>-m<span class="w"> </span>marathonts.hypotheses.run<span class="w"> </span>--only<span class="w"> </span>RQ2<span class="w"> </span>RQ3<span class="w">         </span><span class="c1"># selected questions only: no confirmatory family, overall leaderboard,</span>
+<span class="w">                                                </span><span class="c1">#   ranking files, metric values or case-study pre-specified cell</span>
+python<span class="w"> </span>-m<span class="w"> </span>marathonts.hypotheses.overall<span class="w">                    </span><span class="c1"># overall leaderboard only → artifacts/&lt;profile&gt;/overall/, reports/OVERALL.md</span>
+python<span class="w"> </span>-m<span class="w"> </span>marathonts.hypotheses.leaderboard<span class="w">                </span><span class="c1"># ranking only → artifacts/&lt;profile&gt;/leaderboard/, reports/LEADERBOARD.md</span>
+python<span class="w"> </span>-m<span class="w"> </span>marathonts.hypotheses.metric_values<span class="w">              </span><span class="c1"># metric values only → artifacts/&lt;profile&gt;/metric_values/, reports/METRIC_VALUES.md</span>
+python<span class="w"> </span>-m<span class="w"> </span>marathonts.hypotheses.run<span class="w"> </span>--artifacts-dir<span class="w"> </span>/content/drive/MyDrive/marathonts_artifacts<span class="w"> </span>--out-dir<span class="w"> </span>/tmp/hyp<span class="w">   </span><span class="c1"># base folder: /tmp/hyp/reports, hypotheses, overall, leaderboard, metric_values</span>
+python<span class="w"> </span>-m<span class="w"> </span>marathonts.hypotheses.run<span class="w"> </span>--plugins<span class="w"> </span>my_tests.py<span class="w">  </span><span class="c1"># custom tests and hypotheses (EXTENDING.md)</span>
+python<span class="w"> </span>-m<span class="w"> </span>marathonts.hypotheses.run<span class="w"> </span>--case-method<span class="w"> </span>gan_greedy<span class="w"> </span>--noise-pair<span class="w"> </span>gan_rand<span class="w"> </span>gan_rand_b<span class="w">   </span><span class="c1"># case study of another method</span>
+python<span class="w"> </span>-m<span class="w"> </span>marathonts.hypotheses.run<span class="w"> </span>--config<span class="w"> </span>cfg.json<span class="w">      </span><span class="c1"># run settings (Config.to_json)</span>
+python<span class="w"> </span>-m<span class="w"> </span>marathonts.hypotheses.run<span class="w"> </span>--rank-exclude<span class="w">         </span><span class="c1"># rank every method (names: the list of methods left out of the rankings)</span>
+python<span class="w"> </span>-m<span class="w"> </span>marathonts.hypotheses.run<span class="w"> </span>--no-fail-penalty<span class="w">      </span><span class="c1"># leave out the TSTR cells a series could not train (§2)</span>
+python<span class="w"> </span>-m<span class="w"> </span>marathonts.hypotheses.run<span class="w"> </span>--exclude-datasets<span class="w"> </span>bitcoin<span class="w"> </span>--exclude-metrics<span class="w"> </span>F6.1_disc_score@val<span class="w"> </span>--leaked<span class="w"> </span><span class="s1">'{}'</span><span class="w">   </span><span class="c1"># analysis choices (CONFIGURATION.md)</span>
+</code></pre></div>
+<h3 id="results">Results<a class="headerlink" href="#results" title="Permanent link">&para;</a></h3>
+<p><code>--out-dir X</code> sets the base folder in place of <code>artifacts/&lt;profile&gt;/</code>: the reports go to <code>X/reports/</code>, the tables
+to <code>X/hypotheses/</code>, <code>X/overall/</code>, <code>X/leaderboard/</code> and <code>X/metric_values/</code>. <code>python -m marathonts.hypotheses.overall --out D</code>,
+<code>python -m marathonts.hypotheses.leaderboard --out D</code> and <code>python -m marathonts.hypotheses.metric_values --out D</code> write the tables to <code>D</code>
+and the report to <code>D/../reports/</code>.</p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>artifacts/&lt;profile&gt;/reports/REPORT.md</code></td>
+<td>human-readable report: overall leaderboard, confirmatory family, RQ0–RQ9, case study CS1–CS15</td>
+</tr>
+<tr>
+<td><code>artifacts/&lt;profile&gt;/reports/OVERALL.md</code>, <code>artifacts/&lt;profile&gt;/overall/*.parquet</code></td>
+<td>overall leaderboard (list of files — §3, RQ1, <strong>Overall leaderboard</strong>)</td>
+</tr>
+<tr>
+<td><code>artifacts/&lt;profile&gt;/reports/LEADERBOARD.md</code>, <code>artifacts/&lt;profile&gt;/leaderboard/*.parquet</code></td>
+<td>ranking (list of files — §3, RQ1, <strong>Result</strong>)</td>
+</tr>
+<tr>
+<td><code>artifacts/&lt;profile&gt;/reports/METRIC_VALUES.md</code></td>
+<td>values of the core fidelity metrics and the primary utility metrics by reference, dataset, task, model and split: fidelity per real reference (method × metric, median over datasets of the median over seeds; <code>real</code> — the real OOT part scored as a series) and per core metric (method × dataset); utility primary metric per model and test split (method × task, TRTR first); the pre-specified cells per dataset; the cells a method's series could not train</td>
+</tr>
+<tr>
+<td><code>artifacts/&lt;profile&gt;/metric_values/fidelity.parquet</code>, <code>utility.parquet</code></td>
+<td>median and IQR over seeds of every metric × reference and task × model × split, per dataset and method</td>
+</tr>
+<tr>
+<td><code>artifacts/&lt;profile&gt;/hypotheses/confirmatory.parquet</code></td>
+<td>confirmatory family C1–C4 with Holm correction and verdict</td>
+</tr>
+<tr>
+<td><code>artifacts/&lt;profile&gt;/hypotheses/RQ*_global.parquet</code></td>
+<td>per unit of analysis and comparison: effect in noise units, interval, p before and after correction, number of datasets with each verdict, global verdict</td>
+</tr>
+<tr>
+<td><code>artifacts/&lt;profile&gt;/hypotheses/RQ*_per_dataset.parquet</code></td>
+<td>the same for each dataset: n seeds, effect, noise, p, verdict</td>
+</tr>
+<tr>
+<td><code>artifacts/&lt;profile&gt;/hypotheses/RQ*_&lt;extra&gt;.parquet</code></td>
+<td>additional tables (real-versus-real reference, discriminative power, redundancy, predictors, stability, Pareto)</td>
+</tr>
+<tr>
+<td><code>artifacts/&lt;profile&gt;/hypotheses/CS*_*.parquet</code>, <code>case_cell.parquet</code></td>
+<td>case study and its pre-specified cell</td>
+</tr>
+</tbody>
+</table>
+<h3 id="what-is-required-from-the-benchmark">What is required from the benchmark<a class="headerlink" href="#what-is-required-from-the-benchmark" title="Permanent link">&para;</a></h3>
+<ul>
+<li>All methods of the profile on the same seeds (in the tables: 16 in <code>min</code> — 12 run by the pipeline and the
+  4 published results of <code>frozen_methods</code> —, 17 in <code>mid</code>, 35 in <code>max</code>). Without <code>vae_rand_b</code>
+  (<code>min</code>) the noise is the between-seed spread of <code>vae_rand</code> and RQ0 (a) and the noise check of RQ1 are
+  skipped; without <code>vae_rand</code> — no RQ2 (1), RQ3 and C3; without seam-processing variants — no RQ3 (b, c)
+  and C4. Without TRTR (<code>real</code>, regime R) there
+  is no transfer ratio (RQ4, RQ5).</li>
+<li>Fidelity against three references: <code>Config.fidelity_extra_refs = ["train", "oot"]</code> (default).
+  Tables without <code>@oot</code> metrics give the ranking and RQ4 without the OOT slice.</li>
+<li>Run configuration: <code>hypotheses.run</code> takes it from <code>artifacts/&lt;profile&gt;/tables/config.json</code>
+  (written by the <code>collect</code> stage).</li>
+<li>At least 3 seeds for per-dataset tests; 10 are planned (minimal p ≈ 0.001).</li>
+<li>At least 3 datasets for global tests; 9 are planned.</li>
+<li>A timing table from a single hardware type for RQ6.</li>
+</ul>
+<h3 id="custom-methods-tests-and-hypotheses">Custom methods, tests and hypotheses<a class="headerlink" href="#custom-methods-tests-and-hypotheses" title="Permanent link">&para;</a></h3>
+<ul>
+<li>A method (<code>bench.methods.register_method</code>, EXTENDING.md) enters the ranking and RQ0–RQ9
+  automatically; its family is determined from its description.</li>
+<li>A statistical test: <code>hypotheses.stats.register_test(name, level="dataset" | "global")</code> — the
+  test's columns are added to all comparison tables.</li>
+<li>A hypothesis about a specific method: <code>hypotheses.catalog.register_hypothesis("CS16", "title")</code> —
+  appears in the report together with the case study.</li>
+<li>Case-study roles: the method (<code>--case-method</code>), the noise pair (<code>--noise-pair</code>), baselines (<code>--baselines</code>), the task of the case-study cells (<code>--case-task</code>, by
+  default <code>Config.stitch_task</code>).</li>
+</ul>
+<p>Examples — <a href="../EXTENDING/">EXTENDING.md</a>.</p>
+<h2 id="8-supplementary-analyses-not-pre-specified">8. Supplementary analyses (not pre-specified)<a class="headerlink" href="#8-supplementary-analyses-not-pre-specified" title="Permanent link">&para;</a></h2>
+<p>Checks added after the main run, in answer to review. They do not change the pre-specified analysis, and their
+verdicts are exploratory. All run on CPU in seconds to minutes, locally or in Colab, after the analysis stage
+(<code>python -m marathonts.hypotheses.run</code>); no GPU and no new generation are needed.</p>
+<table>
+<thead>
+<tr>
+<th>Check</th>
+<th>Command</th>
+<th>Input</th>
+<th>Output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>The analysis with the zEDGE pool in place of the VAE pool (assembly median of RQ2 / C2, contrasts of RQ3 / C3 / C4)</td>
+<td><code>python -m marathonts.hypotheses.run --artifacts-dir &lt;run&gt; --noise-pair zedge_rand zedge_rand_b --no-case-study --out-dir &lt;run&gt;/supplementary/zedge_pool</code></td>
+<td><code>&lt;run&gt;/tables/</code></td>
+<td><code>artifacts/run_h200/supplementary/zedge_pool/</code></td>
+</tr>
+<tr>
+<td>Pools: values replaced for NaN, range of the value, flat windows</td>
+<td><code>python -m marathonts.hypotheses.pool_check --artifacts-dir &lt;run&gt;</code></td>
+<td><code>&lt;run&gt;/pools/</code> (Hugging Face; not for ETT and PJM)</td>
+<td><code>artifacts/run_*/supplementary/pool_check/</code></td>
+</tr>
+<tr>
+<td>Calendar of the series: share of steps at which the hour of the week advances by one, error of the hour of the week inside a piece against the closest valid calendar</td>
+<td><code>python -m marathonts.hypotheses.calendar_check --artifacts-dir &lt;run&gt;</code></td>
+<td><code>&lt;run&gt;/series/</code> (Hugging Face; not for ETT and PJM)</td>
+<td><code>artifacts/run_*/supplementary/calendar_check/</code></td>
+</tr>
+<tr>
+<td>The analysis without the fidelity metrics that use the calendar of the series (value-only fidelity; utility unchanged, since every task uses the hour of the week as a feature)</td>
+<td><code>python -m marathonts.hypotheses.run --artifacts-dir &lt;run&gt; --no-case-study --exclude-metrics F3.8_calendar_corr_err F4.1_how_mean F4.2_how_std F4.3_hod_mean F4.4_calendar_continuity F4.5_calendar_seam_breaks F8.4_event_by_how --out-dir &lt;run&gt;/supplementary/value_only</code></td>
+<td><code>&lt;run&gt;/tables/</code></td>
+<td><code>artifacts/run_h200/supplementary/value_only/</code></td>
+</tr>
+<tr>
+<td>Noise margin under other estimators (supplementary): every pair of seeds, random orderings of the seeds, a margin ×0.5 and ×2</td>
+<td><code>python -m marathonts.hypotheses.run --artifacts-dir &lt;run&gt; --no-case-study --noise-estimator pairs</code> (or <code>perm:&lt;n&gt;</code>, or <code>--noise-scale 0.5</code>) <code>--out-dir &lt;variant&gt;</code></td>
+<td><code>&lt;run&gt;/tables/</code></td>
+<td><code>artifacts/run_h200/supplementary/noise_sensitivity/&lt;variant&gt;/</code> (global verdicts of RQ2, RQ3, C1–C4)</td>
+</tr>
+<tr>
+<td>Noise check: the margins, their zero and near-zero values, and the verdicts that change under the variants</td>
+<td><code>python -m marathonts.hypotheses.noise_check --analysis-dir &lt;run&gt; --variant pairs=&lt;dir&gt; perm1=&lt;dir&gt; …</code></td>
+<td>the outputs above</td>
+<td><code>artifacts/run_h200/supplementary/noise_check/</code></td>
+</tr>
+<tr>
+<td>Bootstrap interval of the median over datasets (the statistic of the reported effect) next to the pre-specified interval of the mean; verdicts unchanged</td>
+<td><code>python -m marathonts.hypotheses.run --artifacts-dir &lt;run&gt; --no-case-study --ci-stat median --out-dir &lt;dir&gt;</code></td>
+<td><code>&lt;run&gt;/tables/</code></td>
+<td><code>artifacts/run_*/supplementary/ci_median/</code> (global tables of RQ2, RQ3 and C1–C4)</td>
+</tr>
+<tr>
+<td>Utility cells a series could not train: counts by method, task and model, and the reason (one-class labels, no rows, or a failed fit)</td>
+<td><code>python -m marathonts.hypotheses.failure_check --artifacts-dir &lt;run&gt; --series-dir &lt;run&gt;/series</code></td>
+<td><code>&lt;run&gt;/tables/</code>, <code>&lt;run&gt;/series/</code> (Hugging Face; not for ETT and PJM)</td>
+<td><code>artifacts/run_*/supplementary/failure_check/</code></td>
+</tr>
+<tr>
+<td>The analysis with a fixed chance-level penalty for such cells, and with the cells left out</td>
+<td><code>python -m marathonts.hypotheses.run --artifacts-dir &lt;run&gt; --no-case-study --fail-rule chance</code> (or <code>--no-fail-penalty</code>) <code>--out-dir &lt;dir&gt;</code></td>
+<td><code>&lt;run&gt;/tables/</code></td>
+<td><code>artifacts/run_*/supplementary/fail_rule/{chance,none}/</code> (overall leaderboard, RQ2, RQ3, C1–C4)</td>
+</tr>
+<tr>
+<td>Noise-aware ranks: a worked example, order invariance, the share of non-transitive ties, and the places and top tier against ordinary average ranks</td>
+<td><code>python -m marathonts.hypotheses.tie_check --artifacts-dir &lt;run&gt;</code></td>
+<td><code>&lt;run&gt;/tables/</code></td>
+<td><code>artifacts/run_*/supplementary/tie_check/</code></td>
+</tr>
+<tr>
+<td>Top tier: the paired datasets with the observed leader, and the set of methods that no other method is shown to beat when every pair is tested (Holm over all pairs; accounts for the selection of the leader)</td>
+<td><code>python -m marathonts.hypotheses.tier_check --artifacts-dir &lt;run&gt;</code></td>
+<td><code>&lt;run&gt;/tables/</code></td>
+<td><code>artifacts/run_*/supplementary/tier_check/</code></td>
+</tr>
+<tr>
+<td>RQ4 by generator family: leave one family out, a metric chosen on the other families applied to the held-out family (share of correctly ordered pairs, bootstrap interval over datasets), and RQ4 on the methods of the other run</td>
+<td><code>python -m marathonts.hypotheses.family_check --artifacts-dir &lt;run&gt; [--restrict-to &lt;other run&gt;]</code></td>
+<td><code>&lt;run&gt;/tables/</code></td>
+<td><code>artifacts/run_*/supplementary/family_check/</code></td>
+</tr>
+<tr>
+<td>C1: the method-by-dataset eligibility mask, a permutation calibration of the Friedman test, Skillings-Mack with the incomplete datasets kept, every method on the complete datasets, the methods of the other run, and Holm over C1–C4 with the permutation p</td>
+<td><code>python -m marathonts.hypotheses.c1_check --artifacts-dir &lt;run&gt; [--restrict-to &lt;other run&gt;]</code></td>
+<td><code>&lt;run&gt;/tables/</code>, <code>&lt;run&gt;/hypotheses/confirmatory.parquet</code></td>
+<td><code>artifacts/run_*/supplementary/c1_check/</code></td>
+</tr>
+<tr>
+<td>C3 without the task-aware assembler zseries (the open assemblers against the random path), with Holm over C1–C4 recomputed</td>
+<td><code>python -m marathonts.hypotheses.c3_check --artifacts-dir &lt;run&gt;</code></td>
+<td><code>&lt;run&gt;/tables/</code>, <code>&lt;run&gt;/hypotheses/confirmatory.parquet</code></td>
+<td><code>artifacts/run_*/supplementary/c3_check/</code></td>
+</tr>
+<tr>
+<td>RQ0: the inventory of the 297 units of the validity check (fidelity outputs × references, memorisation, utility units), mapped to the metric IDs, with the outputs left out and those in redundant pairs</td>
+<td><code>python -m marathonts.hypotheses.rq0_inventory --artifacts-dir &lt;run&gt;</code></td>
+<td><code>&lt;run&gt;/hypotheses/RQ0_*.parquet</code></td>
+<td><code>artifacts/run_*/supplementary/rq0_inventory/</code></td>
+</tr>
+<tr>
+<td>RQ5 (a): absolute TSTR and TRTR scores by task, model and split, the ROC AUC cells with an undefined ratio, and the tests by criterion</td>
+<td><code>python -m marathonts.hypotheses.rq5_check --artifacts-dir &lt;run&gt;</code></td>
+<td><code>&lt;run&gt;/tables/</code>, <code>&lt;run&gt;/hypotheses/RQ5_global.parquet</code></td>
+<td><code>artifacts/run_*/supplementary/rq5_check/</code></td>
+</tr>
+<tr>
+<td>F5.6 against the density of the seams: the share of positions near a seam and F5.6 against its chance level (circular shifts of the seams)</td>
+<td><code>python -m marathonts.hypotheses.seam_check --artifacts-dir &lt;run&gt; --series-dir &lt;series&gt;</code></td>
+<td><code>&lt;run&gt;/tables/</code>, the series of the run</td>
+<td><code>artifacts/run_*/supplementary/seam_check/</code></td>
+</tr>
+<tr>
+<td>The analysis on the seam metrics defined for every method (F5.5 only; the seam criterion leaves the core rankings for every method)</td>
+<td><code>python -m marathonts.hypotheses.run --artifacts-dir &lt;run&gt; --no-case-study --exclude-metrics F5.1_ks_seam_vs_real F5.2_ks_seam_vs_inside F5.3_seam_z_mean F5.3_seam_z_p95 F5.4_seam_local_acf F5.6_cp_at_seams F5.7_seam_detect_auc_dev --out-dir &lt;run&gt;/supplementary/common_metrics</code></td>
+<td><code>&lt;run&gt;/tables/</code></td>
+<td><code>artifacts/run_*/supplementary/common_metrics/</code></td>
+</tr>
+<tr>
+<td>Memorisation diagnostics F10: the signed DCR ratio, near copies with bootstrap intervals, exact copies; controls with exact copies of train, copies with noise and partial copies, flagged by the rule of the analysis</td>
+<td><code>python -m marathonts.hypotheses.memorisation_check --artifacts-dir &lt;run&gt; --series-dir &lt;series&gt; --data-dir data/processed/min</code></td>
+<td><code>&lt;run&gt;/tables/</code>, the series of the run, the prepared data</td>
+<td><code>artifacts/run_*/supplementary/memorisation_check/</code></td>
+</tr>
+</tbody>
+</table>
+<p>A family C1–C4 in the zEDGE-pool output is computed in the same way as the confirmatory family, but it is not
+confirmatory: only the family on the VAE pool was fixed in advance.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../MODELS/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Models">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Models
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../PROTOCOL_AMENDMENTS/" class="md-footer__link md-footer__link--next" aria-label="Next: Protocol amendments">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Protocol amendments
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright 2026 zypl Holding Ltd. Code under the Apache License 2.0.
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.sections", "navigation.top", "navigation.footer", "toc.follow", "search.highlight", "content.code.copy"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.525ec568.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

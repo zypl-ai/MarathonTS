@@ -1,0 +1,2517 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A benchmark of long synthetic time series from window assembly and long-series generators">
+      
+      
+      
+        <link rel="canonical" href="https://zypl-ai.github.io/MarathonTS/1.0.0/GETTING_STARTED/">
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../CONFIGURATION/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.39">
+    
+    
+      
+        <title>Getting started - MarathonTS</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.8c3ca2c6.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#getting-started" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="MarathonTS" class="md-header__button md-logo" aria-label="MarathonTS" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            MarathonTS
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Getting started
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/zypl-ai/MarathonTS" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    zypl-ai/MarathonTS
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="MarathonTS" class="md-nav__button md-logo" aria-label="MarathonTS" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    MarathonTS
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/zypl-ai/MarathonTS" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    zypl-ai/MarathonTS
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Getting started
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Getting started
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Requirements
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Requirements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#operating-system-and-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      Operating system and Python
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gpu" class="md-nav__link">
+    <span class="md-ellipsis">
+      GPU
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#disk-space-and-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      Disk space and time
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#credentials-and-network" class="md-nav__link">
+    <span class="md-ellipsis">
+      Credentials and network
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#guide-a-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      Guide A. Docker
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Guide A. Docker">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a1-build" class="md-nav__link">
+    <span class="md-ellipsis">
+      A1. Build
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a2-smoke-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      A2. Smoke test
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a3-full-run-of-profile-min" class="md-nav__link">
+    <span class="md-ellipsis">
+      A3. Full run of profile min
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a4-re-run-only-the-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      A4. Re-run only the analysis
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a5-outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      A5. Outputs
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#guide-b-google-colab" class="md-nav__link">
+    <span class="md-ellipsis">
+      Guide B. Google Colab
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Guide B. Google Colab">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#b1-put-the-project-on-google-drive" class="md-nav__link">
+    <span class="md-ellipsis">
+      B1. Put the project on Google Drive
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b2-the-setup-and-scope-cells" class="md-nav__link">
+    <span class="md-ellipsis">
+      B2. The setup and scope cells
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b3-notebooks-order-and-runtime-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      B3. Notebooks, order and runtime type
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b4-smoke-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      B4. Smoke test
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b5-full-run-of-profile-min" class="md-nav__link">
+    <span class="md-ellipsis">
+      B5. Full run of profile min
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b6-re-run-only-the-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      B6. Re-run only the analysis
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b7-outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      B7. Outputs
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#guide-c-local-environments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Guide C. Local environments
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Guide C. Local environments">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#c0-install-the-package-from-pypi" class="md-nav__link">
+    <span class="md-ellipsis">
+      C0. Install the package from PyPI
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#versions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Versions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c1-install-separate-environments" class="md-nav__link">
+    <span class="md-ellipsis">
+      C1. Install: separate environments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c2-install-one-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      C2. Install: one environment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c3-smoke-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      C3. Smoke test
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c4-full-run-of-profile-min" class="md-nav__link">
+    <span class="md-ellipsis">
+      C4. Full run of profile min
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c5-re-run-only-the-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      C5. Re-run only the analysis
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c6-outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      C6. Outputs
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resuming-and-re-running" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resuming and re-running
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Troubleshooting
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CONFIGURATION/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Configuration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../EXTENDING/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Extending
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Benchmark
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Benchmark
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../BENCHMARK/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Pipeline and protocol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../BASELINES/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Methods
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DATASETS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Datasets
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../METRICS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Metrics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MODELS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Models
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../HYPOTHESES/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Statistics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../PROTOCOL_AMENDMENTS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Protocol amendments
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Figures
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Figures
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig01_architecture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 01
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig02_stage_pipeline/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 02
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig03_environments/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 03
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig04_data_preprocessing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 04
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig05_temporal_split/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 05
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig06_pool_generator_vae/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 06
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig08_method_family/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 08
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig09_long_generators/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 09
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig10_utility_pipeline/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 10
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig11_tasks_models/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 11
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig12_fidelity_evaluation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 12
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig13_statistical_pipeline/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 13
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig14_hypotheses_map/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 14
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig15_incremental_recompute/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 15
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig16_artifact_layout/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 16
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig17_profiles/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 17
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../figures/fig18_extensibility/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Figure 18
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    API reference
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            API reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/config/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Configuration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/registry/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Registries
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/components/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Components
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/load/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Loading artifacts
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LITERATURE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Literature
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DATASET_LICENSES/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Licences
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Requirements
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Requirements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#operating-system-and-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      Operating system and Python
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gpu" class="md-nav__link">
+    <span class="md-ellipsis">
+      GPU
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#disk-space-and-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      Disk space and time
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#credentials-and-network" class="md-nav__link">
+    <span class="md-ellipsis">
+      Credentials and network
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#guide-a-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      Guide A. Docker
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Guide A. Docker">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a1-build" class="md-nav__link">
+    <span class="md-ellipsis">
+      A1. Build
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a2-smoke-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      A2. Smoke test
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a3-full-run-of-profile-min" class="md-nav__link">
+    <span class="md-ellipsis">
+      A3. Full run of profile min
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a4-re-run-only-the-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      A4. Re-run only the analysis
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a5-outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      A5. Outputs
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#guide-b-google-colab" class="md-nav__link">
+    <span class="md-ellipsis">
+      Guide B. Google Colab
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Guide B. Google Colab">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#b1-put-the-project-on-google-drive" class="md-nav__link">
+    <span class="md-ellipsis">
+      B1. Put the project on Google Drive
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b2-the-setup-and-scope-cells" class="md-nav__link">
+    <span class="md-ellipsis">
+      B2. The setup and scope cells
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b3-notebooks-order-and-runtime-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      B3. Notebooks, order and runtime type
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b4-smoke-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      B4. Smoke test
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b5-full-run-of-profile-min" class="md-nav__link">
+    <span class="md-ellipsis">
+      B5. Full run of profile min
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b6-re-run-only-the-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      B6. Re-run only the analysis
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b7-outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      B7. Outputs
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#guide-c-local-environments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Guide C. Local environments
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Guide C. Local environments">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#c0-install-the-package-from-pypi" class="md-nav__link">
+    <span class="md-ellipsis">
+      C0. Install the package from PyPI
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#versions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Versions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c1-install-separate-environments" class="md-nav__link">
+    <span class="md-ellipsis">
+      C1. Install: separate environments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c2-install-one-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      C2. Install: one environment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c3-smoke-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      C3. Smoke test
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c4-full-run-of-profile-min" class="md-nav__link">
+    <span class="md-ellipsis">
+      C4. Full run of profile min
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c5-re-run-only-the-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      C5. Re-run only the analysis
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c6-outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      C6. Outputs
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resuming-and-re-running" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resuming and re-running
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Troubleshooting
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="getting-started">Getting started<a class="headerlink" href="#getting-started" title="Permanent link">&para;</a></h1>
+<p>This guide installs MarathonTS and runs it in one of three ways: Docker (<a href="#guide-a-docker">Guide A</a>), Google
+Colab notebooks (<a href="#guide-b-google-colab">Guide B</a>) or local virtual environments
+(<a href="#guide-c-local-environments">Guide C</a>). Each guide ends with the same three runs: a smoke test, the full run
+of profile <code>min</code>, and re-running only the analysis on existing tables. How to change settings is in
+<a href="../CONFIGURATION/">CONFIGURATION.md</a>, how to add components in <a href="../EXTENDING/">EXTENDING.md</a>, and the pipeline,
+protocol and artifacts in <a href="../BENCHMARK/">BENCHMARK.md</a>.</p>
+<p>The pipeline has eight stages; stages 0–6 are <code>python -m marathonts.bench.run &lt;stage&gt;</code>, stage 7 is
+<code>python -m marathonts.hypotheses.run</code>:</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Stage</th>
+<th>Writes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td><code>raw</code></td>
+<td><code>data/raw/&lt;ds&gt;/*.parquet</code> (download if missing, CSV / TXT → Parquet)</td>
+</tr>
+<tr>
+<td>1</td>
+<td><code>prepare</code></td>
+<td><code>data/processed/&lt;profile&gt;/</code> (hourly series, split, scaling)</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>pools</code></td>
+<td><code>artifacts/&lt;profile&gt;/pools/</code>, <code>generators/</code> (pool generator, in its own environment)</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>generate</code></td>
+<td><code>artifacts/&lt;profile&gt;/series/</code>, <code>records/</code>, <code>generators/</code></td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>fidelity</code></td>
+<td><code>artifacts/&lt;profile&gt;/fidelity/</code></td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>utility</code></td>
+<td><code>artifacts/&lt;profile&gt;/labels/</code>, <code>utility/</code></td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>collect</code></td>
+<td><code>artifacts/&lt;profile&gt;/tables/</code></td>
+</tr>
+<tr>
+<td>7</td>
+<td><code>hypotheses.run</code></td>
+<td><code>artifacts/&lt;profile&gt;/reports/</code>, <code>overall/</code>, <code>leaderboard/</code>, <code>metric_values/</code>, <code>hypotheses/</code></td>
+</tr>
+</tbody>
+</table>
+<p><code>python -m marathonts.bench.run all</code> runs stages 0–6 in this order. Two further stages, <code>targets</code> and <code>hashes</code>, are run on
+their own and are not part of <code>all</code> (<a href="../BENCHMARK/">BENCHMARK.md</a>, stages 1a and 1b).</p>
+<h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h2>
+<h3 id="operating-system-and-python">Operating system and Python<a class="headerlink" href="#operating-system-and-python" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Linux or macOS. The run records use the Unix module <code>resource</code> (<code>marathonts/bench/timing.py</code>); on Windows use Docker or
+  WSL.</li>
+<li>Python 3.11 or 3.12 for local environments; the Docker images use Python 3.11 (<code>tsgm</code>: <code>python:3.11-slim</code>;
+  <code>bench</code>: <code>pytorch/pytorch:2.5.1-cuda12.4-cudnn9-runtime</code>).</li>
+<li>The <code>tsgm</code> environment (the VAE pool generator, <code>tsgm==0.1.0</code>) installs with pip on Python ≤ 3.12. On
+  Python 3.13 the <code>setup.py</code> of tsgm 0.1.0 fails while reading its version; <code>install_tsgm()</code> in
+  <code>colab/colab_setup.py</code> installs it with a one-line patch (used by the Colab notebooks). The single environment
+  of <code>requirements.txt</code> therefore needs Python ≤ 3.12.</li>
+<li><code>git</code> on the path: Diffusion-TS is cloned from GitHub, and <code>envs/timestral.txt</code> installs <code>timestral</code> from a
+  pinned commit of its Git repository.</li>
+</ul>
+<h3 id="gpu">GPU<a class="headerlink" href="#gpu" title="Permanent link">&para;</a></h3>
+<p>Every stage runs on CPU; a CUDA GPU shortens the stages marked below. The torch part selects CUDA when it is
+available (<code>Config.device = None</code>; <code>--device cpu</code> forces the CPU), TensorFlow uses a GPU when it sees one.
+Apple MPS and TPU are not used.</p>
+<table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>Device</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>raw</code>, <code>prepare</code>, <code>collect</code>, <code>hypotheses.run</code></td>
+<td>CPU</td>
+</tr>
+<tr>
+<td><code>pools</code></td>
+<td>the VAE (TensorFlow) on GPU if TensorFlow sees one, else CPU</td>
+</tr>
+<tr>
+<td><code>generate</code></td>
+<td>assemblers (torch), Diffusion-TS training and sampling, Chronos, TimesFM, Timestral on CUDA if available</td>
+</tr>
+<tr>
+<td><code>fidelity</code></td>
+<td>distance metrics (MMD, nearest neighbours, precision / recall) and the GRU discriminator (F6.1) on CUDA if available</td>
+</tr>
+<tr>
+<td><code>utility</code></td>
+<td><code>linear</code> and <code>mlp</code> (torch) on CUDA if available; <code>gbdt</code> (XGBoost) on the device of <code>marathonts/bench/model_configs.json</code> — <code>"cpu"</code> in <code>min</code> and <code>mid</code>, <code>"auto"</code> (CUDA if available) in <code>max</code></td>
+</tr>
+</tbody>
+</table>
+<p>Timing results (RQ6) compare wall times, so all methods of a dataset are to be run on the same hardware type;
+<code>collect</code> warns when the series were made on more than one GPU type. Of the two published runs, the main run
+used one NVIDIA H200 and the replication run one NVIDIA L4 (<a href="../BENCHMARK/#published-runs">BENCHMARK.md</a>).</p>
+<h3 id="disk-space-and-time">Disk space and time<a class="headerlink" href="#disk-space-and-time" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Raw data: about 200 MB of Parquet in <code>data/raw/</code> after conversion (1.3 GB of source files are downloaded and
+  deleted after conversion; <a href="../DATASETS/">DATASETS.md</a>).</li>
+<li>Artifacts of a full <code>min</code> run: about 5 GB for the methods of the replication run (<code>artifacts/run_l4/tables/inventory.parquet</code> lists every file with its
+  size), most of it utility predictions and model weights — about 2 MB of predictions and 0.9 MB of weights per
+  utility unit (<a href="../BENCHMARK/">BENCHMARK.md</a>, "Artifacts"). <code>Config.save_model_weights=False</code> or
+  <code>weights_dtype="float16"</code> reduce it.</li>
+<li>Compute: 9 datasets × 10 seeds × 12 methods = 1080 series in <code>min</code> (<a href="../BENCHMARK/">BENCHMARK.md</a>,
+  "Compute volume"). The longest single step is the Diffusion-TS training: 1.1–1.6 h per dataset on an NVIDIA
+  L4 in the replication run of <code>min</code> (9 trainings; 90 in <code>max</code>). Utility is the stage with the most fits (29 fits
+  per unit in <code>min</code>, each tested on 2 splits).</li>
+</ul>
+<h3 id="credentials-and-network">Credentials and network<a class="headerlink" href="#credentials-and-network" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Kaggle</strong> — two datasets are downloaded through the Kaggle API: <code>pjm</code> (<code>robikscube/hourly-energy-consumption</code>)
+  and <code>bitcoin</code> (<code>mczielinski/bitcoin-historical-data</code>). They need an API token in <code>~/.kaggle/kaggle.json</code>
+  (Kaggle → Settings → API → Create New Token). The other seven datasets, including the two of the smoke test
+  (<code>ett</code>, <code>bike</code>), are downloaded without credentials. Without the token, <code>raw</code> logs the failure of these two
+  datasets to <code>artifacts/&lt;profile&gt;/errors.log</code> and continues with the others. The original files can also be
+  placed by hand in <code>data/raw/pjm/PJME_hourly.csv</code> and <code>data/raw/bitcoin/btcusd_1-min_data.csv</code>: <code>raw</code> then
+  converts them instead of downloading.</li>
+<li><strong>Hugging Face</strong> — the pretrained long-series generators download their weights on first use:
+  <code>amazon/chronos-t5-small</code> (<code>max</code>: <code>amazon/chronos-t5-base</code>; smoke test: <code>amazon/chronos-t5-tiny</code>),
+  <code>google/timesfm-3.0-pytorch</code>, <code>mistralai/Timestral-209M</code> (smoke test: <code>mistralai/Timestral-5M</code>). TimesFM and
+  Timestral are pinned to revisions (<code>Config.timesfm_revision</code>, <code>timestral_revision</code>).</li>
+<li><strong>GitHub</strong> — Diffusion-TS (<code>https://github.com/Y-debug-sys/Diffusion-TS</code>, commit
+  <code>566307e6cf2d8095e58de4c6e3a6ae965b69b5b5</code>) is cloned into <code>external/Diffusion-TS</code> (<code>Config.diffusion_ts_dir</code>,
+  flag <code>--diffusion-ts-dir</code>).</li>
+</ul>
+<h2 id="guide-a-docker">Guide A. Docker<a class="headerlink" href="#guide-a-docker" title="Permanent link">&para;</a></h2>
+<p>Two images are built from <code>Dockerfile</code> and connected by <code>docker-compose.yml</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Service</th>
+<th>Image</th>
+<th>Contents</th>
+<th>Default command</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tsgm</code></td>
+<td><code>marathonts:tsgm</code></td>
+<td>Python 3.11, TensorFlow (with CUDA libraries), Keras, tsgm; <code>marathonts/</code></td>
+<td><code>pools --pool-generators tsgm_vae</code></td>
+</tr>
+<tr>
+<td><code>bench</code></td>
+<td><code>marathonts:bench</code></td>
+<td>PyTorch 2.5.1 with CUDA 12.4, <code>envs/core.txt</code>, Diffusion-TS (pinned commit, in the image), Chronos, TimesFM, Timestral, SDV; <code>bench/</code>, <code>hypotheses/</code></td>
+<td><code>all</code></td>
+</tr>
+<tr>
+<td><code>hypotheses</code></td>
+<td><code>marathonts:bench</code></td>
+<td>entry point <code>python -m marathonts.hypotheses.run</code></td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>The entry point of <code>tsgm</code> and <code>bench</code> is <code>python -m marathonts.bench.run</code>: everything after the service name is passed to it
+(a stage and flags). All three services mount the same host folders:</p>
+<table>
+<thead>
+<tr>
+<th>Host</th>
+<th>Container</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>./data</code></td>
+<td><code>/app/data</code></td>
+<td>raw and processed data</td>
+</tr>
+<tr>
+<td><code>./artifacts</code></td>
+<td><code>/app/artifacts</code></td>
+<td>every artifact, the tables and the reports</td>
+</tr>
+<tr>
+<td><code>~/.kaggle</code></td>
+<td><code>/root/.kaggle</code> (read-only)</td>
+<td>Kaggle API token</td>
+</tr>
+</tbody>
+</table>
+<h3 id="a1-build">A1. Build<a class="headerlink" href="#a1-build" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/zypl-ai/MarathonTS.git
+<span class="nb">cd</span><span class="w"> </span>MarathonTS
+docker<span class="w"> </span>compose<span class="w"> </span>build
+</code></pre></div>
+<p><strong>GPU or CPU.</strong> The <code>deploy</code> blocks of <code>docker-compose.yml</code> reserve every NVIDIA GPU of the host; this needs
+the NVIDIA Container Toolkit. On a machine without an NVIDIA GPU, delete the <code>deploy: *gpu</code> lines of the <code>tsgm</code>
+and <code>bench</code> services: everything then runs on CPU. A CPU-only <code>tsgm</code> image without the CUDA libraries of
+TensorFlow is built with <code>docker compose build --build-arg TF_EXTRA="" tsgm</code>.</p>
+<p><strong>Model weights.</strong> Chronos, TimesFM and Timestral download their weights into the container's Hugging Face
+cache, which <code>--rm</code> removes with the container. Mounting a host folder keeps them between runs, e.g.
+<code>docker compose run --rm -v "$HOME/.cache/huggingface:/root/.cache/huggingface" bench generate</code>.</p>
+<h3 id="a2-smoke-test">A2. Smoke test<a class="headerlink" href="#a2-smoke-test" title="Permanent link">&para;</a></h3>
+<p><code>--quick</code> selects <code>Config.quick()</code>: datasets <code>ett</code> and <code>bike</code>, seeds 0 and 1, small models, output in
+<code>artifacts/quick/</code> and <code>data/processed/quick/</code>. The VAE pools are made in the <code>tsgm</code> image, so the data are
+prepared first:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>bench<span class="w"> </span>raw<span class="w"> </span>--quick
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>bench<span class="w"> </span>prepare<span class="w"> </span>--quick
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>tsgm<span class="w"> </span>pools<span class="w"> </span>--pool-generators<span class="w"> </span>tsgm_vae<span class="w"> </span>--quick
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>bench<span class="w"> </span>all<span class="w"> </span>--quick<span class="w">                       </span><span class="c1"># stages 0–6; the finished ones are skipped</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>hypotheses<span class="w"> </span>--artifacts-dir<span class="w"> </span>artifacts/quick
+</code></pre></div>
+<p>The reports are in <code>artifacts/quick/reports/</code>. With 2 datasets and 2 seeds the report has no global verdicts
+(at least 3 datasets are required) and the case study is skipped (its method has no results in this run);
+the test checks that every stage runs.</p>
+<h3 id="a3-full-run-of-profile-min">A3. Full run of profile <code>min</code><a class="headerlink" href="#a3-full-run-of-profile-min" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>bench<span class="w"> </span>raw<span class="w">            </span><span class="c1"># download and convert the data (Kaggle: ~/.kaggle)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>bench<span class="w"> </span>prepare
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>tsgm<span class="w">                 </span><span class="c1"># VAE pools in the TensorFlow + tsgm image</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>bench<span class="w"> </span>generate<span class="w">       </span><span class="c1"># the assemblers + the long-series generators; pools are read</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>bench<span class="w"> </span>fidelity
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>bench<span class="w"> </span>utility
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>bench<span class="w"> </span>collect
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>hypotheses<span class="w">           </span><span class="c1"># reports → artifacts/min/reports/</span>
+</code></pre></div>
+<p>After the <code>tsgm</code> step, <code>docker compose run --rm bench all</code> runs the remaining stages in one call (the finished
+ones are skipped). Flags go after the stage:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>bench<span class="w"> </span>generate<span class="w"> </span>--datasets<span class="w"> </span>ett<span class="w"> </span>--seeds<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">2</span><span class="w">          </span><span class="c1"># a part of the run</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>bench<span class="w"> </span>generate<span class="w"> </span>--methods<span class="w"> </span>vae_greedy<span class="w"> </span>chronos<span class="w">          </span><span class="c1"># selected methods</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>bench<span class="w"> </span>utility<span class="w"> </span>--device<span class="w"> </span>cpu<span class="w">                           </span><span class="c1"># torch on CPU</span>
+</code></pre></div>
+<p><strong>Profiles.</strong> <code>--profile mid</code> or <code>--profile max</code> is added to every stage, including the <code>tsgm</code> and <code>hypotheses</code>
+services:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>tsgm<span class="w"> </span>pools<span class="w"> </span>--pool-generators<span class="w"> </span>tsgm_vae<span class="w"> </span>--profile<span class="w"> </span>max
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>bench<span class="w"> </span>all<span class="w"> </span>--profile<span class="w"> </span>max
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>hypotheses<span class="w"> </span>--profile<span class="w"> </span>max
+</code></pre></div>
+<p><strong>Your own configuration.</strong> A JSON file written by <code>Config.to_json()</code> with paths relative to the project folder
+(<a href="../CONFIGURATION/#d-a-json-file">CONFIGURATION.md</a>) is read from the mounted <code>artifacts/</code> folder,
+e.g. <code>docker compose run --rm bench all --config artifacts/my_cfg.json</code>.</p>
+<p><strong>Plugins.</strong> The images contain only the package <code>marathonts/</code>; a plugin file is mounted into <code>/app</code> and named
+with <code>--plugins</code> (<a href="../EXTENDING/#plugin-files">EXTENDING.md</a>):</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-v<span class="w"> </span><span class="s2">"</span><span class="nv">$PWD</span><span class="s2">/my_plugins.py:/app/my_plugins.py"</span><span class="w"> </span>bench<span class="w"> </span>all<span class="w"> </span>--plugins<span class="w"> </span>my_plugins.py
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-v<span class="w"> </span><span class="s2">"</span><span class="nv">$PWD</span><span class="s2">/my_plugins.py:/app/my_plugins.py"</span><span class="w"> </span>hypotheses
+</code></pre></div>
+<p><code>collect</code> records the plugin files in <code>tables/config.json</code>, and the analysis loads them from there, so the
+<code>hypotheses</code> service needs the same mount.</p>
+<h3 id="a4-re-run-only-the-analysis">A4. Re-run only the analysis<a class="headerlink" href="#a4-re-run-only-the-analysis" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>hypotheses<span class="w">                                   </span><span class="c1"># profile min, artifacts/min/tables</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>hypotheses<span class="w"> </span>--exclude-datasets<span class="w"> </span>bitcoin<span class="w">        </span><span class="c1"># an analysis-only choice</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>hypotheses<span class="w"> </span>--profile<span class="w"> </span>max
+</code></pre></div>
+<p>Stage 7 reads <code>artifacts/&lt;profile&gt;/tables/</code>, the utility predictions and labels (case study) and
+<code>data/processed/&lt;profile&gt;/</code> (dataset descriptors of RQ7 and CS15, CS12 subgroups; without it these parts are
+skipped). Its flags are listed in <a href="../CONFIGURATION/#command-line-of-the-analysis">CONFIGURATION.md</a>.</p>
+<h3 id="a5-outputs">A5. Outputs<a class="headerlink" href="#a5-outputs" title="Permanent link">&para;</a></h3>
+<p>Everything is written to the host folders <code>./data</code> and <code>./artifacts</code>: <code>artifacts/&lt;profile&gt;/</code> holds the
+per-unit files, <code>tables/</code> (stage 6), <code>reports/</code> and the analysis tables (stage 7), and <code>errors.log</code>
+(<a href="../BENCHMARK/">BENCHMARK.md</a>, "Artifacts").</p>
+<h2 id="guide-b-google-colab">Guide B. Google Colab<a class="headerlink" href="#guide-b-google-colab" title="Permanent link">&para;</a></h2>
+<p>The folder <code>colab/</code> holds one notebook per stage. All of them read and write one project folder on Google
+Drive, so each notebook runs on its own runtime and a disconnected runtime resumes where it stopped.</p>
+<h3 id="b1-put-the-project-on-google-drive">B1. Put the project on Google Drive<a class="headerlink" href="#b1-put-the-project-on-google-drive" title="Permanent link">&para;</a></h3>
+<p>The notebooks expect the project at <code>/content/drive/MyDrive/Colab Notebooks/MarathonTS</code>. Either clone it there
+from a Colab cell:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">google.colab</span><span class="w"> </span><span class="kn">import</span> <span class="n">drive</span>
+<span class="n">drive</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span><span class="s2">"/content/drive"</span><span class="p">)</span>
+<span class="err">!</span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">zypl</span><span class="o">-</span><span class="n">ai</span><span class="o">/</span><span class="n">MarathonTS</span><span class="o">.</span><span class="n">git</span> <span class="s2">"/content/drive/MyDrive/Colab Notebooks/MarathonTS"</span>
+</code></pre></div>
+<p>or upload the project folder to <code>My Drive/Colab Notebooks/MarathonTS</code> with the Drive web interface. Another
+location works when <code>REPO</code> is changed in the setup cell of every notebook. For the Kaggle datasets (<code>pjm</code>,
+<code>bitcoin</code>), put the API token at <code>REPO/kaggle.json</code>: notebook 01 copies it to <code>~/.kaggle/kaggle.json</code>.</p>
+<h3 id="b2-the-setup-and-scope-cells">B2. The setup and scope cells<a class="headerlink" href="#b2-the-setup-and-scope-cells" title="Permanent link">&para;</a></h3>
+<p>The first code cells of every notebook mount Drive and set three variables before running
+<code>colab/colab_setup.py</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">REPO</span> <span class="o">=</span> <span class="s2">"/content/drive/MyDrive/Colab Notebooks/MarathonTS"</span>   <span class="c1"># project folder on Drive (or a git clone)</span>
+<span class="n">PROFILE</span> <span class="o">=</span> <span class="s2">"min"</span>            <span class="c1"># "min": the Colab run (fast); "mid": min + the VAE per seed; "max": everything on</span>
+<span class="c1"># results go to {REPO}/artifacts/&lt;PROFILE&gt;; set ARTIFACTS = "..." to change</span>
+<span class="n">exec</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">REPO</span><span class="si">}</span><span class="s2">/colab/colab_setup.py"</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+</code></pre></div>
+<p><code>colab_setup.py</code> installs the main environment once per runtime (<code>envs/core.txt</code>, Chronos, TimesFM, Timestral,
+Diffusion-TS with a clone of its code into <code>REPO/external/</code>), changes the working directory to <code>REPO</code> and creates
+<code>cfg = Config.profile(PROFILE)</code> with <code>artifacts_dir</code> set to <code>ARTIFACTS</code> when given. <code>PROFILE</code> and <code>ARTIFACTS</code>
+must be the same in every notebook of a run. Notebook 02 sets <code>MAIN_ENVS = ["base"]</code>: its runtime gets
+<code>envs/base.txt</code> and tsgm on top of Colab's TensorFlow (<code>install_tsgm()</code>), without the torch stack.</p>
+<p>Notebooks 01–06 then have a scope cell that changes <code>cfg</code> with <code>dataclasses.replace</code> (datasets, methods, seeds,
+plugins and the other fields of <a href="../CONFIGURATION/#b-the-cfg-cell-of-the-notebooks">CONFIGURATION.md</a>). Use the
+same scope cell in every notebook of a run: <code>collect</code> (06) keeps only the methods and settings of its own <code>cfg</code>.</p>
+<h3 id="b3-notebooks-order-and-runtime-type">B3. Notebooks, order and runtime type<a class="headerlink" href="#b3-notebooks-order-and-runtime-type" title="Permanent link">&para;</a></h3>
+<p>Run the notebooks in the order 01 → 07. Set the runtime type before running (Runtime → Change runtime type):</p>
+<table>
+<thead>
+<tr>
+<th>Notebook</th>
+<th>Runtime</th>
+<th>What it does</th>
+<th>Writes (under <code>REPO/</code>)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>01_data.ipynb</code></td>
+<td>CPU</td>
+<td>raw data → Parquet (download if missing), preparation</td>
+<td><code>data/raw/</code>, <code>data/processed/&lt;profile&gt;/</code></td>
+</tr>
+<tr>
+<td><code>02_pools.ipynb</code></td>
+<td>GPU (T4 or better)</td>
+<td>VAE pools: tsgm on top of Colab's TensorFlow, the <code>pools</code> stage in a subprocess (<code>run_in_env(None, "pools", ...)</code>)</td>
+<td><code>artifacts/&lt;profile&gt;/pools/</code>, <code>generators/</code></td>
+</tr>
+<tr>
+<td><code>03_generate.ipynb</code></td>
+<td>GPU, the same type as in 02</td>
+<td>the assemblers (except <code>frozen_methods</code>), Diffusion-TS, Chronos, TimesFM, Timestral; time and weights</td>
+<td><code>series/</code>, <code>records/</code>, <code>generators/</code></td>
+</tr>
+<tr>
+<td><code>04_fidelity.ipynb</code></td>
+<td>GPU recommended, CPU works</td>
+<td>metrics F1–F12</td>
+<td><code>fidelity/</code></td>
+</tr>
+<tr>
+<td><code>05_utility.ipynb</code></td>
+<td>GPU (T4 or better)</td>
+<td>TSTR and TRTR: models, utility metrics, predictions, model weights</td>
+<td><code>labels/</code>, <code>utility/</code></td>
+</tr>
+<tr>
+<td><code>06_collect.ipynb</code></td>
+<td>CPU</td>
+<td>the tables</td>
+<td><code>tables/</code></td>
+</tr>
+<tr>
+<td><code>07_hypotheses.ipynb</code></td>
+<td>CPU</td>
+<td>overall leaderboard, rankings, metric values, research questions, case study</td>
+<td><code>reports/</code>, <code>overall/</code>, <code>leaderboard/</code>, <code>metric_values/</code>, <code>hypotheses/</code></td>
+</tr>
+</tbody>
+</table>
+<p>After notebook 02 has finished, close its runtime (Runtime → Disconnect and delete runtime) before opening 03:
+notebook 03 never imports TensorFlow and reads the pools from Drive. Errors of single units go to
+<code>artifacts/&lt;profile&gt;/errors.log</code> (notebook 03 prints its tail) and do not stop the notebook.</p>
+<p><strong>Long stages across sessions.</strong> Re-running a notebook after a disconnect continues where it stopped
+(<a href="#resuming-and-re-running">Resuming and re-running</a>). Stages 03–05 can also be divided between sessions by
+<code>datasets=[...]</code> or <code>seeds=[...]</code> in the scope cell; notebook 06 is then run with the full scope.</p>
+<p><strong>Other environments.</strong> <code>run_in_env("&lt;env&gt;", "&lt;stage&gt;", ...)</code> runs a stage in a virtual environment built from
+<code>envs/&lt;env&gt;.txt</code> (created once per runtime) and passes the whole <code>cfg</code> as JSON, e.g.
+<code>run_in_env("sdv", "pools", "--pool-generators", "sdv_par", config=cfg)</code> in notebook 02.</p>
+<h3 id="b4-smoke-test">B4. Smoke test<a class="headerlink" href="#b4-smoke-test" title="Permanent link">&para;</a></h3>
+<p>In notebooks 01–06 add a cell after the scope cell, and in notebook 07 after the setup cell:</p>
+<div class="highlight"><pre><span></span><code><span class="n">cfg</span> <span class="o">=</span> <span class="n">Config</span><span class="o">.</span><span class="n">quick</span><span class="p">()</span>        <span class="c1"># ett and bike, seeds 0 and 1, small models → REPO/artifacts/quick/</span>
+</code></pre></div>
+<p>and run 01 → 07 as above. Notebook 07 analyses <code>cfg.artifacts_dir</code>, i.e. <code>artifacts/quick/</code>.</p>
+<h3 id="b5-full-run-of-profile-min">B5. Full run of profile <code>min</code><a class="headerlink" href="#b5-full-run-of-profile-min" title="Permanent link">&para;</a></h3>
+<p>Keep <code>PROFILE = "min"</code> and the scope cell as shipped (every dataset of the profile, <code>seeds=list(range(10))</code>),
+and run 01 → 07. For <code>mid</code> or <code>max</code>, set <code>PROFILE</code> in every notebook.</p>
+<h3 id="b6-re-run-only-the-analysis">B6. Re-run only the analysis<a class="headerlink" href="#b6-re-run-only-the-analysis" title="Permanent link">&para;</a></h3>
+<p>Run notebook 07 alone: it reads <code>artifacts/&lt;profile&gt;/tables/</code>. Analysis-only choices are added to the arguments
+of <code>main</code> in its second code cell, e.g.</p>
+<div class="highlight"><pre><span></span><code><span class="n">main</span><span class="p">([</span><span class="s2">"--profile"</span><span class="p">,</span> <span class="n">PROFILE</span><span class="p">,</span> <span class="s2">"--artifacts-dir"</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">artifacts_dir</span><span class="p">),</span> <span class="s2">"--exclude-datasets"</span><span class="p">,</span> <span class="s2">"bitcoin"</span><span class="p">])</span>
+</code></pre></div>
+<p>(<a href="../CONFIGURATION/#analysis-only-settings">CONFIGURATION.md</a>).</p>
+<h3 id="b7-outputs">B7. Outputs<a class="headerlink" href="#b7-outputs" title="Permanent link">&para;</a></h3>
+<p><code>REPO/data/</code> and <code>REPO/artifacts/&lt;profile&gt;/</code> on Drive, as in the table of B3; the reports are in
+<code>REPO/artifacts/&lt;profile&gt;/reports/</code>.</p>
+<h2 id="guide-c-local-environments">Guide C. Local environments<a class="headerlink" href="#guide-c-local-environments" title="Permanent link">&para;</a></h2>
+<p>Two setups: separate virtual environments, one per dependency set (the layout of the Docker images and the
+Colab runtimes), or one environment for everything.</p>
+<table>
+<thead>
+<tr>
+<th>Environment</th>
+<th>File</th>
+<th>What runs in it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>base</td>
+<td><code>envs/base.txt</code></td>
+<td><code>raw</code>, <code>prepare</code>; the basis of the others</td>
+</tr>
+<tr>
+<td>core</td>
+<td><code>envs/core.txt</code></td>
+<td><code>generate</code> (assembly), <code>fidelity</code>, <code>utility</code>, <code>collect</code>, <code>hypotheses.run</code></td>
+</tr>
+<tr>
+<td>tsgm</td>
+<td><code>envs/tsgm.txt</code></td>
+<td><code>pools --pool-generators tsgm_vae</code> (TensorFlow, no torch)</td>
+</tr>
+<tr>
+<td>diffusion_ts, chronos, timesfm, timestral</td>
+<td><code>envs/&lt;name&gt;.txt</code></td>
+<td><code>generate --methods &lt;name&gt;</code>; each is core + its package</td>
+</tr>
+<tr>
+<td>sdv</td>
+<td><code>envs/sdv.txt</code></td>
+<td><code>pools --pool-generators sdv_par</code> (optional pool generator)</td>
+</tr>
+</tbody>
+</table>
+<p>A stage skips a component whose modules are missing in the current environment and names the environment to
+run it in (see <a href="#troubleshooting">Troubleshooting</a>).</p>
+<h3 id="c0-install-the-package-from-pypi">C0. Install the package from PyPI<a class="headerlink" href="#c0-install-the-package-from-pypi" title="Permanent link">&para;</a></h3>
+<p>The benchmark is also the Python package <code>marathonts</code> (the core environment; extras for the generators that
+have their own requirements):</p>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">"marathonts[chronos,timesfm,diffusion-ts]"</span><span class="w">     </span><span class="c1"># Python 3.11 or 3.12</span>
+</code></pre></div>
+<p>The VAE pool generator (TensorFlow, <code>envs/tsgm.txt</code>) and Timestral (<code>envs/timestral.txt</code>) are installed
+separately, and Diffusion-TS needs its official code (C1). The package keeps its own files (task thresholds,
+model configurations, data hashes); the working folders <code>data/</code>, <code>artifacts/</code> and <code>external/</code> are created in
+the project folder: the current directory, or <code>MARATHONTS_HOME</code> if it is set. The commands are the same as from
+a clone: <code>python -m marathonts.bench.run &lt;stage&gt;</code>, <code>python -m marathonts.hypotheses.run</code>. To re-run the
+analysis of a published run, download its tables from Hugging Face
+(<a href="../BENCHMARK/#published-runs">BENCHMARK.md</a>) into <code>artifacts/run_h200/tables/</code> and run
+<code>python -m marathonts.hypotheses.run --artifacts-dir artifacts/run_h200</code>.</p>
+<h3 id="versions">Versions<a class="headerlink" href="#versions" title="Permanent link">&para;</a></h3>
+<p><code>envs/*.txt</code> give flexible versions — a lower bound (the oldest the published runs used) and an upper bound where
+a newer version is known to change the results (pandas 3 changes the prepared data) — so that they install on
+top of Colab's and the Docker images' own torch and TensorFlow. Two sets of exact versions are kept as well:</p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>What it fixes</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>envs/lock/main-run-core.txt</code>, <code>envs/lock/main-run-tsgm.txt</code></td>
+<td>the environments of the main run (Linux x86_64, Python 3.12.13, torch 2.9.1 with CUDA 12.8, TensorFlow 2.20.0), from its <code>pip freeze</code></td>
+<td>to repeat the benchmark stages as they were run; the tsgm file is installed in two steps (its header)</td>
+</tr>
+<tr>
+<td><code>tests/requirements.txt</code></td>
+<td>the analysis environment</td>
+<td><code>hypotheses.run</code> rebuilds the published rankings, questions and reports from the published tables bit for bit (checked by CI)</td>
+</tr>
+</tbody>
+</table>
+<p>Results depend on versions in a few places: newer scipy changes some p-values of RQ4 with tied values, GPU
+generations and library builds change the trained generators (the two published runs differ mainly for this
+reason, <a href="../BENCHMARK/#published-runs">BENCHMARK.md</a>).</p>
+<h3 id="c1-install-separate-environments">C1. Install: separate environments<a class="headerlink" href="#c1-install-separate-environments" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/zypl-ai/MarathonTS.git
+<span class="nb">cd</span><span class="w"> </span>MarathonTS
+
+python3.12<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv-core
+.venv-core/bin/pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>envs/core.txt<span class="w"> </span>-r<span class="w"> </span>envs/diffusion_ts.txt<span class="w"> </span>-r<span class="w"> </span>envs/chronos.txt<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-r<span class="w"> </span>envs/timesfm.txt<span class="w"> </span>-r<span class="w"> </span>envs/timestral.txt
+python3.12<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv-tsgm<span class="w">                    </span><span class="c1"># Python ≤ 3.12 (tsgm 0.1.0)</span>
+.venv-tsgm/bin/pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>envs/tsgm.txt
+
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Y-debug-sys/Diffusion-TS.git<span class="w"> </span>external/Diffusion-TS
+git<span class="w"> </span>-C<span class="w"> </span>external/Diffusion-TS<span class="w"> </span>checkout<span class="w"> </span>566307e6cf2d8095e58de4c6e3a6ae965b69b5b5
+</code></pre></div>
+<p>The four long-series generators share the core environment here; when their dependencies conflict, each one gets
+its own environment from its file and runs with <code>generate --methods &lt;name&gt;</code> there.</p>
+<h3 id="c2-install-one-environment">C2. Install: one environment<a class="headerlink" href="#c2-install-one-environment" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>python3.12<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">source</span><span class="w"> </span>.venv/bin/activate
+pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt<span class="w">                  </span><span class="c1"># every envs/*.txt; Python ≤ 3.12</span>
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Y-debug-sys/Diffusion-TS.git<span class="w"> </span>external/Diffusion-TS
+git<span class="w"> </span>-C<span class="w"> </span>external/Diffusion-TS<span class="w"> </span>checkout<span class="w"> </span>566307e6cf2d8095e58de4c6e3a6ae965b69b5b5
+</code></pre></div>
+<p>In one environment <code>python -m marathonts.bench.run all</code> runs every stage, the VAE pools included (TensorFlow is imported
+before torch initialises CUDA). The CUDA builds of TensorFlow and torch may require different cuDNN versions;
+the separate environments of C1 avoid this.</p>
+<h3 id="c3-smoke-test">C3. Smoke test<a class="headerlink" href="#c3-smoke-test" title="Permanent link">&para;</a></h3>
+<p>One environment:</p>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>marathonts.bench.run<span class="w"> </span>all<span class="w"> </span>--quick
+python<span class="w"> </span>-m<span class="w"> </span>marathonts.hypotheses.run<span class="w"> </span>--artifacts-dir<span class="w"> </span>artifacts/quick
+</code></pre></div>
+<p>Separate environments:</p>
+<div class="highlight"><pre><span></span><code>.venv-core/bin/python<span class="w"> </span>-m<span class="w"> </span>marathonts.bench.run<span class="w"> </span>raw<span class="w"> </span>--quick
+.venv-core/bin/python<span class="w"> </span>-m<span class="w"> </span>marathonts.bench.run<span class="w"> </span>prepare<span class="w"> </span>--quick
+.venv-tsgm/bin/python<span class="w"> </span>-m<span class="w"> </span>marathonts.bench.run<span class="w"> </span>pools<span class="w"> </span>--pool-generators<span class="w"> </span>tsgm_vae<span class="w"> </span>--quick
+.venv-core/bin/python<span class="w"> </span>-m<span class="w"> </span>marathonts.bench.run<span class="w"> </span>all<span class="w"> </span>--quick<span class="w">          </span><span class="c1"># generate, fidelity, utility, collect</span>
+.venv-core/bin/python<span class="w"> </span>-m<span class="w"> </span>marathonts.hypotheses.run<span class="w"> </span>--artifacts-dir<span class="w"> </span>artifacts/quick
+</code></pre></div>
+<p>The reports are in <code>artifacts/quick/reports/</code> (see the note in <a href="#a2-smoke-test">A2</a> on what they contain).</p>
+<h3 id="c4-full-run-of-profile-min">C4. Full run of profile <code>min</code><a class="headerlink" href="#c4-full-run-of-profile-min" title="Permanent link">&para;</a></h3>
+<p>Separate environments, stage by stage:</p>
+<div class="highlight"><pre><span></span><code>.venv-core/bin/python<span class="w"> </span>-m<span class="w"> </span>marathonts.bench.run<span class="w"> </span>raw
+.venv-core/bin/python<span class="w"> </span>-m<span class="w"> </span>marathonts.bench.run<span class="w"> </span>prepare
+.venv-tsgm/bin/python<span class="w"> </span>-m<span class="w"> </span>marathonts.bench.run<span class="w"> </span>pools<span class="w"> </span>--pool-generators<span class="w"> </span>tsgm_vae
+.venv-core/bin/python<span class="w"> </span>-m<span class="w"> </span>marathonts.bench.run<span class="w"> </span>generate
+.venv-core/bin/python<span class="w"> </span>-m<span class="w"> </span>marathonts.bench.run<span class="w"> </span>fidelity
+.venv-core/bin/python<span class="w"> </span>-m<span class="w"> </span>marathonts.bench.run<span class="w"> </span>utility
+.venv-core/bin/python<span class="w"> </span>-m<span class="w"> </span>marathonts.bench.run<span class="w"> </span>collect
+.venv-core/bin/python<span class="w"> </span>-m<span class="w"> </span>marathonts.hypotheses.run
+</code></pre></div>
+<p>One environment:</p>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>marathonts.bench.run<span class="w"> </span>all
+python<span class="w"> </span>-m<span class="w"> </span>marathonts.hypotheses.run
+</code></pre></div>
+<p>Other profiles: <code>--profile mid</code> or <code>--profile max</code> on every command, <code>hypotheses.run</code> included. Parts of a run:
+<code>--datasets</code>, <code>--seeds</code>, <code>--methods</code>, <code>--models</code> (<a href="../CONFIGURATION/#a-command-line-flags">CONFIGURATION.md</a>).</p>
+<h3 id="c5-re-run-only-the-analysis">C5. Re-run only the analysis<a class="headerlink" href="#c5-re-run-only-the-analysis" title="Permanent link">&para;</a></h3>
+<p>On the tables of a published run (<code>artifacts/run_h200/</code>, <code>artifacts/run_l4/</code>) or on the tables of your own run; only <code>envs/core.txt</code> is needed:</p>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>marathonts.hypotheses.run<span class="w">                                    </span><span class="c1"># profile min</span>
+python<span class="w"> </span>-m<span class="w"> </span>marathonts.hypotheses.run<span class="w"> </span>--profile<span class="w"> </span>max
+python<span class="w"> </span>-m<span class="w"> </span>marathonts.hypotheses.run<span class="w"> </span>--exclude-datasets<span class="w"> </span>bitcoin<span class="w"> </span>--rank-exclude<span class="w">    </span><span class="c1"># analysis-only choices</span>
+python<span class="w"> </span>-m<span class="w"> </span>marathonts.hypotheses.overall<span class="w">                                </span><span class="c1"># one report only: OVERALL.md</span>
+</code></pre></div>
+<p>Without <code>data/processed/&lt;profile&gt;/</code> the parts that read it (RQ7, CS15, CS12 subgroups) are skipped with a
+message; <code>python -m marathonts.bench.run raw</code> and <code>prepare</code> recreate it.</p>
+<h3 id="c6-outputs">C6. Outputs<a class="headerlink" href="#c6-outputs" title="Permanent link">&para;</a></h3>
+<p><code>data/</code> and <code>artifacts/&lt;profile&gt;/</code> in the project folder (<a href="../BENCHMARK/">BENCHMARK.md</a>, "Artifacts");
+<code>--artifacts-dir</code> writes the artifacts elsewhere.</p>
+<h2 id="resuming-and-re-running">Resuming and re-running<a class="headerlink" href="#resuming-and-re-running" title="Permanent link">&para;</a></h2>
+<p>Every unit of work (a pool, a series, a fidelity record, a utility unit) writes its own files and is skipped
+when they exist and were made with the same settings: its record holds a fingerprint of the data settings, the
+settings of its components, the exogenous files it reads and the units it is made from. Fidelity and utility
+units are fingerprinted per metric group and per task × model, with the done cells listed in <code>cells.json</code> /
+<code>seed&lt;k&gt;.cells.json</code>. An interrupted stage therefore continues where it stopped when it is run again, a changed
+setting redoes only the units that depend on it, and an added model, task or metric group computes only its own
+cells. Details: <a href="../BENCHMARK/">BENCHMARK.md</a>, "Stages"; which settings redo which stages:
+<a href="../CONFIGURATION/#what-a-change-recomputes">CONFIGURATION.md</a>.</p>
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Message or symptom</th>
+<th>Cause and action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>skip tsgm_vae: needs tensorflow, tsgm — run it in its environment (envs/tsgm.txt), e.g. python -m marathonts.bench.run pools --pool-generators tsgm_vae there</code></td>
+<td>the component's modules are not installed in this environment; the stage skips it and continues. Run the named command in that environment (Docker: the <code>tsgm</code> service; Colab: notebook 02). The same message for a long-series generator names <code>generate --methods …</code></td>
+</tr>
+<tr>
+<td><code>skip &lt;ds&gt;: not prepared with these data settings — run the prepare stage</code></td>
+<td><code>data/processed/&lt;profile&gt;/</code> has no data for these data settings (<code>max_points</code>, <code>split</code>, <code>embargo</code>, <code>max_gap_interp</code>, <code>T</code>, the Bitcoin window); run <code>prepare</code> with the same profile and settings</td>
+</tr>
+<tr>
+<td><code>datasets [...] are not registered; known: ...</code></td>
+<td>a misspelt dataset name or a plugin that is not loaded (<code>--plugins</code>, <code>Config.plugins</code>)</td>
+</tr>
+<tr>
+<td><code>FAILED raw pjm</code> / <code>raw bitcoin</code> in the log</td>
+<td>no Kaggle token in <code>~/.kaggle/kaggle.json</code>; the other datasets continue. Add the token or place the source file in <code>data/raw/&lt;ds&gt;/</code> and run <code>raw</code> again</td>
+</tr>
+<tr>
+<td><code>FAILED generate &lt;ds&gt; diffusion_ts seed&lt;k&gt;</code></td>
+<td><code>external/Diffusion-TS</code> is missing or at another path (<code>--diffusion-ts-dir</code>); the traceback is in <code>errors.log</code></td>
+</tr>
+<tr>
+<td><code>FAILED …</code> lines in general</td>
+<td>one unit failed; the traceback is appended to <code>artifacts/&lt;profile&gt;/errors.log</code>, the stage continues, and the unit is retried on the next run</td>
+</tr>
+<tr>
+<td>files <code>*.bad</code> next to the artifacts</td>
+<td>a file truncated by an interruption is renamed <code>&lt;name&gt;.bad</code> and its unit is redone on the next run; the <code>.bad</code> files can be deleted</td>
+</tr>
+<tr>
+<td><code>thresholds of '&lt;ds&gt;' were set on another split</code></td>
+<td>the task thresholds file belongs to other data settings; use the file of the profile (<code>target_params.json</code> for <code>min</code> / <code>mid</code>, <code>target_params_max.json</code> for <code>max</code>) or point <code>target_params_file</code> to a new file (<a href="../CONFIGURATION/#exogenous-files">CONFIGURATION.md</a>)</td>
+</tr>
+<tr>
+<td><code>WARNING: &lt;ds&gt; differs from the published data (data_hashes.json)</code></td>
+<td>the downloaded source differs from the one of the published run (e.g. a re-uploaded Kaggle file); the run continues, its results on that dataset are not comparable with the published ones</td>
+</tr>
+<tr>
+<td><code>WARNING: model gbdt runs on sklearn here, not XGBoost</code></td>
+<td>on macOS <code>gbdt</code> defaults to scikit-learn HistGradientBoosting (<code>BENCH_GBDT_BACKEND=xgboost</code> selects XGBoost); its results are not comparable with XGBoost runs and it has no multi-step task</td>
+</tr>
+<tr>
+<td><code>WARNING: series made with N different GPU types</code> (collect)</td>
+<td>the timing table mixes hardware; the cost comparisons (RQ6, cost ranking) assume one hardware type per dataset</td>
+</tr>
+<tr>
+<td><code>dropped N stale rows (other settings or methods)</code> (collect)</td>
+<td>units made with other settings or of methods outside <code>cfg.methods</code> are left out of the tables; run <code>collect</code> with the scope and settings of the run</td>
+</tr>
+<tr>
+<td><code>WARNING: optional package ... failed to install</code> (Colab)</td>
+<td><code>elkai</code>, <code>ortools</code>, <code>ruptures</code> or <code>hmmlearn</code> did not build: <code>vae_atsp</code> / <code>vae_pctsp</code> fail, F5.5–F5.6 / F7.7 are NaN</td>
+</tr>
+<tr>
+<td><code>needs N windows, the pool has M — raise pool_size / pool_mult</code></td>
+<td>a method with seam processing requests more windows than the pool holds</td>
+</tr>
+<tr>
+<td><code>chronos</code> / <code>timesfm</code> missing on some datasets in the reports</td>
+<td>these pairs are in the models' training corpora and are left out of the analysis by <code>Config.leaked</code> (<a href="../DATASETS/#leakage-into-pretrained-models">DATASETS.md</a>); <code>--leaked '{}'</code> keeps them</td>
+</tr>
+<tr>
+<td>warnings at the start of the analysis (noise pair, case-study method, core metrics, primary metrics)</td>
+<td>a role or choice that the tables cannot serve; the affected parts are empty or skipped. With fewer than 3 datasets there are no global tests, with fewer than 5 seeds the per-dataset verdicts are mostly inconclusive</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href=".." class="md-footer__link md-footer__link--prev" aria-label="Previous: Home">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Home
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../CONFIGURATION/" class="md-footer__link md-footer__link--next" aria-label="Next: Configuration">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Configuration
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright 2026 zypl Holding Ltd. Code under the Apache License 2.0.
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.sections", "navigation.top", "navigation.footer", "toc.follow", "search.highlight", "content.code.copy"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.525ec568.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
