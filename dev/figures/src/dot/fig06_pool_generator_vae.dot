@@ -1,0 +1,35 @@
+digraph fig06_pool_generator_vae {
+  rankdir=TB;
+
+  graph [fontname="Helvetica", fontsize=11, pad=0.15, nodesep=0.28, ranksep=0.38, newrank=true];
+  node  [fontname="Helvetica", fontsize=10, shape=box, style="rounded,filled", fillcolor="#FFFFFF",
+         color="#3A3A3A", penwidth=0.8, margin="0.10,0.05"];
+  edge  [fontname="Helvetica", fontsize=8.5, color="#3A3A3A", penwidth=0.8, arrowsize=0.6];
+
+
+  node [fillcolor="#F9DCC2"];
+  xc [label="train core windows\n(n ≤ 5000, T, 3)", fillcolor="#D6E6F4"];
+  xh [label="holdout windows\n(last 10% of train)", fillcolor="#D6E6F4"];
+  subgraph cluster_vae { label=<<b>β-VAE</b>  (tsgm vae_conv5 + BetaVAE)>; style="rounded,filled"; fillcolor="#FDF0E4"; color="#3A3A3A";
+    enc [label="Conv encoder\n→ μ, log σ²  (latent 16)"];
+    z   [label="z = μ + σ·ε", shape=ellipse];
+    dec [label="Conv decoder\n→ (T, 3)"];
+    loss [label="loss = reconstruction + β·KL\nβ = 2 · Adam 1e-3 · batch 64", shape=box, style="rounded,dashed", fillcolor="#FFFFFF"];
+    enc -> z -> dec; dec -> loss [style=dashed]; enc -> loss [style=dashed];
+  }
+  es [label=<<b>Early stopping</b> after every epoch<br/>holdout loss with z = μ<br/>epochs 1–150 ignored (min_epochs)<br/>patience 50 · ≤ 400 epochs · keep best weights>, fillcolor="#FFFFFF"];
+  w  [shape=cylinder, style=filled, fillcolor="#EDEDED", label="generators/<ds>/tsgm_vae/\nreplica<r> (min) · seed<k> (mid, max)"];
+  smp [label=<<b>Sampling</b> (per seed)<br/>z ~ 0.5 · N(0, I) → decoder<br/>NaN → 0.5, clip to [0, 1]>];
+  pool [shape=cylinder, style=filled, fillcolor="#EDEDED", label="pool (N, T, 3)\nN = max(300, 2K)\npools/<ds>/tsgm_vae/seed<k>"];
+  use [label="all same-pool methods\n(14 in min)", fillcolor="#FCEFB4"];
+
+  xc -> enc [label=" fit"];
+  xh -> es; loss -> es [style=dashed];
+  es -> w [label=" best weights"];
+  w -> smp -> pool -> use;
+
+  rep [shape=note, style=filled, fillcolor="#FFFFFF", fontsize=8.5,
+       label="Model sharing across seeds (pool_train_replicas)\nmin: 1 model / dataset   mid, max: 1 model per seed. Seeds always change sampling.\nFit and sampling have separate fingerprints:\nnew N re-samples without re-training."];
+  w -> rep [style=dotted, arrowhead=none, color="#7A7A7A"];
+
+}

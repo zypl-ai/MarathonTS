@@ -1,0 +1,27 @@
+digraph fig12_fidelity_evaluation {
+  rankdir=TB;
+
+  graph [fontname="Helvetica", fontsize=11, pad=0.15, nodesep=0.28, ranksep=0.38, newrank=true];
+  node  [fontname="Helvetica", fontsize=10, shape=box, style="rounded,filled", fillcolor="#FFFFFF",
+         color="#3A3A3A", penwidth=0.8, margin="0.10,0.05"];
+  edge  [fontname="Helvetica", fontsize=8.5, color="#3A3A3A", penwidth=0.8, arrowsize=0.6];
+
+
+  rankdir=LR; nodesep=0.18; ranksep=0.4;
+  subgraph cluster_in { label=<<b>Series under test</b>>; style="rounded"; color="#3A3A3A";
+    s  [label="method m, seed k\n(length K·T)", fillcolor="#FCEFB4"];
+    sl [label="m@len: first len(OOT) points\n(seed 0; equal-length comparison)", fillcolor="#FCEFB4"];
+    re [label="real: OOT series\n(seed 0; real-vs-real, RQ0;\nnot scored against OOT)", fillcolor="#D5ECD0"];
+  }
+  subgraph cluster_ref { label=<<b>Real references</b>>; style="rounded"; color="#3A3A3A";
+    rv [label="val — primary reference\n(no suffix)", fillcolor="#D6E6F4", penwidth=1.3];
+    rt [label="train — '@train'\n(fit to training data)", fillcolor="#D6E6F4"];
+    ro [label="OOT — '@oot'\n(generalisation under drift)", fillcolor="#D6E6F4"];
+  }
+  f [label=<<b>fidelity(series, reference)</b><br/><font point-size="8.5">same code for every method;<br/>pairwise distances, GRU in torch (GPU)</font>>, fillcolor="#FFFFFF"];
+  g [shape=plaintext, style="", margin=0, label=<<TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" CELLPADDING="3" COLOR="#3A3A3A" BGCOLOR="#F6D5DA"><TR><TD COLSPAN="3" ALIGN="LEFT" BGCOLOR="#EDEDED"><B>12 registered metric groups, 83 metrics × 3 references</B></TD></TR><TR><TD ALIGN="LEFT"><B>F1</B></TD><TD ALIGN="LEFT"><B>Marginal</B></TD><TD ALIGN="LEFT"><FONT POINT-SIZE="8.5">KS, W1, Anderson–Darling, QQ corr., quantiles, moments, out-of-range, coverage, JS, Hill tail</FONT></TD></TR><TR><TD ALIGN="LEFT"><B>F2</B></TD><TD ALIGN="LEFT"><B>Increments</B></TD><TD ALIGN="LEFT"><FONT POINT-SIZE="8.5">Δ_k distributions (k = 1, 6, 24, h, 168), volatility ratio, up-share, large jumps</FONT></TD></TR><TR><TD ALIGN="LEFT"><B>F3</B></TD><TD ALIGN="LEFT"><B>Temporal dependence</B></TD><TD ALIGN="LEFT"><FONT POINT-SIZE="8.5">ACF lags &lt; T, ACF lags T…3T, PACF, ACF of |Δ| and Δ², spectrum, peaks, Hurst/DFA</FONT></TD></TR><TR><TD ALIGN="LEFT"><B>F4</B></TD><TD ALIGN="LEFT"><B>Seasonality, calendar</B></TD><TD ALIGN="LEFT"><FONT POINT-SIZE="8.5">hour-of-week and hour-of-day mean/std profiles, calendar continuity</FONT></TD></TR><TR><TD ALIGN="LEFT"><B>F5</B></TD><TD ALIGN="LEFT"><B>Seams</B></TD><TD ALIGN="LEFT"><FONT POINT-SIZE="8.5">jump z-scores, seams vs interior, local ACF, change points (PELT), seam detectability AUC</FONT></TD></TR><TR><TD ALIGN="LEFT"><B>F6</B></TD><TD ALIGN="LEFT"><B>Window distribution</B></TD><TD ALIGN="LEFT"><FONT POINT-SIZE="8.5">GRU discriminator, C2ST on window features, predictive score, MMD, feature-FID, NN distance</FONT></TD></TR><TR><TD ALIGN="LEFT"><B>F7</B></TD><TD ALIGN="LEFT"><B>Long structure</B></TD><TD ALIGN="LEFT"><FONT POINT-SIZE="8.5">rolling mean/std, level crossings, excursions, drawdowns, trend, HMM regimes</FONT></TD></TR><TR><TD ALIGN="LEFT"><B>F8</B></TD><TD ALIGN="LEFT"><B>Target</B></TD><TD ALIGN="LEFT"><FONT POINT-SIZE="8.5">class-share TVD, event durations, inter-event times, hour profile, conditionals</FONT></TD></TR><TR><TD ALIGN="LEFT"><B>F9</B></TD><TD ALIGN="LEFT"><B>Diversity, coverage</B></TD><TD ALIGN="LEFT"><FONT POINT-SIZE="8.5">precision / recall, density / coverage on window embeddings</FONT></TD></TR><TR><TD ALIGN="LEFT"><B>F10</B></TD><TD ALIGN="LEFT"><B>Memorisation</B></TD><TD ALIGN="LEFT"><FONT POINT-SIZE="8.5">distance to closest train record vs holdout, near-copy share (once, vs train)</FONT></TD></TR><TR><TD ALIGN="LEFT"><B>F11</B></TD><TD ALIGN="LEFT"><B>Class balance</B></TD><TD ALIGN="LEFT"><FONT POINT-SIZE="8.5">class shares of every classification task (relative error), rare events, multiclass TVD, lost minority</FONT></TD></TR><TR><TD ALIGN="LEFT"><B>F12</B></TD><TD ALIGN="LEFT"><B>Extremes, outliers</B></TD><TD ALIGN="LEFT"><FONT POINT-SIZE="8.5">exceedances of real 0.5 / 99.5% (rate, size), local spikes, weekly block maxima / minima</FONT></TD></TR></TABLE>>];
+  o [shape=cylinder, style=filled, fillcolor="#EDEDED", label="fidelity/<ds>/<m>/seed<k>\none row per unit\n+ ORIENT (orientation)"];
+  s -> f; sl -> f; re -> f; rv -> f; rt -> f; ro -> f;
+  f -> g -> o;
+
+}
