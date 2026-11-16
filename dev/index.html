@@ -1433,14 +1433,13 @@
 
 
 <h1 id="marathonts">MarathonTS<a class="headerlink" href="#marathonts" title="Permanent link">&para;</a></h1>
-<p><a href="https://github.com/zypl-ai/MarathonTS/blob/main/LICENSE"><img alt="License: Apache 2.0" src="https://img.shields.io/badge/license-Apache%202.0-blue.svg" /></a>
+<p><a href="https://arxiv.org/abs/2611.18190"><img alt="arXiv" src="https://img.shields.io/badge/arXiv-2611.18190-b31b1b.svg" /></a>
+<a href="https://pypi.org/project/marathonts/"><img alt="PyPI" src="https://img.shields.io/pypi/v/marathonts.svg" /></a>
+<a href="https://github.com/zypl-ai/MarathonTS/blob/main/LICENSE"><img alt="License: Apache 2.0" src="https://img.shields.io/badge/license-Apache%202.0-blue.svg" /></a>
 <a href="GETTING_STARTED/"><img alt="Python 3.11 | 3.12" src="https://img.shields.io/badge/python-3.11%20%7C%203.12-blue.svg" /></a>
 <a href="https://zypl-ai.github.io/MarathonTS/"><img alt="Docs" src="https://img.shields.io/badge/docs-zypl--ai.github.io-informational.svg" /></a>
 <a href="https://huggingface.co/datasets/zyplai/MarathonTS"><img alt="Data on Hugging Face" src="https://img.shields.io/badge/%F0%9F%A4%97%20data-zyplai%2FMarathonTS-yellow.svg" /></a>
 <a href="https://huggingface.co/spaces/zyplai/MarathonTS"><img alt="Leaderboard" src="https://img.shields.io/badge/%F0%9F%A4%97%20leaderboard-Space-yellow.svg" /></a></p>
-<!-- With the arXiv identifier (assigned at submission, filled in before the repository is opened): [![arXiv](https://img.shields.io/badge/arXiv-XXXX.XXXXX-b31b1b.svg)](https://arxiv.org/abs/XXXX.XXXXX) -->
-<!-- After the PyPI release: [![PyPI](https://img.shields.io/pypi/v/marathonts.svg)](https://pypi.org/project/marathonts/) -->
-
 <p><strong>A benchmark of long synthetic time series from window assembly and long-series generators.</strong></p>
 <p>Many uses of synthetic time series need a series much longer than the windows a generative model is
 trained on. MarathonTS compares the two ways to obtain one under a single protocol: <strong>assembly</strong> from a pool
@@ -1460,7 +1459,7 @@ tables.</p>
 <tbody>
 <tr>
 <td>Paper</td>
-<td>arXiv: to be announced</td>
+<td>https://arxiv.org/abs/2611.18190</td>
 </tr>
 <tr>
 <td>Code</td>
@@ -1537,6 +1536,9 @@ python<span class="w"> </span>-m<span class="w"> </span>marathonts.hypotheses.ru
 <a href="GETTING_STARTED/#c0-install-the-package-from-pypi">Guide C, C0</a>). The pretrained generators (Chronos,
 TimesFM, Timestral) download their weights from Hugging Face on first use. The same test with Docker: <a href="GETTING_STARTED/#a2-smoke-test">Guide A, A2</a>; in Colab:
 <a href="GETTING_STARTED/#b4-smoke-test">Guide B, B4</a>.</p>
+<p>To rebuild only the published analysis (rankings, research questions, reports) from the tables in the clone, the
+analysis environment is enough: <code>pip install -r tests/requirements.txt</code>, then
+<code>python -m marathonts.hypotheses.run --artifacts-dir artifacts/run_h200</code> (or <code>run_l4</code>).</p>
 <h2 id="ways-to-run">Ways to run<a class="headerlink" href="#ways-to-run" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -1996,7 +1998,7 @@ is not part of the repository, and their results cannot be reproduced from it. N
 their components. Every ranking can be recomputed with any set of methods excluded (<code>--rank-exclude</code>).
 The paper states the competing interests of the authors.</p>
 <h2 id="citation">Citation<a class="headerlink" href="#citation" title="Permanent link">&para;</a></h2>
-<p>If you use MarathonTS, please cite the paper (the arXiv identifier is filled in at submission, before the release)
+<p>If you use MarathonTS, please cite the paper (<a href="https://arxiv.org/abs/2611.18190">arXiv:2611.18190</a>)
 and the original source of every dataset you use (<a href="DATASETS/">DATASETS.md</a>):</p>
 <div class="highlight"><pre><span></span><code><span class="nc">@misc</span><span class="p">{</span><span class="nl">varshavskiy2026marathonts</span><span class="p">,</span>
 <span class="w">  </span><span class="na">title</span><span class="w">         </span><span class="p">=</span><span class="w"> </span><span class="s">{{MarathonTS}: A Benchmark of Long Synthetic Time Series from Window Assembly and</span>
@@ -2004,8 +2006,11 @@ and the original source of every dataset you use (<a href="DATASETS/">DATASETS.m
 <span class="w">  </span><span class="na">author</span><span class="w">        </span><span class="p">=</span><span class="w"> </span><span class="s">{Varshavskiy, Ilyas and Shulgin, Sergey and Khalilbekov, Shuhrat and Boboeva, Bonu and</span>
 <span class="s">                   Azimi, Azizjon}</span><span class="p">,</span>
 <span class="w">  </span><span class="na">year</span><span class="w">          </span><span class="p">=</span><span class="w"> </span><span class="s">{2026}</span><span class="p">,</span>
-<span class="w">  </span><span class="na">eprint</span><span class="w">        </span><span class="p">=</span><span class="w"> </span><span class="s">{XXXX.XXXXX}</span><span class="p">,</span>
-<span class="w">  </span><span class="na">archivePrefix</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{arXiv}</span>
+<span class="w">  </span><span class="na">eprint</span><span class="w">        </span><span class="p">=</span><span class="w"> </span><span class="s">{2611.18190}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">archivePrefix</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{arXiv}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">primaryClass</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="s">{cs.LG}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">doi</span><span class="w">           </span><span class="p">=</span><span class="w"> </span><span class="s">{10.48550/arXiv.2611.18190}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">url</span><span class="w">           </span><span class="p">=</span><span class="w"> </span><span class="s">{https://arxiv.org/abs/2611.18190}</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>Machine-readable citation metadata: <a href="https://github.com/zypl-ai/MarathonTS/blob/main/CITATION.cff">CITATION.cff</a>.</p>
