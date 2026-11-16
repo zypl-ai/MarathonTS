@@ -1,12 +1,11 @@
 [build-system]
-requires = ["hatchling>=1.24"]
+requires = ["hatchling>=1.24", "hatch-fancy-pypi-readme>=24.1"]
 build-backend = "hatchling.build"
 
 [project]
 name = "marathonts"
-dynamic = ["version"]
+dynamic = ["version", "readme"]
 description = "A benchmark of long synthetic time series: window assembly from generated pools against long-series generators"
-readme = "README.md"
 license = "Apache-2.0"
 license-files = ["LICENSE", "NOTICE"]
 requires-python = ">=3.11,<3.13"
@@ -62,6 +61,22 @@ Repository = "https://github.com/zypl-ai/MarathonTS"
 Data = "https://huggingface.co/datasets/zyplai/MarathonTS"
 Leaderboard = "https://huggingface.co/spaces/zyplai/MarathonTS"
 Changelog = "https://github.com/zypl-ai/MarathonTS/blob/main/CHANGELOG.md"
+Paper = "https://arxiv.org/abs/2611.18190"
+
+# the README on PyPI: its links and figure point to the repository (on GitHub and the site they stay relative)
+[tool.hatch.metadata.hooks.fancy-pypi-readme]
+content-type = "text/markdown"
+
+[[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
+path = "README.md"
+
+[[tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions]]
+pattern = '\]\((?!https?://|#|mailto:)([^)\s]+)\)'
+replacement = '](https://github.com/zypl-ai/MarathonTS/blob/main/\1)'
+
+[[tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions]]
+pattern = 'src="(docs/[^"]+)"'
+replacement = 'src="https://raw.githubusercontent.com/zypl-ai/MarathonTS/main/\1"'
 
 [tool.hatch.version]
 path = "marathonts/__init__.py"

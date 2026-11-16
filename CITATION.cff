@@ -2,8 +2,8 @@ cff-version: 1.2.0
 message: "If you use MarathonTS, please cite the paper below and the original source of every dataset you use."
 title: "MarathonTS: A Benchmark of Long Synthetic Time Series from Window Assembly and Long-Series Generators"
 type: software
-version: 1.0.0
-date-released: 2026-11-13
+version: 1.0.1
+date-released: 2026-11-16
 license: Apache-2.0
 repository-code: "https://github.com/zypl-ai/MarathonTS"
 url: "https://zypl-ai.github.io/MarathonTS/"
@@ -31,7 +31,6 @@ authors:
   - family-names: Azimi
     given-names: Azizjon
     affiliation: zypl.ai
-# After the arXiv announcement: the arXiv identifier and DOI in preferred-citation.
 preferred-citation:
   type: article
   title: "MarathonTS: A Benchmark of Long Synthetic Time Series from Window Assembly and Long-Series Generators"
@@ -49,3 +48,5 @@ preferred-citation:
       given-names: Azizjon
   year: 2026
   journal: arXiv
+  doi: "10.48550/arXiv.2611.18190"
+  url: "https://arxiv.org/abs/2611.18190"

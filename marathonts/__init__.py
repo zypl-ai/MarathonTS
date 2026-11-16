@@ -3,4 +3,4 @@
 `marathonts.bench` runs the benchmark (data, generators, assembly, fidelity, utility, cost);
 `marathonts.hypotheses` is the statistical analysis of its tables (rankings, research questions, reports).
 """
-__version__ = "1.0.0"
+__version__ = "1.0.1"

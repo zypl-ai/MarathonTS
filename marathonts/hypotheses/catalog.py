@@ -540,7 +540,7 @@ def h16_temporal_stability(T, cfg):
     try:                                            # needs data/processed (test-split calendar, volatility)
         sub = subgroup_tests(cfg)
     except Exception as e:
-        sub = f"skipped: {type(e).__name__}: {e}"
+        sub = f"skipped: needs data/processed ({type(e).__name__})"
     return {"global": g, "per_dataset": pd.DataFrame(), "extra": {"subgroups": sub}}
 
 

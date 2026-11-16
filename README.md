@@ -1,12 +1,12 @@
 # MarathonTS
 
+[![arXiv](https://img.shields.io/badge/arXiv-2611.18190-b31b1b.svg)](https://arxiv.org/abs/2611.18190)
+[![PyPI](https://img.shields.io/pypi/v/marathonts.svg)](https://pypi.org/project/marathonts/)
 [![License: Apache 2.0](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
 [![Python 3.11 | 3.12](https://img.shields.io/badge/python-3.11%20%7C%203.12-blue.svg)](docs/GETTING_STARTED.md)
 [![Docs](https://img.shields.io/badge/docs-zypl--ai.github.io-informational.svg)](https://zypl-ai.github.io/MarathonTS/)
 [![Data on Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97%20data-zyplai%2FMarathonTS-yellow.svg)](https://huggingface.co/datasets/zyplai/MarathonTS)
 [![Leaderboard](https://img.shields.io/badge/%F0%9F%A4%97%20leaderboard-Space-yellow.svg)](https://huggingface.co/spaces/zyplai/MarathonTS)
-<!-- With the arXiv identifier (assigned at submission, filled in before the repository is opened): [![arXiv](https://img.shields.io/badge/arXiv-XXXX.XXXXX-b31b1b.svg)](https://arxiv.org/abs/XXXX.XXXXX) -->
-<!-- After the PyPI release: [![PyPI](https://img.shields.io/pypi/v/marathonts.svg)](https://pypi.org/project/marathonts/) -->
 
 **A benchmark of long synthetic time series from window assembly and long-series generators.**
 
@@ -21,7 +21,7 @@ tables.
 
 | Resource | Link |
 |---|---|
-| Paper | arXiv: to be announced |
+| Paper | https://arxiv.org/abs/2611.18190 |
 | Code | https://github.com/zypl-ai/MarathonTS |
 | Package | https://pypi.org/project/marathonts/ (`pip install marathonts`) |
 | Data | https://huggingface.co/datasets/zyplai/MarathonTS (full benchmark artifacts) |
@@ -63,6 +63,10 @@ The benchmark is also installable as a package, `pip install marathonts` (the sa
 [Guide C, C0](docs/GETTING_STARTED.md#c0-install-the-package-from-pypi)). The pretrained generators (Chronos,
 TimesFM, Timestral) download their weights from Hugging Face on first use. The same test with Docker: [Guide A, A2](docs/GETTING_STARTED.md#a2-smoke-test); in Colab:
 [Guide B, B4](docs/GETTING_STARTED.md#b4-smoke-test).
+
+To rebuild only the published analysis (rankings, research questions, reports) from the tables in the clone, the
+analysis environment is enough: `pip install -r tests/requirements.txt`, then
+`python -m marathonts.hypotheses.run --artifacts-dir artifacts/run_h200` (or `run_l4`).
 
 ## Ways to run
 
@@ -236,7 +240,7 @@ The paper states the competing interests of the authors.
 
 ## Citation
 
-If you use MarathonTS, please cite the paper (the arXiv identifier is filled in at submission, before the release)
+If you use MarathonTS, please cite the paper ([arXiv:2611.18190](https://arxiv.org/abs/2611.18190))
 and the original source of every dataset you use ([DATASETS.md](docs/DATASETS.md)):
 
 ```bibtex
@@ -246,8 +250,11 @@ and the original source of every dataset you use ([DATASETS.md](docs/DATASETS.md
   author        = {Varshavskiy, Ilyas and Shulgin, Sergey and Khalilbekov, Shuhrat and Boboeva, Bonu and
                    Azimi, Azizjon},
   year          = {2026},
-  eprint        = {XXXX.XXXXX},
-  archivePrefix = {arXiv}
+  eprint        = {2611.18190},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.LG},
+  doi           = {10.48550/arXiv.2611.18190},
+  url           = {https://arxiv.org/abs/2611.18190}
 }
 ```
 

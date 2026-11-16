@@ -3,6 +3,17 @@
 All notable changes of MarathonTS are recorded here. Versions follow [semantic versioning](https://semver.org/);
 the tag of the code, of the data on Hugging Face and of the PyPI package is the same.
 
+## [1.0.1] — 2026-11-16
+
+- The paper: arXiv:2611.18190 (DOI 10.48550/arXiv.2611.18190) in the README, `CITATION.cff`, the package
+  metadata and the Hugging Face cards.
+- The package page on PyPI: the links and the figure of the README point to the repository.
+- README: the analysis environment that is enough to rebuild the published results.
+- Analysis: a part skipped for missing data (subgroups of CS12) names the missing folder in the report instead
+  of the error with a local path.
+
+No changes to the protocol, the results or the tables.
+
 ## [1.0.0] — 2026-11-13
 
 First public release, the version described in the paper.
